@@ -1,0 +1,13 @@
+# 设置启动端口
+server:
+  port: 9000
+
+# security测试使用
+
+
+# 配置mapper映射文件
+mybatis:
+  mapper-locations: classpath*:/mapper/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+    map-underscore-to-camel-case: true
