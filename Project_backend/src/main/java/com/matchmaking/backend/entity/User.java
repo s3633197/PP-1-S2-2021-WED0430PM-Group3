@@ -7,13 +7,19 @@ import java.time.LocalDateTime;
 
 @Data
 public class User {
-    private String username;
+    private String email;
 
     private String password;
 
     private Long userId;
 
-    private LocalDateTime createdTime;
+    private String nickname;
+
+    private int status;
+
+    private String avatar;
+
+    private LocalDateTime createTime;
 
     private LocalDateTime lastLoginTime;
 
