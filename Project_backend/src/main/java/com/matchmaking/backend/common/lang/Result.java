@@ -43,6 +43,14 @@ public class Result {
         return new Result(StatusCode.BAD.getCode(),message,data);
     }
 
+    public static Result error(Object data){
+        return new Result(StatusCode.ERROR.getCode(),StatusCode.ERROR.getMessage(), data);
+    }
+
+    public static Result error(Object data, String message){
+        return new Result(StatusCode.ERROR.getCode(),message,data);
+    }
+
 
 
 }
