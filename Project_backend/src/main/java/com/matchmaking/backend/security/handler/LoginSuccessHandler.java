@@ -4,6 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.User;
 import com.matchmaking.backend.service.UserService;
+import com.matchmaking.backend.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -23,12 +24,19 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtUtils jwtUtils;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
     User user = userService.findUserByEmail(authentication.getName());
 
+    // create token
+    String token = jwtUtils.generateToken(user.getEmail());
+
+    // add token to header
+    response.setHeader(jwtUtils.getHeader(),token);
 
     ServletOutputStream outputStream = response.getOutputStream();
     Result result =  userService.updateLoginTime(user.getEmail());

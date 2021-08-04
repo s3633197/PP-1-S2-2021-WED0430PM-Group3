@@ -19,7 +19,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String[] URL_WHITELISTS = {
             "/login",
             "/logout",
-            "/api/user/signup"
+            "/api/user/*"
     };
 
     @Autowired
@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests()
         .antMatchers(URL_WHITELISTS).permitAll()
         .anyRequest().authenticated()
+
 
         // disable session
         .and()

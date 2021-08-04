@@ -15,4 +15,10 @@ public interface UserMapper {
 
     void updateLoginTime(String email, LocalDateTime loginTime);
 
+    void updatePassword(String email,String oldPassword,String newPassword);
+
+    User checkNickname(String nickname);
+
+
+
 }
