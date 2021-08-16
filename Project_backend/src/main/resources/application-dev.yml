@@ -13,10 +13,17 @@ spring:
   datasource:
     username: root
     password: 12345
-    url: jdbc:mysql://localhost:3306
+    url: jdbc:mysql://localhost:3306/project1
+  # 配置redis缓存
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
 
-# security测试使用
-  security:
-    user:
-      name: test
-      password: 12345
+token:
+  jwt:
+    header: token
+    # 加密密钥 32位
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token过期时间(2个小时)
+    expire: 7200
