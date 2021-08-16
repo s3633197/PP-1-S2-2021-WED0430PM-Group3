@@ -29,7 +29,7 @@ public class UserService {
             userMapper.createUser(user);
             return Result.create("","Account Created");
        }
-       return Result.failed("","Email was taken");
+       return Result.error("","Email was taken");
     }
 
     public User findUserByEmail(String email){

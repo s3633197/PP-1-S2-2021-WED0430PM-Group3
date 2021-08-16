@@ -13,11 +13,7 @@ public class User {
 
     private Long userId;
 
-    private String nickname;
-
-    private int status;
-
-    private String avatar;
+    private int roleId;
 
     private LocalDateTime createTime;
 

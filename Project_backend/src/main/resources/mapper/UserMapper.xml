@@ -5,24 +5,20 @@
 
 
     <select id="findUserByEmail" resultType="com.matchmaking.backend.entity.User">
-        select * from user where email=#{email}
+        select * from account where email=#{email}
     </select>
 
     <insert id="createUser" >
-        insert into user(email,password,nickname,avatar,create_time,last_login_time,status)
-        values (#{email},#{password},#{nickname},#{avatar},#{createTime},#{lastLoginTime},#{status})
+        insert into account(email,password,create_time,last_login_time,role_id)
+        values (#{email},#{password},#{createTime},#{lastLoginTime},#{roleId})
     </insert>
 
     <update id="updateLoginTime">
-        update user set last_login_time=#{loginTime} where email=#{email}
+        update account set last_login_time=#{loginTime} where email=#{email}
     </update>
 
     <update id="updatePassword">
         update user set password=#{newPassword} where email=#{email}
     </update>
-
-    <select id="checkNickname" >
-
-    </select>
 
 </mapper>

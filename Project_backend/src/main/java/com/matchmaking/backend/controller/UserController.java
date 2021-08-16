@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/signup")
+    @PostMapping("/register")
     public Result signUp(@RequestBody User user){
         return userService.createUser(user);
     }

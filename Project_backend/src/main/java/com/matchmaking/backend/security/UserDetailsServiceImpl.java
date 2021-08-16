@@ -25,4 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("Email does not exist");
         }
     }
+
+
+    public String getAuthorities(){
+        return null;
+    }
+
 }
