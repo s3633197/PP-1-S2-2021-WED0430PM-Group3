@@ -22,7 +22,6 @@ spring:
     host: localhost
     port: 6379
     database: 0
-spring.datasource.
 
 token:
   jwt:
@@ -32,15 +31,7 @@ token:
     # token过期时间(2个小时)
     expire: 7200
 
-cloud.aws.
-
 
 # AWS Cloud config
-cloud:
-  aws:
-    credentials:
-      access-key: AKIAQFULF3NX2MWQMUFY
-      secret-key: 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
-    region:
-      auto: true
+
 
