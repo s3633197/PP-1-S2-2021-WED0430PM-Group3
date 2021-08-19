@@ -21,8 +21,8 @@ public class TokenAccessDeniedHandler implements AccessDeniedHandler {
         httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
-
-        Result result = Result.failed("",e.getMessage());
+        // 根据不同角色设置不同权限错误信息
+        Result result = Result.failed(e.getMessage());
 
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();

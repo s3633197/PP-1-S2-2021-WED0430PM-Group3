@@ -28,7 +28,7 @@ public class AccountService {
             accountMapper.createAccount(account);
             return Result.create("","Account Created");
        }
-       return Result.failed("","Email was taken");
+       return Result.failed("Email was taken");
     }
 
     public Account findAccountByEmail(String email){
@@ -47,12 +47,12 @@ public class AccountService {
         // get current user
         Account account = this.findAccountByEmail(email);
         if(account == null) {
-            return Result.failed("","Email does not exists");
+            return Result.failed("Email does not exists");
         }
         // validate old password
         Boolean correct = bCryptPasswordEncoder.matches(oldPassword,account.getPassword());
         if(!correct){
-            return Result.failed("","Incorrect password");
+            return Result.failed("Incorrect password");
         }
         // 密码更新后需要删掉对应的token缓存
 

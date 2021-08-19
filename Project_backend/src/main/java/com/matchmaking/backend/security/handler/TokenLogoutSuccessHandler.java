@@ -3,6 +3,7 @@ package com.matchmaking.backend.security.handler;
 import cn.hutool.json.JSONUtil;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.utils.JwtUtils;
+import com.matchmaking.backend.utils.RedistUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -22,6 +23,9 @@ public class TokenLogoutSuccessHandler implements LogoutSuccessHandler {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    RedistUtils redistUtils;
+
     @Override
     public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         if(authentication != null){
@@ -30,7 +34,11 @@ public class TokenLogoutSuccessHandler implements LogoutSuccessHandler {
 
 
         httpServletResponse.setContentType("application/json;charset=utf-8");
+        String jwt = httpServletRequest.getHeader(jwtUtils.getHeader());
         httpServletResponse.setHeader(jwtUtils.getHeader(),"");
+
+        // delete token in redis, manage logout status
+        redistUtils.del(jwt);
 
         Result result = Result.success("","Successfully logout");
 
