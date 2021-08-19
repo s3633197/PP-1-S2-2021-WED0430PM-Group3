@@ -19,8 +19,8 @@ public class Result {
         this.statusCode = statusCode;
     }
 
-    public Result(long code, String message) {
-        this.statusCode = code;
+    public Result(long statusCode, String message) {
+        this.statusCode = statusCode;
         this.message = message;
     }
 

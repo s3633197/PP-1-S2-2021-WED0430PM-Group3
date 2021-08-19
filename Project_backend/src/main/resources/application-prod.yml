@@ -3,7 +3,11 @@ server:
   port: 9000
 
 # security测试使用
-
+spring:
+  datasource:
+    username: admin
+    password: 12345678
+    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
 
 # 配置mapper映射文件
 mybatis:

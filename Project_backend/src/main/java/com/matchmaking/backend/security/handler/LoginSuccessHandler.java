@@ -42,7 +42,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     response.setHeader(jwtUtils.getHeader(),token);
 
     // store token in redis for 1 hours
-    redistUtils.set(token,account.getEmail(),60);
+    redistUtils.set(token,account.getEmail(),60*60);
 
     ServletOutputStream outputStream = response.getOutputStream();
     Result result =  accountService.updateLoginTime(account.getEmail());

@@ -11,7 +11,7 @@ public class Account {
 
     private String password;
 
-    private Long accountId;
+    private int accountId;
 
     private int roleId;
 
