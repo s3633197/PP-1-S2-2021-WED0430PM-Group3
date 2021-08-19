@@ -1,23 +1,21 @@
 package com.matchmaking.backend.mapper;
 
 
-import com.matchmaking.backend.entity.User;
+import com.matchmaking.backend.entity.Account;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
 
 @Mapper
-public interface UserMapper {
+public interface AccountMapper {
 
-    User findUserByEmail(String email);
+    Account findAccountByEmail(String email);
 
-    void createUser(User user);
+    void createAccount(Account account);
 
     void updateLoginTime(String email, LocalDateTime loginTime);
 
     void updatePassword(String email,String oldPassword,String newPassword);
-
-    User checkNickname(String nickname);
 
 
 
