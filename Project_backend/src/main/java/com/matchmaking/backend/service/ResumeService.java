@@ -42,8 +42,13 @@ public class ResumeService {
             return Result.failed("Please create your CV first");
         }
         // set account id and seeker id to new Resume to update the information
+        resume.setAccountId(current.getAccountId());
         resume.setSeekerId(current.getSeekerId());
         resumeMapper.updateResume(resume);
         return Result.success("Successfully updated");
+    }
+
+    public Result getAllResume(){
+        return Result.success(resumeMapper.getAllResume());
     }
 }

@@ -10,7 +10,7 @@
                               expected_salary,account_id)
                               values(#{firstName},#{lastName},#{gender},#{phone},#{DOB},#{schoolName},
                                      #{major},#{educationalBackground},#{skill},#{location},#{statement},#{wantedIndustry},
-                                     #{jobType},#{expectedCompany},#{expectedSalary},#{id})
+                                     #{jobType},#{expectedCompany},#{expectedSalary},#{accountId})
     </insert>
 
     <select id="getResumeByAccountId" resultType="com.matchmaking.backend.entity.Resume">
@@ -21,6 +21,10 @@
         update jobSeeker set  first_name=#{firstName}, last_name=#{lastName}, gender=#{gender},phone=#{phone},DOB=#{DOB},
                              school_name=#{schoolName},major=#{major},educational_background=#{educationalBackground},skill=#{skill},
                              location=#{location},statement=#{statement},wanted_industry=#{wantedIndustry},job_type=#{jobType},
-                             expected_company=#{expectedCompany},expected_salary=#{expectedSalary} where seeker_id=#{seekerId}
+                             expected_company=#{expectedCompany},expected_salary=#{expectedSalary},account_id=#{accountId} where seeker_id=#{seekerId}
     </update>
+
+    <select id="getAllResume" resultType="com.matchmaking.backend.entity.Resume">
+        select * from jobSeeker
+    </select>
 </mapper>

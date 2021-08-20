@@ -9,26 +9,38 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@PreAuthorize("hasRole('Personal')")
+
 @RequestMapping("/api/seeker")
 public class ResumeController {
 
     @Autowired
     ResumeService resumeService;
 
+    @PreAuthorize("hasRole('Personal')")
     @PostMapping("/create")
     public Result createResume(@RequestBody Resume resume){
         return   resumeService.createResume(resume);
     }
 
+
+    @PreAuthorize("hasRole('Personal')")
     @GetMapping("/resume")
     public Result getResume(){
         return  resumeService.getResume();
     }
 
+
+    @PreAuthorize("hasRole('Personal')")
     @PutMapping("/update")
     public Result updateResume(@RequestBody Resume resume){
         return resumeService.updateResume(resume);
+    }
+
+
+    @PreAuthorize("hasAnyRole('Company')")
+    @GetMapping("/all")
+    public Result getAllResume(){
+        return resumeService.getAllResume();
     }
 
 

@@ -26,7 +26,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login",
             "/logout",
             "/api/account/register",
-            "/api/company/all"
+            "/api/company/all",
+            "/api/post/getAll/{id}",
+            "/api/post/all"
     };
 
     @Autowired

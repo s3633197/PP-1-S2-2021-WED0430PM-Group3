@@ -19,7 +19,7 @@ public class Result {
         this.statusCode = statusCode;
     }
 
-    public Result(long statusCode, String message) {
+    protected Result(long statusCode, String message) {
         this.statusCode = statusCode;
         this.message = message;
     }
@@ -54,6 +54,10 @@ public class Result {
 
     public static Result error(Object data, String message){
         return new Result(StatusCode.ERROR.getCode(),message,data);
+    }
+
+    public static Result notAuthorised(String  message){
+        return new Result(StatusCode.UNAUTHORIZED.getCode(),message);
     }
 
 

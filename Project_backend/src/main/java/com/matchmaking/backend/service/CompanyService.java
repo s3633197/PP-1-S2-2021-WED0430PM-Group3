@@ -32,12 +32,16 @@ public class CompanyService {
     }
 
     public Result getCompany(){
-        Account account = accountService.currentAccount();
-        Company company = companyMapper.getCompany(account.getAccountId());
+        Company company = currentCompany();
         if(company == null){
             return Result.failed("Please upload your company information first");
         }
             return Result.success(company);
+    }
+
+    public Company currentCompany(){
+        Account account = accountService.currentAccount();
+        return companyMapper.getCompany(account.getAccountId());
     }
 
 
@@ -50,10 +54,11 @@ public class CompanyService {
     }
 
     public Result updateCompany(Company company){
-        Company current = companyMapper.getCompany(accountService.currentAccount().getAccountId());
+        Company current = this.currentCompany();
         if( current == null){
             return Result.failed("Please upload your company information first");
         }
+        company.setAccountId(current.getAccountId());
         company.setCompanyId(current.getCompanyId());
         companyMapper.updateCompanyInfo(company);
         return Result.success("Successfully updated");
