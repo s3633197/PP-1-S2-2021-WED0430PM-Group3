@@ -15,42 +15,34 @@ public class ResumeService {
     ResumeMapper resumeMapper;
 
     @Autowired
-    AccountMapper accountMapper;
+    AccountService accountService;
 
-
-    private Account currentAccount(){
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Account currentAccount = accountMapper.findAccountByEmail(email);
-        return  currentAccount;
-    }
 
     public Result createResume(Resume resume){
-        if(resumeMapper.getResumeByAccountId(this.currentAccount().getAccountId()) != null){
+        if(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()) != null){
             return Result.failed("You have already created your CV");
         }
-        resume.setAccountId(this.currentAccount().getAccountId());
+        resume.setAccountId(accountService.currentAccount().getAccountId());
         resumeMapper.createResume(resume);
-        return Result.success("","Successfully Created");
+        return Result.create("","Successfully Created");
     }
 
-
     public Result getResume(){
-        Resume resume = resumeMapper.getResumeByAccountId(this.currentAccount().getAccountId());
+        Resume resume = resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId());
         if(resume == null){
             return Result.failed("Please create your CV first");
         }
-        return Result.success(resumeMapper.getResumeByAccountId(this.currentAccount().getAccountId()));
+        return Result.success(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()));
     }
 
     public Result updateResume(Resume resume){
         // get current resume
-        Resume current = resumeMapper.getResumeByAccountId(this.currentAccount().getAccountId());
+        Resume current = resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId());
         if(current == null){
             return Result.failed("Please create your CV first");
         }
         // set account id and seeker id to new Resume to update the information
         resume.setSeekerId(current.getSeekerId());
-        resume.setAccountId(current.getAccountId());
         resumeMapper.updateResume(resume);
         return Result.success("Successfully updated");
     }

@@ -25,7 +25,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final String[] URL_WHITELISTS = {
             "/login",
             "/logout",
-            "/api/account/register"
+            "/api/account/register",
+            "/api/company/all"
     };
 
     @Autowired

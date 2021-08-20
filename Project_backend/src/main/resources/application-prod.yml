@@ -15,3 +15,10 @@ mybatis:
   configuration:
     mapUnderscoreToCamelCase: true
     map-underscore-to-camel-case: true
+token:
+  jwt:
+    header: Authentication
+    # 加密密钥 32位
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    # token过期时间(2个小时)
+    expire: 7200

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.matchmaking.backend.mapper.CompanyMapper">
+
+    <insert id="createCompany">
+        insert into company(company_name,start_up_date,owner,account_id) values (#{companyName},#{startUpDate},#{owner},#{accountId})
+    </insert>
+
+    <select id="getCompany" resultType="com.matchmaking.backend.entity.Company">
+        select * from company where account_id = #{accountId}
+    </select>
+
+    <select id="getAllCompany" resultType="com.matchmaking.backend.entity.Company">
+        select * from company
+    </select>
+
+    <update id="updateCompanyInfo" parameterType="com.matchmaking.backend.entity.Company">
+        update company set company_name=#{companyName}, owner=#{owner},start_up_date=#{startUpDate},
+                           account_id=#{accountId} where company_id = #{companyId}
+    </update>
+</mapper>
