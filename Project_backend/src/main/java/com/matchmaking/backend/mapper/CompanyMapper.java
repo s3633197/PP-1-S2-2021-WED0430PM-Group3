@@ -12,7 +12,9 @@ public interface CompanyMapper {
 
     Company getCompany(int accountId);
 
-    List<Company> getAllCompany ();
+    List<Company> getAllCompany();
+
+    Company selectCompany(int companyId);
 
     void updateCompanyInfo(Company company);
 }

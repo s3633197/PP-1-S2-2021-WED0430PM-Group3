@@ -60,6 +60,10 @@ public class Result {
         return new Result(StatusCode.UNAUTHORIZED.getCode(),message);
     }
 
+    public static Result notFound(){
+        return new Result(StatusCode.NOTFOUND.getCode(), StatusCode.NOTFOUND.getMessage());
+    }
+
 
 
 }

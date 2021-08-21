@@ -2,6 +2,7 @@ package com.matchmaking.backend.entity;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,7 +18,7 @@ public class Resume {
 
     private int phone;
 
-    private LocalDateTime DOB;
+    private LocalDate dateOfBirth;
 
     private String schoolName;
 
@@ -34,8 +35,6 @@ public class Resume {
     private String wantedIndustry;
 
     private String jobType;
-
-    private String expectedCompany;
 
     private long expectedSalary;
 

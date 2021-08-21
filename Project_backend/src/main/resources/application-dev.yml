@@ -28,10 +28,9 @@ token:
     header: Authentication
     # 加密密钥 32位
     secret: f4e2e52034348f86b67cde581c0f9eb5
-    # token过期时间(2个小时)
-    expire: 7200
+    # token过期时间(1个小时)
+    expire: 3600
 
 
-# AWS Cloud config
 
 

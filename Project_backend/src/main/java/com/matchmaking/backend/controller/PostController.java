@@ -30,20 +30,27 @@ public class PostController {
 
 
     @PreAuthorize("hasAnyRole('Company')")
-    @PutMapping("/update/{id}")
-    public Result updatePost(@PathVariable int id,@RequestBody Post post){
-        return postService.updatePost(id,post);
+    @PutMapping("/update/{postId}")
+    public Result updatePost(@PathVariable int postId,@RequestBody Post post){
+        return postService.updatePost(postId,post);
     }
 
-
-    @GetMapping("/getAll/{id}")
-    public Result getAllPostsOfCompany(@PathVariable int id){
-        return postService.getPostsByCompanyId(id);
-    }
 
     @PreAuthorize("hasAnyRole('Company')")
-    @DeleteMapping("/delete/{id}")
-    public Result deletePost(@PathVariable int id){
-        return postService.deletePost(id);
+    @GetMapping("/getAll")
+    public Result getAllPostsOfCompany(){
+        return postService.getPostsOfCompany();
+    }
+
+
+    @PreAuthorize("hasAnyRole('Company')")
+    @DeleteMapping("/delete/{postId}")
+    public Result deletePost(@PathVariable int postId){
+        return postService.deletePost(postId);
+    }
+
+    @GetMapping("/select/{postId}")
+    public Result selectPost(@PathVariable int postId){
+        return postService.selectPost(postId);
     }
 }

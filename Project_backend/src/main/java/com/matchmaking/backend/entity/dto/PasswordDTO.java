@@ -1,4 +1,4 @@
-package com.matchmaking.backend.entity.DTO;
+package com.matchmaking.backend.entity.dto;
 
 
 import lombok.Data;

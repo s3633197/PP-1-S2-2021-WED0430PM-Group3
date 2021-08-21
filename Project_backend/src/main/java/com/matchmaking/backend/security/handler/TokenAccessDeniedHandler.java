@@ -22,7 +22,7 @@ public class TokenAccessDeniedHandler implements AccessDeniedHandler {
 
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
         // 根据不同角色设置不同权限错误信息
-        Result result = Result.failed(e.getMessage());
+        Result result = Result.notAuthorised("Not authorised");
 
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();

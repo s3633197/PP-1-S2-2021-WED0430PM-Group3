@@ -25,11 +25,12 @@ public class CompanyController {
     @PreAuthorize("hasAnyRole('Company')")
     @GetMapping("/info")
     public Result getCompany(){
-        return companyService.getCompany();
+        return companyService.getCompanyInfo();
     }
 
+
     @GetMapping("/all")
-    public Result allCompany(){
+    public Result getAllCompany(){
         return companyService.getAllCompany();
     }
 
@@ -39,6 +40,13 @@ public class CompanyController {
         return companyService.updateCompany(company);
     }
 
+    @GetMapping("/select/{companyId}")
+    public Result selectCompany(@PathVariable int companyId){
+        if(companyService.selectCompany(companyId)==null){
+            return Result.notFound();
+        }
+        return Result.success(companyService.selectCompany(companyId));
+    }
 
 
 }

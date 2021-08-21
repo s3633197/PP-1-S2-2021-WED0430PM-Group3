@@ -5,12 +5,12 @@
 
 
     <insert id="createResume" >
-        insert into jobSeeker(first_name,last_name,gender,phone,DOB,school_name,
-                              major,educational_background,skill,location,statement,wanted_industry,job_type,expected_company,
+        insert into jobSeeker(first_name,last_name,gender,phone,date_of_birth,school_name,
+                              major,educational_background,skill,location,statement,wanted_industry,job_type,
                               expected_salary,account_id)
-                              values(#{firstName},#{lastName},#{gender},#{phone},#{DOB},#{schoolName},
+                              values(#{firstName},#{lastName},#{gender},#{phone},#{dateOfBirth},#{schoolName},
                                      #{major},#{educationalBackground},#{skill},#{location},#{statement},#{wantedIndustry},
-                                     #{jobType},#{expectedCompany},#{expectedSalary},#{accountId})
+                                     #{jobType},#{expectedSalary},#{accountId})
     </insert>
 
     <select id="getResumeByAccountId" resultType="com.matchmaking.backend.entity.Resume">
@@ -18,10 +18,10 @@
     </select>
 
     <update id="updateResume" parameterType="com.matchmaking.backend.entity.Resume">
-        update jobSeeker set  first_name=#{firstName}, last_name=#{lastName}, gender=#{gender},phone=#{phone},DOB=#{DOB},
+        update jobSeeker set  first_name=#{firstName}, last_name=#{lastName}, gender=#{gender},phone=#{phone},date_of_birth=#{dateOfBirth},
                              school_name=#{schoolName},major=#{major},educational_background=#{educationalBackground},skill=#{skill},
-                             location=#{location},statement=#{statement},wanted_industry=#{wantedIndustry},job_type=#{jobType},
-                             expected_company=#{expectedCompany},expected_salary=#{expectedSalary},account_id=#{accountId} where seeker_id=#{seekerId}
+                             location=#{location},statement=#{statement},wanted_industry=#{wantedIndustry},job_type=#{jobType}
+                             ,expected_salary=#{expectedSalary},account_id=#{accountId} where seeker_id=#{seekerId}
     </update>
 
     <select id="getAllResume" resultType="com.matchmaking.backend.entity.Resume">

@@ -3,11 +3,16 @@ package com.matchmaking.backend.service;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
 import com.matchmaking.backend.entity.Resume;
+import com.matchmaking.backend.entity.vo.ResumeVO;
 import com.matchmaking.backend.mapper.AccountMapper;
 import com.matchmaking.backend.mapper.ResumeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ResumeService {
@@ -49,6 +54,25 @@ public class ResumeService {
     }
 
     public Result getAllResume(){
-        return Result.success(resumeMapper.getAllResume());
+        List<Resume> resumeList = resumeMapper.getAllResume();
+        List<ResumeVO> resumeVOList = resumeList.stream().map(
+                e->new ResumeVO(
+                 e.getSeekerId(),
+                 e.getFirstName(),
+                 e.getLastName(),
+                 e.getGender(),
+                 e.getPhone(),
+                 e.getDateOfBirth(),
+                 e.getSchoolName(),
+                 e.getMajor(),
+                 e.getEducationalBackground(),
+                 e.getSkill(),
+                 e.getStatement(),
+                 e.getLocation(),
+                 e.getWantedIndustry(),
+                 e.getJobType(),
+                 e.getExpectedSalary()
+                )).collect(Collectors.toList());
+        return Result.success(resumeVOList);
     }
 }

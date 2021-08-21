@@ -4,11 +4,16 @@ package com.matchmaking.backend.service;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Company;
 import com.matchmaking.backend.entity.Post;
+import com.matchmaking.backend.entity.vo.PostListVO;
+import com.matchmaking.backend.entity.vo.PostPageVO;
+import com.matchmaking.backend.mapper.CompanyMapper;
 import com.matchmaking.backend.mapper.PostMapper;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService {
@@ -19,7 +24,14 @@ public class PostService {
     @Autowired
     CompanyService companyService;
 
+    @Autowired
+    CompanyMapper companyMapper;
+
+    @Autowired
+    DozerBeanMapper dozerBeanMapper;
+
     public Result createPost(Post post){
+        // 需要检查相同的post
         Company company = companyService.currentCompany();
         if(company == null){
             return Result.failed("Please upload your company information first");
@@ -30,24 +42,66 @@ public class PostService {
     }
 
 
+    // get all posts as post cards display in the Job list
     public Result getAllPosts(){
-        return Result.success(postMapper.getAllPosts());
+        List<Post> postList = postMapper.getAllPosts();
+
+        // convert to PostVO
+        if(!postList.isEmpty()){
+            List<PostListVO> postVOList = postList.stream()
+                    .map(e -> new PostListVO(
+                            e.getPostId(),
+                            e.getTitle(),
+                            e.getMinSalary(),
+                            e.getMaxSalary(),
+                            e.getEducationalBackground(),
+                            e.getAddress(),
+                            e.getIndustry(),
+                            e.getEmploymentType(),
+                            companyMapper.selectCompany(e.getCompanyId()).getStartUpDate(),
+                            companyMapper.selectCompany(e.getCompanyId()).getCompanyName(),
+                            e.getCompanyId()
+                    )).collect(Collectors.toList());
+            return Result.success(postVOList);
+        }
+        return Result.failed("No posts available now");
+
     }
 
-    // 需要检查操作用户是否为内容的所有者
+
+
+    public Result selectPost(int postId){
+        Post post = postMapper.getPost(postId);
+        if(post == null){
+            return Result.notFound();
+        }
+        PostPageVO postPageVO = dozerBeanMapper.map(post,PostPageVO.class);
+        Company company = companyMapper.selectCompany(post.getCompanyId());
+        postPageVO.setCompanyName(company.getCompanyName());
+        postPageVO.setStartUpDate(company.getStartUpDate());
+        postPageVO.setOwner(company.getOwner());
+        return Result.success(postPageVO);
+    }
+
+
     public Result updatePost(int postId,Post post){
         Post current = postMapper.getPost(postId);
+        // check the user access to update the post
+        if(current.getCompanyId() != companyService.currentCompany().getCompanyId()){
+            return Result.notAuthorised("Not Authorised");
+        }
         if(current == null){
             return Result.failed("Can not find this post");
         }
         post.setPostId(current.getPostId());
+        post.setCompanyId(current.getCompanyId());
         postMapper.updatePost(post);
         return Result.success("Successfully update");
     }
 
-    public Result getPostsByCompanyId(int companyId){
-
-        List<Post> postList =postMapper.getPostsByCompanyId(companyId);
+    public Result getPostsOfCompany(){
+        List<Post> postList =postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
+        if(postList.isEmpty()) return Result.failed("No post available now");
         return Result.success(postList);
     }
 
