@@ -19,7 +19,7 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
-    // console.log(+"asdasdasd"),
+    console.log(+"asdasdasd"),
     response =>{
         console.log("response ->" + response)
         let res = response.data

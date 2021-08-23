@@ -4,8 +4,8 @@
       <el-col :span="8">
         <div>
           <el-form :model="signinForm" :rules="rules" ref="signinForm" label-width="200px">
-            <el-form-item label="email" prop="email">
-                <el-input v-model="signinForm.email"></el-input>
+            <el-form-item label="email" prop="username">
+                <el-input v-model="signinForm.username"></el-input>
             </el-form-item>
             <el-form-item label="password" prop="password" >
                 <el-input v-model="signinForm.password" type="password"></el-input>
@@ -36,12 +36,12 @@ export default {
       return {
         active: 0,
         signinForm: {
-          email: '',
+          username: '',
           password: '',
           
         },
         rules: {
-          email: [
+          username: [
             { required: true, message: 'Please enter email number!', trigger: 'blur' },
             { min: 5, max: 20, message: '5-10 number or letters!', trigger: 'blur' }
           ],
@@ -59,6 +59,8 @@ export default {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
+              console.log(this.signinForm.password+"   pass")
+              console.log(this.signinForm.username+"   username")
               this.$axios.post('/login?',qs.stringify(this.signinForm)).then(res => {
                 console.log("code = " + res.data.data.statusCode)
                 const jwt = res.headers['Authentication']
