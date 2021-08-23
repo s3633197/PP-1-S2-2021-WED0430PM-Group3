@@ -12,7 +12,7 @@
             </el-form-item>
             
             <el-form-item>
-              <el-button type="primary" @click="submitForm('signinForm')">submit</el-button>
+              <el-button class="submit" type="primary" @click="submitForm('signinForm')">submit</el-button>
               <el-button @click="resetForm('signinForm')">replace</el-button>
             </el-form-item>
           </el-form>
@@ -37,7 +37,8 @@ export default {
         active: 0,
         signinForm: {
           email: '',
-          password: ''
+          password: '',
+          
         },
         rules: {
           email: [
@@ -47,7 +48,7 @@ export default {
           password: [
             { required: true, message: 'Please enter password!', trigger: 'blur' },
             { min: 6, max: 20, message: 'At lease 6 numbers or letters!', trigger: 'blur' },
-          ]
+          ],
         }
       };
     },
@@ -56,18 +57,16 @@ export default {
     //  },
     methods: {
       submitForm(formName) {
-        
         this.$refs[formName].validate((valid) => {
           if (valid) {
-             this.$axios.post('/login',this.signinForm).then(res => {
-            //   const jwt = res.headers['authorization']
-            //   this.$store.commit('SET_EMAIL',jwt)
-            //   this.$store.commit('SET_PASSWORD',jwt)
-            //   this.$router.push("/index")
-             });
-            alert('submit!');
+              this.$axios.post('/login?',qs.stringify(this.signinForm)).then(res => {
+                console.log("code = " + res.data.data.statusCode)
+                const jwt = res.headers['Authentication']
+                this.$store.commit('SET_TOKEN',jwt)
+                this.$store.commit('SET_EMAIL',jwt)
+                this.$router.push("/index")
+              });
           }else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -92,19 +91,35 @@ export default {
 
 
 
-
+import qs from 'qs'
 </script>
 
 <style scoped>
 
+.step{
+  height: 200px;
+  align-items: center;
+  margin: 0ch;
+}
 .form{
   padding: 15px;
-  margin-top: 200px;
 }
 .step2{
   width: 500px;
 }
+.submit{
+  background-color: #54c685;
+  
+}
+.submit:hover{
+  background-color: #3ea56a;
+  
+}
+.submit:focus{
+  background-color: #54c685;
+}
 button{
   margin-left: 20%;
+  /* background-color: #54c685; */
 }
 </style>

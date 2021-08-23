@@ -4,10 +4,11 @@ import Home from '../views/Home.vue'
 import Index from '../views/Index.vue'
 import SignUp from '../views/SignUp.vue'
 import SignIn from '../views/SignIn.vue'
-import axios from 'axios'
-
-
-
+import Profile from '../views/Profile.vue'
+import Resume from '../views/Resume.vue'
+import createPost from '../views/createPost.vue'
+import getAllPost from '../views/getAllPost.vue'
+import getAllCompanyPost from '../views/getAllCompanyPost.vue'
 
 Vue.use(VueRouter)
 
@@ -32,7 +33,32 @@ const routes = [
         path: '/SignUp',
         name: 'SignUp',
         component: SignUp
-      }
+      },
+      {
+        path: '/Profile',
+        name: 'Profile',
+        component: Profile
+      },
+      {
+        path: '/Resume',
+        name: 'Resume',
+        component: Resume
+      },
+      {
+        path: '/create-Post',
+        name: 'createPost',
+        component: createPost
+      },
+      {
+        path: '/get-All-Post',
+        name: 'getAllPost',
+        component: getAllPost
+      },
+      {
+        path: '/get-All-Post',
+        name: 'getAllCompanyPost',
+        component: getAllCompanyPost
+      },
   ]
   },
   

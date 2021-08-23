@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     email:'',
     password:'',
-    roleId:null
+    roleId: null,
+    token: ''
   },
   mutations: {
     SET_EMAIL: (state, email) => {
@@ -21,8 +22,21 @@ export default new Vuex.Store({
     SET_ROLEID: (state, roleId) => {
       state.roleId = roleId
       // localStorage.setItem("password",password)
-    }
+    },
+    SET_TOKEN: (token) => {
+      state.token = token
+      localStorage.setItem("token",token)
+    },
+    // SET_TOKEN_NULL: () => {
+    //   // this.state.token = ''
+    //   localStorage.setItem("token",null)
+    // }
   },
+  // getters: {
+  //   getemail: state => {
+  //     return state.todos.filter(todo => todo.done)
+  //   }
+  // },
   actions: {
   },
   modules: {

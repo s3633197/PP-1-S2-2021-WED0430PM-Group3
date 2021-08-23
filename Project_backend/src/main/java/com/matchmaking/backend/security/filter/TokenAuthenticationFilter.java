@@ -52,6 +52,7 @@ public class TokenAuthenticationFilter extends BasicAuthenticationFilter {
 
         if(StrUtil.isBlankOrUndefined(jwt)){
             chain.doFilter(request,response);
+            System.out.print("asdasdasd "+response.getStatus()+"");
             return;
         }
 

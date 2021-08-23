@@ -19,6 +19,7 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
+    // console.log(+"asdasdasd"),
     response =>{
         console.log("response ->" + response)
         let res = response.data
@@ -36,7 +37,8 @@ request.interceptors.response.use(
             Element.Message.error("Incorrect password/email")
             return Promise.reject(res.data.message)
         }else{
-            console.log(response)
+            console.log("response ->" + response)
+            console.log("res ->" + res)
             Element.Message.error(res.message ? 'error':res.message)
             return Promise.reject(res.message)
         }

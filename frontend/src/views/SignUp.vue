@@ -19,7 +19,7 @@
             <el-form-item label="password" prop="password">
                 <el-input v-model="signupForm.password" type="password"></el-input>
             </el-form-item>
-            <el-form-item label="password confirm" prop="password_confirm">
+            <el-form-item label="password confirm"  prop="password_confirm">
                 <el-input v-model="signupForm.password_confirm" type="password"></el-input>
             </el-form-item>
             <el-form-item  label="account role" prop="roleId">
@@ -56,7 +56,7 @@ export default {
   data() {
       return {
         
-        password_confirm:null,
+        password_confirm:"",
         active: 0,
         signupForm: {
           email: '',
@@ -75,6 +75,7 @@ export default {
           password_confirm: [
             { required: true, message: 'Please enter password again!', trigger: 'blur' },
             { min: 6, max: 20, message: 'At lease 6 numbers or letters!', trigger: 'blur' },
+            { }
           ],
           roleId: [
             { required: true, message: 'Please select account role!', trigger: 'blur' },
@@ -88,7 +89,6 @@ export default {
           value: 2,
           label: 'company'
         }],
-        value: ''
 
       };
       var checkEmail = (rule, value, cb) => {
@@ -105,16 +105,17 @@ export default {
         
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$axios.post('/api/user/register?',this.signupForm).then(res => {
-              
+            if(this.signupForm.password === this.password_confirm){
+              alert("The two passwords entered are inconsistent")
+            }else{
+              this.$axios.post('/api/account/register',this.signupForm).then(res => {
               // const jwt = res.headers['authorization']
               // this.$store.commit('SET_EMAIL',jwt)
               // this.$store.commit('SET_PASSWORD',jwt)
               // this.$router.push("/signin")
-              // this.$message.success("success")
-            });
+              });
+            }
           }else {
-            console.log('error submit!!');
             return false;
           }
         });
@@ -151,9 +152,12 @@ export default {
   background-color: #54c685;
   
 }
-.submit:hover{
+/* .submit:hover{
   background-color: #3ea56a;
   
+} */
+.submit:focus{
+  background-color: #54c685;
 }
 button{
   margin-left: 20%;

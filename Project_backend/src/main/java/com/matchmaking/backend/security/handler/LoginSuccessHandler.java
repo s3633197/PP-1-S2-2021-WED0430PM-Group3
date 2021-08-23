@@ -41,6 +41,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     // add token to header
     response.setHeader(jwtUtils.getHeader(),token);
 
+    System.out.println("user information" + account);
+
     // store token in redis for 1 hours
     redistUtils.set(token,account.getEmail(),60*60);
 

@@ -24,6 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final String[] URL_WHITELISTS = {
             "/login",
+            "/favicon.ico",
             "/logout",
             "/api/account/register",
             "/api/company/all",
