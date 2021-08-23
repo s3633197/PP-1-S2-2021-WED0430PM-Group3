@@ -8,7 +8,10 @@ mybatis:
     mapUnderscoreToCamelCase: true
     map-underscore-to-camel-case: true
 
-# 数据库相关配置
+
+
+
+# 本地数据库相关配置
 spring:
   datasource:
     username: root
@@ -22,8 +25,12 @@ spring:
 
 token:
   jwt:
-    header: token
+    header: Authentication
     # 加密密钥 32位
     secret: f4e2e52034348f86b67cde581c0f9eb5
-    # token过期时间(2个小时)
-    expire: 7200
+    # token过期时间(1个小时)
+    expire: 3600
+
+
+
+

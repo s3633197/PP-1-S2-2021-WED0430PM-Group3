@@ -25,8 +25,8 @@ public class JwtUtils {
     public String generateToken(String email){
         Date createDate = new Date();
         Date expireTime = new Date(createDate.getTime()+1000*expire);
-        System.out.println(expireTime);
-        System.out.println(createDate);
+
+
 
         return   Jwts.builder()
                 .setHeaderParam("type","JWT")
@@ -42,7 +42,7 @@ public class JwtUtils {
     public Claims getClaimByToken(String jwt){
         return Jwts.parser()
                     .setSigningKey(secret)
-                    .parseClaimsJwt(jwt)
+                    .parseClaimsJws(jwt)
                     .getBody();
     }
 

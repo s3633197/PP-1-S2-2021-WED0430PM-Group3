@@ -23,7 +23,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         ServletOutputStream outputStream = response.getOutputStream();
 
-        Result result = Result.error("","Incorrect password/email");
+        Result result = Result.failed("Incorrect password/email");
 
         outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 

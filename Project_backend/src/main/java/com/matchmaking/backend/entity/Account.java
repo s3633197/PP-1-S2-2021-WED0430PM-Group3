@@ -6,12 +6,12 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class User {
+public class Account {
     private String email;
 
     private String password;
 
-    private Long userId;
+    private int accountId;
 
     private int roleId;
 

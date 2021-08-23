@@ -19,6 +19,11 @@ public class Result {
         this.statusCode = statusCode;
     }
 
+    protected Result(long statusCode, String message) {
+        this.statusCode = statusCode;
+        this.message = message;
+    }
+
 
     public static Result success(Object data){
         return new Result(StatusCode.SUCCESS.getCode(),StatusCode.SUCCESS.getMessage(),data);
@@ -39,8 +44,8 @@ public class Result {
     public static Result failed(Object data){
         return new Result(StatusCode.BAD.getCode(),StatusCode.BAD.getMessage(),data);
     }
-    public static Result failed(Object data,String message){
-        return new Result(StatusCode.BAD.getCode(),message,data);
+    public static Result failed(String message){
+        return new Result(StatusCode.BAD.getCode(),message);
     }
 
     public static Result error(Object data){
@@ -49,6 +54,14 @@ public class Result {
 
     public static Result error(Object data, String message){
         return new Result(StatusCode.ERROR.getCode(),message,data);
+    }
+
+    public static Result notAuthorised(String  message){
+        return new Result(StatusCode.UNAUTHORIZED.getCode(),message);
+    }
+
+    public static Result notFound(){
+        return new Result(StatusCode.NOTFOUND.getCode(), StatusCode.NOTFOUND.getMessage());
     }
 
 
