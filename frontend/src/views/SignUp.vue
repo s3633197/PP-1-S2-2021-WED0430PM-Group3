@@ -42,9 +42,10 @@
     </el-row>
   </div>
 </template>
-
+ 
 
 <script>
+import qs from 'qs'
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
 
@@ -108,7 +109,10 @@ export default {
             if(this.signupForm.password === this.password_confirm){
               alert("The two passwords entered are inconsistent")
             }else{
-              this.$axios.post('/api/account/register',this.signupForm).then(res => {
+              // this.$axios.post('/api/account/register?',qs.stringify(this.signupForm)).then(res => {
+              this.$axios.post('/api/account/register?',this.signupForm).then(res => {
+                console.log(res.data.message)
+                console.log(res.data.statusCode)
               // const jwt = res.headers['authorization']
               // this.$store.commit('SET_EMAIL',jwt)
               // this.$store.commit('SET_PASSWORD',jwt)

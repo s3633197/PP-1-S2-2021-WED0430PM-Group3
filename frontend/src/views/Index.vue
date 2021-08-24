@@ -2,6 +2,7 @@
     <div class="img">
          <img src="../assets/img.jpg">
          <img src="../assets/img.jpg">
+         asdasdasd
     </div>
 </template>
 
@@ -25,3 +26,13 @@ img{
     padding: 10px;
 }
 </style>
+
+
+<script>
+    export default {
+        created() {
+        console.log("body")
+        },
+
+    }
+</script>

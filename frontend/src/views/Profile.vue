@@ -89,26 +89,25 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import qs from 'qs'
 export default {
   data() {
         return {
             informationForm: {
-            firstName: '',
-            lastName: '',
-            gender: 'empty',
-            phone: null,
-            dateOfBirth: '',
-            schoolName: '',
-            major: '',
-            educationalBackground: '',
-            skill: '',
-            location: '',
-            statement: '',
-            wantedIndustry: '',
-            jobType: '',
-            expectedSalary: null,
-            token:'',
+              firstName: '',
+              lastName: '',
+              gender: 'empty',
+              phone: null,
+              dateOfBirth: '',
+              schoolName: '',
+              major: '',
+              educationalBackground: '',
+              skill: '',
+              location: '',
+              statement: '',
+              wantedIndustry: '',
+              jobType: '',
+              expectedSalary: null,
             },
 
             rules: {
@@ -188,15 +187,16 @@ export default {
     methods: {
       submitForm(formName) {
         
-        // this.$refs[formName].validate((valid) => {
-        //   if (valid) {
-        //     this.$axios.post('/api/seeker/create',this.informationForm).then(res => {
-        //     //   this.$router.push("/index")
-        //      });
-        //   }else {
-        //     return false;
-        //   }
-        // });
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$axios.post('/api/seeker/create?',qs.stringify(this.informationForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
+              
+              this.$router.push("/resume")
+            });
+          }else {
+            return false;
+          }
+        });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

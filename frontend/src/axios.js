@@ -7,39 +7,39 @@ axios.defaults.baseURL = "http://localhost:9000"
 const request = axios.create ({
     timeout: 5000,
     headers: {
+        // 'Content-Type' : "application/json;"
         'Content-Type' : "application/json; charset=utf-8"
+        // 'Content-Type' : "application/x-www-form-urlencoded; application/json; charset=utf-8"
     }
 })
 
 request.interceptors.request.use(
     config => {
-        config.headers['Authorization'] = localStorage.getItem("token")
+        config.headers['authentication'] = localStorage.getItem("token")
+        console.log(config.headers)
         return config
     }
 )
 
 request.interceptors.response.use(
-    console.log(+"asdasdasd"),
     response =>{
-        console.log("response ->" + response)
+        console.log(response)
         let res = response.data
-        console.log("res ->" + res)
         if(res.statusCode === 201 || res.statusCode === 200){
-            console.log("success")
-            Element.Message.success("Success")
-            return res
+            Element.Message.success(res.message)
+            return response
         }else if(res.statusCode === 400){
-            console.log("Email was taken")
-            Element.Message.error("Email was taken")
+            Element.Message.error(res.message)
             return Promise.reject(res.data.message)
+        }else if(res.statusCode === 401){
+            Element.Message.error(res.message)
+            return Promise.reject(res.message)
         }else if(res.statusCode === 500){
-            console.log("Incorrect password/email")
-            Element.Message.error("Incorrect password/email")
-            return Promise.reject(res.data.message)
+            Element.Message.error(res.message)
+            return Promise.reject(res.message)
         }else{
-            console.log("response ->" + response)
-            console.log("res ->" + res)
-            Element.Message.error(res.message ? 'error':res.message)
+            console.log("error code " + res.statusCode)
+            Element.Message.error("error message: " + res.message)
             return Promise.reject(res.message)
         }
 

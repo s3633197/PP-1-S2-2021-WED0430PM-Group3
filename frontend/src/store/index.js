@@ -5,25 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    email:'',
-    password:'',
-    roleId: null,
-    token: ''
+    token: '',
+    email: '',
+    roleId: null
   },
   mutations: {
-    SET_EMAIL: (state, email) => {
-      state.email = email
-      // localStorage.setItem("email",email)
-    },
-    SET_PASSWORD: (state, password) => {
-      state.password = password
-      // localStorage.setItem("password",password)
-    },
+    // SET_EMAIL: (state, email) => {
+    //   state.email = email
+    // },
+    // SET_PASSWORD: (state, password) => {
+    //   this.password = password
+    //   // localStorage.setItem("password",password)
+    // },
     SET_ROLEID: (state, roleId) => {
       state.roleId = roleId
+      localStorage.setItem("roleId",roleId)
       // localStorage.setItem("password",password)
     },
-    SET_TOKEN: (token) => {
+    SET_TOKEN: (state,token) => {
       state.token = token
       localStorage.setItem("token",token)
     },

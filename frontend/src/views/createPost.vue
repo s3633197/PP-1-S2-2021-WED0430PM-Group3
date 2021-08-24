@@ -72,7 +72,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import qs from 'qs'
 export default {
   data() {
         return {
@@ -86,7 +86,6 @@ export default {
                 educationalBackground: '',
                 minSalary: null,
                 maxSalary: null,
-                token:'',
             },
 
             rules: {
@@ -146,16 +145,17 @@ export default {
 
     methods: {
       submitForm(formName) {
-        // this.$refs[formName].validate((valid) => {
-        //   if (valid) {
-        //      this.$axios.post('/api/post/create',this.postInformation).then(res => {
-                token
-        //     //   this.$router.push("/index")
-        //      });
-        //   }else {
-        //     return false;
-        //   }
-        // });
+        console.log(qs.stringify(this.postInformation))
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+             this.$axios.post('/api/post/create',this.postInformation).then(res => {
+               console.log("post"+res.data)
+            //   this.$router.push("/index")
+             });
+          }else {
+            return false;
+          }
+        });
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();

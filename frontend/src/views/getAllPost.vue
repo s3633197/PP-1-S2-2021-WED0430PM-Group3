@@ -55,7 +55,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import qs from 'qs'
 export default {
   data() {
         return {

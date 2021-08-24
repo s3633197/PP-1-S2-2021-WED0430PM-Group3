@@ -6,10 +6,9 @@
     <div id="nav">
       <div id="nav1">
         <router-link to="/Index">Home</router-link>
-        <span v-text= email>$</span>
       </div>
       <div id="nav2" >
-        <router-link to="/SignUp" v-if="logout">Sign Up</router-link> |
+        <router-link to="/SignUp" v-if="logout">Sign Up | </router-link> 
         <router-link to="/SignIn" v-if="logout">Sign In</router-link> 
         <el-button id="logout" type="primary" @click="logoutButton()" v-if="login">Log out</el-button>
       </div>
@@ -85,33 +84,52 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
+   created() {
+      this.loginOrnot();
+      console.log("home")
+    },
   data() {
     return {
       login:false,
       logout:true,
-      email:''
     }
   },
-    created() {
-      this.loginOrnot();
-    },
   methods: {
     logoutButton() {
       this.$axios.post('/logout').then(res => {
-        localStorage.setItem("token",null)
+        localStorage.removeItem('token')
+        this.$router.push("/index")
       });
        
     },
     loginOrnot(){
-      if( this.$store.email==null){
+      
+      if(localStorage.getItem('token')==null){
+        console.log("null")
         this.logout = true
-      }else{
+        this.login = false
+      }
+      if(localStorage.getItem('token')!=null){
+        console.log("value")
         this.login = true
-        this.email = this.$store.getemail
-        console.log(email+"asdasd")
+        this.logout = false
       }
      
-    }
-  }
+    },
+    // personalOrCompany(){
+      
+    //   if(localStorage.getItem('roleId')==1){
+    //     console.log("null")
+    //     this.logout = true
+    //     this.login = false
+    //   }
+    //   if(localStorage.getItem('token')!=null){
+    //     console.log("value")
+    //     this.login = true
+    //     this.logout = false
+    //   }
+     
+    // }
+  },
 }
 </script>

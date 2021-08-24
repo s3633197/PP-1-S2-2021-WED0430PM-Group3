@@ -75,26 +75,29 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import qs from 'qs'
 export default {
   data() {
         return {
-          seekerId: null,
-          firstName: '',
-          lastName: '',
-          gender: '',
-          phone: null,
-          dateOfBirth: '',
-          schoolName: '',
-          major: '',
-          educationalBackground: '',
-          skill: '',
-          location: '',
-          statement: '',
-          wantedIndustry: '',
-          jobType: '',
-          expectedSalary: null,
-          accountId: null,
+          informationForm:{
+              seekerId: null,
+              firstName: '',
+              lastName: '',
+              gender: '',
+              phone: null,
+              dateOfBirth: '',
+              schoolName: '',
+              major: '',
+              educationalBackground: '',
+              skill: '',
+              location: '',
+              statement: '',
+              wantedIndustry: '',
+              jobType: '',
+              expectedSalary: null,
+              accountId: null,
+          },
+          
         };
     },
       created() {
@@ -102,22 +105,22 @@ export default {
       },
     methods: {
       getResume(){
-        // this.$axios.get('/api/seeker/resume').then(res => {
-        //   // this.signupForm.token = res.data.data.token
-        //   this.firstName = res.data.dat.firstName
-        //   this.lastName = res.data.dat.lastName
-        //   this.gender = res.data.dat.gender
-        //   this.phone = res.data.dat.phone
-        //   this.dateOfBirth = res.data.dat.dateOfBirth
-        //   this.schoolName = res.data.dat.schoolName
-        //   this.major = res.data.dat.major
-        //   this.educationalBackground = res.data.dat.educationalBackground
-        //   this.location = res.data.dat.location
-        //   this.statement = res.data.dat.statement
-        //   this.wantedIndustry = res.data.dat.wantedIndustry
-        //   this.jobType = res.data.dat.jobType
-        //   this.expectedSalary = res.data.dat.expectedSalary
-        // });
+        this.$axios.get('/api/seeker/resume').then(res => {
+          // this.signupForm.token = res.data.data.token
+          this.firstName = res.data.dat.firstName
+          this.lastName = res.data.dat.lastName
+          this.gender = res.data.dat.gender
+          this.phone = res.data.dat.phone
+          this.dateOfBirth = res.data.dat.dateOfBirth
+          this.schoolName = res.data.dat.schoolName
+          this.major = res.data.dat.major
+          this.educationalBackground = res.data.dat.educationalBackground
+          this.location = res.data.dat.location
+          this.statement = res.data.dat.statement
+          this.wantedIndustry = res.data.dat.wantedIndustry
+          this.jobType = res.data.dat.jobType
+          this.expectedSalary = res.data.dat.expectedSalary
+        });
       }
     }
 }

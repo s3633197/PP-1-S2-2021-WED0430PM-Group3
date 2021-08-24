@@ -26,7 +26,7 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
+import qs from 'qs'
 export default {
   name: 'SignIn',
   // components: {
@@ -37,7 +37,7 @@ export default {
         active: 0,
         signinForm: {
           username: '',
-          password: '',
+          password: null,
           
         },
         rules: {
@@ -61,11 +61,16 @@ export default {
           if (valid) {
               console.log(this.signinForm.password+"   pass")
               console.log(this.signinForm.username+"   username")
-              this.$axios.post('/login?',qs.stringify(this.signinForm)).then(res => {
-                console.log("code = " + res.data.data.statusCode)
-                const jwt = res.headers['Authentication']
+              this.$axios.post('/login?',qs.stringify(this.signinForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
+              // this.$axios.post('/login',qs.stringify(this.signinForm)).then(res => {
+                
+                const jwt = res.headers['authentication']
+                const roleId = res.data.data.roleId
+                const email = res.data.data.email
+                console.log("token = " + jwt)
                 this.$store.commit('SET_TOKEN',jwt)
-                this.$store.commit('SET_EMAIL',jwt)
+                // this.$store.commit('SET_EMAIL',jwt)
+                this.$store.commit('SET_ROLEID',roleId)
                 this.$router.push("/index")
               });
           }else {
@@ -90,10 +95,6 @@ export default {
       // }
     }
 }
-
-
-
-import qs from 'qs'
 </script>
 
 <style scoped>
