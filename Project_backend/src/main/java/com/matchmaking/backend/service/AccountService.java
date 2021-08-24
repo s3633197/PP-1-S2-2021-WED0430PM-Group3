@@ -38,9 +38,8 @@ public class AccountService {
     }
 
 
-    public Result updateLoginTime(String email){
+    public void updateLoginTime(String email){
         accountMapper.updateLoginTime(email, LocalDateTime.now());
-        return Result.success("","Successfully Login");
     }
 
 

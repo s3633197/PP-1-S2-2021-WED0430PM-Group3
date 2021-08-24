@@ -3,9 +3,11 @@ package com.matchmaking.backend.security.handler;
 import cn.hutool.json.JSONUtil;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
+import com.matchmaking.backend.entity.vo.AccountVO;
 import com.matchmaking.backend.service.AccountService;
 import com.matchmaking.backend.utils.JwtUtils;
 import com.matchmaking.backend.utils.RedistUtils;
+import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -30,6 +32,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     @Autowired
     RedistUtils redistUtils;
 
+    @Autowired
+    DozerBeanMapper dozerBeanMapper;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -47,8 +52,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     redistUtils.set(token,account.getEmail(),60*60);
 
     ServletOutputStream outputStream = response.getOutputStream();
-    Result result =  accountService.updateLoginTime(account.getEmail());
+    accountService.updateLoginTime(account.getEmail());
 
+    AccountVO accountVO = dozerBeanMapper.map(account,AccountVO.class);
+    Result result = Result.success(accountVO,"Successfully login");
     outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 
     outputStream.flush();
