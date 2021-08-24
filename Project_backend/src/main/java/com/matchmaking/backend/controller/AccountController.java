@@ -29,6 +29,16 @@ public class AccountController {
         return accountService.changePassword(passwordDTO.getEmail(),passwordDTO.getOldPassword(),passwordDTO.getNewPassword());
     }
 
+    @GetMapping("/auth/company")
+    public Result checkAuthCompany(){
+        return accountService.checkAuthCompany();
+    }
+
+    @GetMapping("/auth/seeker")
+    public Result checkAuthSeeker(){
+        return accountService.checkAuthSeeker();
+    }
+
 
 
 }

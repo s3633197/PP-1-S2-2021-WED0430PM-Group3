@@ -4,11 +4,16 @@ package com.matchmaking.backend.service;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
 import com.matchmaking.backend.mapper.AccountMapper;
+import com.matchmaking.backend.utils.JwtUtils;
+import com.matchmaking.backend.utils.RedistUtils;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 
 @Service
@@ -19,6 +24,18 @@ public class AccountService {
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    HttpServletRequest request;
+
+    @Autowired
+    HttpServletResponse response;
+
+    @Autowired
+    RedistUtils redistUtils;
+
+    @Autowired
+    JwtUtils jwtUtils;
 
     public Result createAccount(Account account){
        Account existUser = this.findAccountByEmail(account.getEmail());
@@ -66,6 +83,19 @@ public class AccountService {
         return  currentAccount;
     }
 
+    public Result checkAuthCompany(){
+        if(currentAccount().getRoleId() != 2){
+            return Result.notAuthorised("Not authorised");
+        }
+        return Result.notFound();
+    }
+
+    public Result checkAuthSeeker(){
+        if(currentAccount().getRoleId() != 1){
+            return Result.notAuthorised("Not authorised");
+        }
+        return Result.notFound();
+    }
 
 
 

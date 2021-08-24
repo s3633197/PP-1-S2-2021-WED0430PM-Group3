@@ -19,7 +19,7 @@ public class TokenAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException exception) throws IOException, ServletException {
         httpServletResponse.setContentType("application/json;charset=utf-8");
-        httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 

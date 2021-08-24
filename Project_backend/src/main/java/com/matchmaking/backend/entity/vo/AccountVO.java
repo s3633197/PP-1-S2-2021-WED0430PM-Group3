@@ -14,6 +14,6 @@ public class AccountVO {
     private int accountId;
 
     private int roleId;
-    
+
 
 }
