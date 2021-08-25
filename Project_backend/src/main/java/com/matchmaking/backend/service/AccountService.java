@@ -84,17 +84,18 @@ public class AccountService {
     }
 
     public Result checkAuthCompany(){
+        System.out.println(currentAccount().getRoleId());
         if(currentAccount().getRoleId() != 2){
             return Result.notAuthorised("Not authorised");
         }
-        return Result.notFound();
+        return Result.success("","Authorised");
     }
 
     public Result checkAuthSeeker(){
         if(currentAccount().getRoleId() != 1){
             return Result.notAuthorised("Not authorised");
         }
-        return Result.notFound();
+        return Result.success("","Authorised");
     }
 
 
