@@ -9,7 +9,8 @@ import Resume from '../views/Resume.vue'
 import createPost from '../views/createPost.vue'
 import getAllPost from '../views/getAllPost.vue'
 import getAllCompanyPost from '../views/getAllCompanyPost.vue'
-
+import createCompany from '../views/createCompany.vue'
+import companyInfo from '../views/companyInfo.vue'
 Vue.use(VueRouter)
 
 
@@ -55,9 +56,14 @@ const routes = [
         component: getAllPost
       },
       {
-        path: '/get-All-Post',
-        name: 'getAllCompanyPost',
-        component: getAllCompanyPost
+        path: '/create-company',
+        name: 'createCompany',
+        component: createCompany
+      },
+      {
+        path: '/company-info',
+        name: 'companyInfo',
+        component: companyInfo
       },
   ]
   },

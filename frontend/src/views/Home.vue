@@ -99,6 +99,7 @@ export default {
       this.$axios.post('/logout').then(res => {
         localStorage.removeItem('token')
         this.$router.push("/index")
+        this.$router.go(0)
       });
        
     },

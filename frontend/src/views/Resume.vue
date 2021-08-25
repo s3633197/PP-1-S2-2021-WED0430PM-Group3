@@ -8,59 +8,59 @@
                 <h1>Your profile</h1>
             </el-form-item>
 
-            <el-form-item label="First Name">
+            <el-form-item label="First Name: ">
                 <span v-text="informationForm.firstName"></span>
             </el-form-item>
             
-            <el-form-item label="Last Name">
+            <el-form-item label="Last Name: ">
                 <span v-text="informationForm.lastName"></span>
             </el-form-item>
 
-            <el-form-item label="Gender">
+            <el-form-item label="Gender: ">
                 <span v-text="informationForm.gender"></span>
             </el-form-item>
 
-            <el-form-item label="Phone">
+            <el-form-item label="Phone: ">
                 <span v-text="informationForm.phone"></span>
             </el-form-item>
 
-            <el-form-item label="Date of Birth">
+            <el-form-item label="Date of Birth: ">
                 <span v-text="informationForm.dateOfBirth"></span>
             </el-form-item>
 
-            <el-form-item label="School Name">
+            <el-form-item label="School Name: ">
                 <span v-text="informationForm.schoolName"></span>
             </el-form-item>
 
-            <el-form-item label="Major">
+            <el-form-item label="Major: ">
                 <span v-text="informationForm.major"></span>
             </el-form-item>
 
-            <el-form-item label="Educational Background">
+            <el-form-item label="Educational Background: ">
                 <span v-text="informationForm.educationalBackground"></span>
             </el-form-item>
 
-            <el-form-item label="skll">
+            <el-form-item label="skill: ">
                 <span v-text="informationForm.skill"></span>
             </el-form-item>
 
-            <el-form-item label="statement">
+            <el-form-item label="statement: ">
                 <span v-text="informationForm.statement"></span>
             </el-form-item>
 
-            <el-form-item label="location">
+            <el-form-item label="location: ">
                 <span v-text="informationForm.location"></span>
             </el-form-item>
 
-            <el-form-item label="Wanted Industry">
+            <el-form-item label="Wanted Industry: ">
                 <span v-text="informationForm.wantedIndustry"></span>
             </el-form-item>
 
-            <el-form-item label="Job Type">
+            <el-form-item label="Job Type: ">
                 <span v-text="informationForm.jobType"></span>
             </el-form-item>
 
-            <el-form-item label="Expected Salary">
+            <el-form-item label="Expected Salary: ">
                 <span v-text="informationForm.expectedSalary"></span>
             </el-form-item>
 
@@ -75,7 +75,6 @@
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-import qs from 'qs'
 export default {
   data() {
         return {
@@ -107,19 +106,20 @@ export default {
       getResume(){
         this.$axios.get('/api/seeker/resume').then(res => {
           // this.signupForm.token = res.data.data.token
-          this.firstName = res.data.dat.firstName
-          this.lastName = res.data.dat.lastName
-          this.gender = res.data.dat.gender
-          this.phone = res.data.dat.phone
-          this.dateOfBirth = res.data.dat.dateOfBirth
-          this.schoolName = res.data.dat.schoolName
-          this.major = res.data.dat.major
-          this.educationalBackground = res.data.dat.educationalBackground
-          this.location = res.data.dat.location
-          this.statement = res.data.dat.statement
-          this.wantedIndustry = res.data.dat.wantedIndustry
-          this.jobType = res.data.dat.jobType
-          this.expectedSalary = res.data.dat.expectedSalary
+          this.informationForm.firstName = res.data.data.firstName
+          this.informationForm.lastName = res.data.data.lastName
+          this.informationForm.gender = res.data.data.gender
+          this.informationForm.phone = res.data.data.phone
+          this.informationForm.dateOfBirth = res.data.data.dateOfBirth
+          this.informationForm.schoolName = res.data.data.schoolName
+          this.informationForm.major = res.data.data.major
+          this.informationForm.educationalBackground = res.data.data.educationalBackground
+          this.informationForm.skill = res.data.data.skill
+          this.informationForm.location = res.data.data.location
+          this.informationForm.statement = res.data.data.statement
+          this.informationForm.wantedIndustry = res.data.data.wantedIndustry
+          this.informationForm.jobType = res.data.data.jobType
+          this.informationForm.expectedSalary = res.data.data.expectedSalary
         });
       }
     }
@@ -147,6 +147,11 @@ export default {
   background-color: #54c685;
   
 }
+span{
+  margin-left: 20px;
+  padding-left: 50px;
+}
+
 /* .submit:hover{
   background-color: #3ea56a;
 }

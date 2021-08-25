@@ -5,7 +5,7 @@
         <div>
           <el-form :model="informationForm" :rules="rules" ref="informationForm" label-width="200px">
             <el-form-item>
-                <h1>Create your profile!</h1>
+                <h1>Create your profile</h1>
             </el-form-item>
             <el-form-item label="First Name" prop="firstName">
                 <el-input v-model="informationForm.firstName"></el-input>
@@ -23,7 +23,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="Phone" prop="phone" >
+            <el-form-item label="Phone" prop="phone" type="number">
                 <el-input v-model="informationForm.phone"></el-input>
             </el-form-item>
             <el-form-item label="Date of Birth" prop="dateOfBirth" >
@@ -33,6 +33,9 @@
                     type="date"
                     placeholder="select a date">
                 </el-date-picker>
+            </el-form-item>
+            <el-form-item label="School Name" prop="schoolName" >
+                <el-input v-model="informationForm.schoolName"></el-input>
             </el-form-item>
             <el-form-item label="Major" prop="major" >
                 <el-input v-model="informationForm.major"></el-input>
@@ -96,7 +99,7 @@ export default {
             informationForm: {
               firstName: '',
               lastName: '',
-              gender: 'empty',
+              gender: 'male',
               phone: null,
               dateOfBirth: '',
               schoolName: '',
@@ -123,6 +126,12 @@ export default {
                 jobType: [
                     { required: true, message: 'Please select your job type!', trigger: 'blur' },
                 ],
+                // phone:[
+                //     { type:'number', message: 'Only accept number!' },
+                // ],
+                // expectedSalary:[
+                //     { type:'number', message: 'Only accept number!' },
+                // ],
             },
 
             genderOptions: [{
@@ -131,9 +140,6 @@ export default {
             }, {
             value: 'female',
             label: 'female'
-            }, {
-            value: 'empty',
-            label: 'empty'
             }], 
 
             jobTypeOptions: [{
@@ -189,9 +195,9 @@ export default {
         
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$axios.post('/api/seeker/create?',qs.stringify(this.informationForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
+            this.$axios.post('/api/seeker/create',this.informationForm).then(res => {
               
-              this.$router.push("/resume")
+              // this.$router.push("/resume")
             });
           }else {
             return false;

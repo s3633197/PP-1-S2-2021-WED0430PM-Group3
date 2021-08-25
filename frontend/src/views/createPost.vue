@@ -101,6 +101,12 @@ export default {
                 employmentType: [
                     { required: true, message: 'Please select your employment type!', trigger: 'blur' },
                 ],
+                // minSalary:[
+                //     { type:'number', message: 'Only accept number!' },
+                // ],
+                // maxSalary:[
+                //     { type:'number', message: 'Only accept number!' },
+                // ],
             },
 
             employmentTypeOptions: [{
@@ -142,7 +148,9 @@ export default {
         };
       
     },
-
+    // created() {
+    //     this.getAuth();
+    //   },
     methods: {
       submitForm(formName) {
         console.log(qs.stringify(this.postInformation))
@@ -163,6 +171,9 @@ export default {
       next() {
         if (this.active++ > 2) this.active = 0;
       },
+      // getAuth() {
+      //   this.$axios.post('/api/post/create')
+      // },
     }
 }
 

@@ -13,7 +13,7 @@
             
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('signinForm')">submit</el-button>
-              <el-button @click="resetForm('signinForm')">replace</el-button>
+              <el-button @click="forgotPassword('signinForm')">forgot password</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -72,14 +72,18 @@ export default {
                 // this.$store.commit('SET_EMAIL',jwt)
                 this.$store.commit('SET_ROLEID',roleId)
                 this.$router.push("/index")
+                this.$router.go(0)
               });
           }else {
             return false;
           }
         });
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+      forgotPassword(formName) {
+        // this.$axios.post('/forgot?',qs.stringify(this.signinForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
+        //       // this.$axios.post('/login',qs.stringify(this.signinForm)).then(res => {
+
+        // });
       },
       next() {
         if (this.active++ > 2) this.active = 0;

@@ -106,7 +106,7 @@ export default {
         
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            if(this.signupForm.password === this.password_confirm){
+            if(this.signupForm.password == this.password_confirm){
               alert("The two passwords entered are inconsistent")
             }else{
               // this.$axios.post('/api/account/register?',qs.stringify(this.signupForm)).then(res => {

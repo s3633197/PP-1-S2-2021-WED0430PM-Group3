@@ -8,15 +8,15 @@ const request = axios.create ({
     timeout: 5000,
     headers: {
         // 'Content-Type' : "application/json;"
-        'Content-Type' : "application/json; charset=utf-8"
+        'Content-Type' : "application/json; charset=utf-8",
         // 'Content-Type' : "application/x-www-form-urlencoded; application/json; charset=utf-8"
+        'authentication' : localStorage.getItem("token")
     }
 })
 
 request.interceptors.request.use(
     config => {
         config.headers['authentication'] = localStorage.getItem("token")
-        console.log(config.headers)
         return config
     }
 )
@@ -45,21 +45,16 @@ request.interceptors.response.use(
 
     }, 
 
-    // error =>{
-    
-    //     console.log(error)
+    error =>{
+        // console.log(error.response)
+        if(error.response.status === 403){
+            router.push("/index")
+        }
+        Element.Message.error(error.response.data.message, {duration:3000})
+        
 
-    //     if(error.response.data){
-    //         error.Message = error.response.data.Message
-    //     }
-    //     if(error.response.statusCode === 401){
-    //         router.push("/signin")
-    //     }
-
-    //     Element.Message.error(error.Message, {duration:3000})
-
-    //     return Promise.reject(error)
-    // }
+        return Promise.reject(error)
+    }
     
 
 )
