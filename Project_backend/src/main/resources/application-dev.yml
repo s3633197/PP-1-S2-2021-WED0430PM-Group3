@@ -22,6 +22,10 @@ spring:
     host: localhost
     port: 6379
     database: 0
+  mail:
+    username: kenlbd61@126.com
+    host: smtp.126.com
+    password: RMLYOKONWHZFICYY
 
 token:
   jwt:
