@@ -28,12 +28,13 @@ public class JwtUtils {
 
 
 
-        return   Jwts.builder()
-                .setHeaderParam("type","JWT")
+
+        return Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setSubject(email)
                 .setIssuedAt(createDate)
-                .setExpiration(expireTime)
-                .signWith(SignatureAlgorithm.HS512,secret)
+                .setExpiration(expireTime)// 7天過期
+                .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
 
     }

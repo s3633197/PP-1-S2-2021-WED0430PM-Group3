@@ -2,9 +2,11 @@ package com.matchmaking.backend.common.lang;
 
 public enum JobType {
 
-    FULLTIME("Full-Time",1),
-    PARTIME("Part-Time",2),
-    CONTRACT("Contract",3);
+    FULLTIME("Full-time",1),
+    PARTIME("Part-time",2),
+    CONTRACT("Contract",3),
+    UNKNOWN("Unknown",4)
+            ;
 
 
     private String key;

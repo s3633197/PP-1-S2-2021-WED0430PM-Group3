@@ -95,9 +95,9 @@ public class ResumeService {
         if(resume == null){
             return null;
         }
-        Target target = KNNRecommendAlogrithm.resumeCovertToTarget(getCurrentResume());
+        Target target = knnRecommendAlogrithm.resumeCovertToTarget(getCurrentResume());
         List<Post> postList = postMapper.getAllPosts();
-        return KNNRecommendAlogrithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
+        return knnRecommendAlogrithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
     }
 
 }

@@ -13,14 +13,14 @@ mybatis:
 
 # 本地数据库相关配置
 spring:
-#  datasource:
-#    username: root
-#    password: 12345
-#    url: jdbc:mysql://localhost:3306/project1
   datasource:
-    username: admin
-    password: 12345678
-    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
+    username: root
+    password: 12345
+    url: jdbc:mysql://localhost:3306/project1
+#  datasource:
+#    username: admin
+#    password: 12345678
+#    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
 
 
   # 配置redis缓存
@@ -37,7 +37,7 @@ token:
   jwt:
     header: Authentication
     # 加密密钥 32位
-    secret: f4e2e52034348f86b67cde581c0f9eb5
+    secret: ji8n3439n439n43ld9ne9343fdfer49h
     # token过期时间(1个小时)
     expire: 3600
 
