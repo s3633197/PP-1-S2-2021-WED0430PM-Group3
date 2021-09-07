@@ -2,11 +2,14 @@ package com.matchmaking.backend.controller;
 
 
 import com.matchmaking.backend.common.lang.Result;
+import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 
@@ -43,5 +46,13 @@ public class ResumeController {
         return resumeService.getAllResume();
     }
 
+    @GetMapping("/recommend/all")
+    public Result getRecommendPosts(){
+        List<Post> postList = resumeService.getAllRecommendPost();
+        if (postList != null){
+            return Result.success(postList);
+        }
+        return Result.failed("No Recommendation");
+    }
 
 }

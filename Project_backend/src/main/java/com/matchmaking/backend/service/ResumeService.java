@@ -1,10 +1,14 @@
 package com.matchmaking.backend.service;
 
+import com.matchmaking.backend.common.algorithm.KNNRecommendAlogrithm;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
+import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
+import com.matchmaking.backend.entity.Target;
 import com.matchmaking.backend.entity.vo.ResumeVO;
 import com.matchmaking.backend.mapper.AccountMapper;
+import com.matchmaking.backend.mapper.PostMapper;
 import com.matchmaking.backend.mapper.ResumeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,6 +26,12 @@ public class ResumeService {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    PostMapper postMapper;
+
+    @Autowired
+    KNNRecommendAlogrithm knnRecommendAlogrithm;
+
 
     public Result createResume(Resume resume){
         if(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()) != null){
@@ -38,6 +48,10 @@ public class ResumeService {
             return Result.failed("Please create your CV first");
         }
         return Result.success(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()));
+    }
+
+    public Resume getCurrentResume(){
+      return resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId());
     }
 
     public Result updateResume(Resume resume){
@@ -75,4 +89,15 @@ public class ResumeService {
                 )).collect(Collectors.toList());
         return Result.success(resumeVOList);
     }
+
+    public List<Post> getAllRecommendPost(){
+        Resume resume = getCurrentResume();
+        if(resume == null){
+            return null;
+        }
+        Target target = KNNRecommendAlogrithm.resumeCovertToTarget(getCurrentResume());
+        List<Post> postList = postMapper.getAllPosts();
+        return KNNRecommendAlogrithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
+    }
+
 }

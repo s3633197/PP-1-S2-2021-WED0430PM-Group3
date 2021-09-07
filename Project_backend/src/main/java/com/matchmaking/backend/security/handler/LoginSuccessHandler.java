@@ -48,7 +48,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
     response.setContentType("application/json;charset=UTF-8");
 
 
-        // store token in redis for 1 hours
+    // store token in redis for 1 hours
     redistUtils.set(token,account.getEmail(),60*60);
 
     ServletOutputStream outputStream = response.getOutputStream();

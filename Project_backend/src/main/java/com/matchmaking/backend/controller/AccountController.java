@@ -1,6 +1,7 @@
 package com.matchmaking.backend.controller;
 
 
+import com.google.code.kaptcha.Producer;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
 import com.matchmaking.backend.entity.dto.PasswordDTO;
@@ -18,6 +19,7 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+
 
     @PostMapping("/register")
     public Result signUp(@RequestBody Account account){
@@ -37,6 +39,13 @@ public class AccountController {
     @GetMapping("/auth/seeker")
     public Result checkAuthSeeker(){
         return accountService.checkAuthSeeker();
+    }
+
+    @GetMapping("/email/captcha")
+    public Result getEmailCaptcha(@RequestBody String email){
+
+
+        return null;
     }
 
 

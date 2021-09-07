@@ -68,8 +68,6 @@ public class PostService {
 
     }
 
-
-
     public Result selectPost(int postId){
         Post post = postMapper.getPost(postId);
         if(post == null){
