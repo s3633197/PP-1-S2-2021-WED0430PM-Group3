@@ -24,7 +24,7 @@
               </el-select>
             </el-form-item>
             <el-form-item label="Phone" prop="phone" type="number">
-                <el-input v-model="informationForm.phone"></el-input>
+                <el-input v-model="informationForm.phone" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
             <el-form-item label="Date of Birth" prop="dateOfBirth" >
                 <el-date-picker
@@ -73,7 +73,7 @@
                 </el-select>
             </el-form-item>
             <el-form-item label="Expected Salary" prop="expectedSalary" >
-                <el-input v-model="informationForm.expectedSalary"></el-input>
+                <el-input v-model="informationForm.expectedSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
 
             
@@ -110,7 +110,7 @@ export default {
               statement: '',
               wantedIndustry: '',
               jobType: '',
-              expectedSalary: null,
+              expectedSalary: 0,
             },
 
             rules: {
@@ -130,7 +130,7 @@ export default {
                 //     { type:'number', message: 'Only accept number!' },
                 // ],
                 // expectedSalary:[
-                //     { type:'number', message: 'Only accept number!' },
+                //     { type: 'number', message: 'Only accept number!' },
                 // ],
             },
 

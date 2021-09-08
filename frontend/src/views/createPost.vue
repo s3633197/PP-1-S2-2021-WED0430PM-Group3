@@ -22,8 +22,8 @@
             <el-form-item label="Position" prop="Position" >
                 <el-input v-model="postInformation.position"></el-input>
             </el-form-item>
-            <el-form-item label="Location" prop="location" >
-                <el-input v-model="postInformation.location"></el-input>
+            <el-form-item label="Address" prop="address" >
+                <el-input v-model="postInformation.address"></el-input>
             </el-form-item>
            
             <el-form-item label="Employment Type" prop="employmentType" >
@@ -49,11 +49,11 @@
             </el-form-item>
 
             <el-form-item label="Min Salary" prop="minSalary" >
-                <el-input v-model="postInformation.minSalary"></el-input>
+                <el-input v-model="postInformation.minSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
 
              <el-form-item label="Max Salary" prop="maxSalary" >
-                <el-input v-model="postInformation.maxSalary"></el-input>
+                <el-input v-model="postInformation.maxSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
 
             
@@ -81,7 +81,7 @@ export default {
                 description: '',
                 industry: '',
                 position: '',
-                location: '',
+                address: '',
                 employmentType: '',
                 educationalBackground: '',
                 minSalary: null,

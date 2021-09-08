@@ -66,8 +66,7 @@ export default {
                 
                 const jwt = res.headers['authentication']
                 const roleId = res.data.data.roleId
-                const email = res.data.data.email
-                console.log("token = " + jwt)
+                // const email = res.data.data.email
                 this.$store.commit('SET_TOKEN',jwt)
                 // this.$store.commit('SET_EMAIL',jwt)
                 this.$store.commit('SET_ROLEID',roleId)
@@ -126,7 +125,7 @@ export default {
   background-color: #54c685;
 }
 button{
-  margin-left: 20%;
+  margin-left: 5%;
   /* background-color: #54c685; */
 }
 </style>

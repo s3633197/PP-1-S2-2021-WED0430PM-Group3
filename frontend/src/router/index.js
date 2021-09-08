@@ -56,6 +56,11 @@ const routes = [
         component: getAllPost
       },
       {
+        path: '/get-All-Company-Post',
+        name: 'getAllCompanyPost',
+        component: getAllCompanyPost
+      },
+      {
         path: '/create-company',
         name: 'createCompany',
         component: createCompany

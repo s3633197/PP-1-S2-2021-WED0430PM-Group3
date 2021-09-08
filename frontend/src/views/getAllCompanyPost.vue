@@ -1,136 +1,72 @@
 <template>
-  <div>
-    <el-row type="flex" class="form" justify="center">
-      <el-col :span="8">
-        <div>
-          <el-form :model="postpostInformationForm" ref="postInformationForm" label-width="200px">
-            <el-form-item>
-                <h1>Your post</h1>
-            </el-form-item>
-
-            <el-form-item label="Title">
-                <span v-text="postInformationForm.title"></span>
-            </el-form-item>
-
-            <el-form-item label="Description">
-                <span v-text="postInformationForm.description"></span>
-            </el-form-item>
-
-            <el-form-item label="Industry">
-                <span v-text="postInformationForm.industry"></span>
-            </el-form-item>
-
-            <el-form-item label="position">
-                <span v-text="postInformationForm.position"></span>
-            </el-form-item>
-
-            <el-form-item label="Address">
-                <span v-text="postInformationForm.address"></span>
-            </el-form-item>
-
-            <el-form-item label="Employment Type">
-                <span v-text="postInformationForm.employmentType"></span>
-            </el-form-item>
-
-            <el-form-item label="Educational Background">
-                <span v-text="postInformationForm.educationalBackground"></span>
-            </el-form-item>
-
-            <el-form-item label="Min Salary">
-                <span v-text="postInformationForm.minSalary"></span>
-            </el-form-item>
-
-            <el-form-item label="Max Salary">
-                <span v-text="postInformationForm.maxSalary"></span>
-            </el-form-item>    
-
-          </el-form>
-        </div>
-      </el-col>
-    </el-row>
-  </div>
+    <div>
+        <el-row>
+            <h1 style="text-align:center;">All Posts</h1>
+            <el-col :span="16" v-for="item in array" :key="item.title" id="card">
+                <el-card :body-style="{ padding: '0px' }">
+                    <div style="float:left;margin:14px;width:298px;">
+                        <span style="font-size:30px;">{{ item.title }}</span><br><br>
+                        <span>{{ item.minSalary }}-{{ item.maxSalary }}/month</span><br><br>
+                        <span >{{ item.educationalBackground }}</span>
+                    </div>
+                    <div style="float:left;margin:14px;width:298px;">
+                        <span style="margin:10px; ">{{ item.address || 'empty' }}</span><br><br><br>
+                        <span > JobType: {{ item.jobType }}</span>
+                        
+                        
+                    </div>
+                    <div style="float:right;margin:14px;width:298px;">
+                        <span>{{ item.companyName }}</span><br><br><br>
+                        <span>{{ item.industry }}/{{ item.startUpYear }}</span><br><br>
+                        <el-button size="mini" @click="handleEdit()">Edit</el-button>
+                        <el-button size="mini" type="danger" @click="handleDelete(item.postId)">Delete</el-button>
+                    </div>
+                </el-card>
+            </el-col>
+        </el-row>
+    </div>
+    
 </template>
 
+<style>
+#card{
+    margin-left: 260px;
+}
+</style>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-
-export default {
-  data() {
-        return {
-          postId: null,
-          title:'',
-          description:'',
-          industry: '',
-          position:'',
-          address:'',
-          employmentType: '',
-          educationalBackground:'',
-          minSalary: null,
-          maxSalary: null,
-          companyId: null,
-        };
+  export default {
+    
+    data() {
+      return {
+        array:null,
+      }
     },
-      created() {
-        this.getAllPost();
-      },
+    created() {
+      this.getAllPost();
+    },
     methods: {
+      handleEdit(index, row) {
+        console.log(index, row);
+      },
+      handleDelete(index, row) {
+        console.log(index, row);
+      },
       getAllPost(){
         this.$axios.get('/api/post/getAll').then(res => {
-          // this.signupForm.token = res.data.data.token
-          this.postId = res.data.dat.postId
-          this.title = res.data.dat.title
-          this.description = res.data.dat.description
-          this.industry = res.data.dat.industry
-          this.position = res.data.dat.position
-          this.address = res.data.dat.address
-          this.employmentType = res.data.dat.employmentType
-          this.educationalBackground = res.data.dat.educationalBackground
-          this.minSalary = res.data.dat.minSalary
-          this.maxSalary = res.data.dat.maxSalary
-          this.companyId = res.data.dat.companyId
+          this.array = res.data.data
+        });
+      },
+      handleEdit(){
+        this.$axios.get('/api/post/getAll').then(res => {
+          this.array = res.data.data
+        });
+      },
+      handleDelete(postId){
+        this.$axios.get('/api/post/delete/{postId}').then(res => {
+          this.array = res.data.data
         });
       }
     }
-}
-
-
-
-
+  }
 </script>
-
-<style scoped>
-
-.step{
-  height: 200px;
-  align-items: center;
-  margin: 0ch;
-}
-.form{
-  padding: 15px;
-}
-.step2{
-  width: 500px;
-}
-.submit{
-  background-color: #54c685;
-  
-}
-/* .submit:hover{
-  background-color: #3ea56a;
-}
-.submit:visited{
-  background-color: #54c685;
-}
-.submit:active{
-  background-color: #54c685;
-} */
-.submit:focus{
-  background-color: #54c685;
-}
-button{
-  margin-left: 20%;
-  /* background-color: #54c685; */
-}
-</style>
