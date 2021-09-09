@@ -2,10 +2,13 @@ package com.matchmaking.backend.controller;
 
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Post;
+import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 
@@ -52,5 +55,18 @@ public class PostController {
     @GetMapping("/select/{postId}")
     public Result selectPost(@PathVariable int postId){
         return postService.selectPost(postId);
+    }
+
+    @PreAuthorize("hasAnyRole('Company')")
+    @GetMapping("/recommend/all/{postId}")
+    public Result getRecommendResumes(@PathVariable int postId){
+        List<Resume> resumeList = postService.getRecommendResumes(postId);
+        if(resumeList == null){
+            return Result.notAuthorised("Not Authorised");
+        }
+        if(resumeList.isEmpty()){
+            return Result.success("","No Recommendation");
+        }
+        return Result.success(resumeList);
     }
 }

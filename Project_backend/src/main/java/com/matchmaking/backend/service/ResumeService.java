@@ -1,20 +1,16 @@
 package com.matchmaking.backend.service;
 
-import com.matchmaking.backend.common.algorithm.KNNRecommendAlogrithm;
+import com.matchmaking.backend.common.algorithm.RecommendAlgorithm;
 import com.matchmaking.backend.common.lang.Result;
-import com.matchmaking.backend.entity.Account;
 import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.entity.Target;
 import com.matchmaking.backend.entity.vo.ResumeVO;
-import com.matchmaking.backend.mapper.AccountMapper;
 import com.matchmaking.backend.mapper.PostMapper;
 import com.matchmaking.backend.mapper.ResumeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +26,7 @@ public class ResumeService {
     PostMapper postMapper;
 
     @Autowired
-    KNNRecommendAlogrithm knnRecommendAlogrithm;
+    RecommendAlgorithm recommendAlgorithm;
 
 
     public Result createResume(Resume resume){
@@ -95,9 +91,9 @@ public class ResumeService {
         if(resume == null){
             return null;
         }
-        Target target = knnRecommendAlogrithm.resumeCovertToTarget(getCurrentResume());
+        Target target = recommendAlgorithm.resumeCovertToTarget(getCurrentResume());
         List<Post> postList = postMapper.getAllPosts();
-        return knnRecommendAlogrithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
+        return recommendAlgorithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
     }
 
 }

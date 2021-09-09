@@ -74,7 +74,7 @@ public class RedistUtils {
         return true;
     }
 
-    public Object get(String key,String item) {
+    public Object hget(String key,String item) {
         return key == null? null: redisTemplate.opsForHash().get(key,item);
     }
 }

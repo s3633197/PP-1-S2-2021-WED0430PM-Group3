@@ -26,6 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/login",
             "/logout",
             "/api/account/register",
+            "/api/account/verify/email",
             "/api/company/all",
             "/api/post/all",
             "/api/company/select/{companyId}",

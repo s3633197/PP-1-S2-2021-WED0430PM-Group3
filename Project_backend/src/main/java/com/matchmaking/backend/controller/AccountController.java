@@ -6,9 +6,12 @@ import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Account;
 import com.matchmaking.backend.entity.dto.PasswordDTO;
 import com.matchmaking.backend.service.AccountService;
+import com.matchmaking.backend.utils.EmailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.mail.MessagingException;
 
 @RestController
 @RequestMapping("/api/account")
@@ -19,6 +22,8 @@ public class AccountController {
 
     @Autowired
     AccountService accountService;
+
+
 
 
     @PostMapping("/register")
@@ -41,13 +46,9 @@ public class AccountController {
         return accountService.checkAuthSeeker();
     }
 
-    @GetMapping("/email/captcha")
+    @GetMapping("/verify/email")
     public Result getEmailCaptcha(@RequestBody String email){
-
-
-        return null;
+        return accountService.sendEmail(email);
     }
-
-
 
 }

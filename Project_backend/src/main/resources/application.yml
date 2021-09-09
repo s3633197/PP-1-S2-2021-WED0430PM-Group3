@@ -1,5 +1,11 @@
 
 # 配置运行环境
 spring:
+
   profiles:
     active: dev
+  # email configuration
+  mail:
+    host: smtp.126.com
+    username: kenlbd61@126.com
+    password: TNFIAMJHYCBIZMCV

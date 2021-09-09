@@ -1,13 +1,17 @@
 package com.matchmaking.backend.service;
 
 
+import com.matchmaking.backend.common.algorithm.RecommendAlgorithm;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Company;
 import com.matchmaking.backend.entity.Post;
+import com.matchmaking.backend.entity.Resume;
+import com.matchmaking.backend.entity.Target;
 import com.matchmaking.backend.entity.vo.PostListVO;
 import com.matchmaking.backend.entity.vo.PostPageVO;
 import com.matchmaking.backend.mapper.CompanyMapper;
 import com.matchmaking.backend.mapper.PostMapper;
+import com.matchmaking.backend.mapper.ResumeMapper;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +33,13 @@ public class PostService {
 
     @Autowired
     DozerBeanMapper dozerBeanMapper;
+
+    @Autowired
+    RecommendAlgorithm recommendAlgorithm;
+
+    @Autowired
+    ResumeMapper resumeMapper;
+
 
     public Result createPost(Post post){
         // 需要检查相同的post
@@ -115,5 +126,16 @@ public class PostService {
 
         postMapper.deletePost(postId);
         return Result.success("Successfully deleted");
+    }
+
+    public List<Resume> getRecommendResumes(int postId){
+        Company company = companyService.currentCompany();
+        Post post =postMapper.getPost(postId);
+        if(post.getCompanyId() != company.getCompanyId()){
+            return null;
+        }
+        Target target = recommendAlgorithm.postCovertToTarget(post);
+        List<Resume> resumeList = resumeMapper.getAllResume();
+        return recommendAlgorithm.matchResume(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),resumeList);
     }
 }

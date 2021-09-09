@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class Account {
+
     private String email;
 
     private String password;
@@ -19,4 +20,5 @@ public class Account {
 
     private LocalDateTime lastLoginTime;
 
+    private String verifyCode;
 }
