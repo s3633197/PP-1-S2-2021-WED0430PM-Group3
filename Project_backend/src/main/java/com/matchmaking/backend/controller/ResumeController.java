@@ -46,13 +46,14 @@ public class ResumeController {
         return resumeService.getAllResume();
     }
 
+    @PreAuthorize("hasAnyRole('Personal')")
     @GetMapping("/recommend/all")
     public Result getRecommendPosts(){
         List<Post> postList = resumeService.getAllRecommendPost();
         if (postList != null){
             return Result.success(postList);
         }
-        return Result.failed("No Recommendation");
+        return Result.success("","No Recommendation");
     }
 
 }
