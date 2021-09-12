@@ -14,6 +14,4 @@ public class Target {
 
     private int expectedSalary;
 
-
-
 }

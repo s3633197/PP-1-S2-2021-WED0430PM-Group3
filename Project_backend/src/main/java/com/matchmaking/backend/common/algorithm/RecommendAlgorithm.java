@@ -98,6 +98,7 @@ public class RecommendAlgorithm {
 
     public  Target postCovertToTarget(Post post){
         Target target = new Target();
+        target.setDegree(Degree.UNKNOWN);
         for(Degree degree: Degree.values()){
             if(degree.getKey().equals(post.getEducationalBackground())){
                 target.setDegree(degree);
@@ -115,6 +116,7 @@ public class RecommendAlgorithm {
 
     public  Target resumeCovertToTarget(Resume resume){
         Target target = new Target();
+        target.setJobType(JobType.UNKNOWN);
         for(Degree degree: Degree.values()){
             if(degree.getKey().equals(resume.getEducationalBackground())){
                 target.setDegree(degree);
