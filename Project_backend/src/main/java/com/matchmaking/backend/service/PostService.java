@@ -131,6 +131,11 @@ public class PostService {
     public List<Resume> getRecommendResumes(int postId){
         Company company = companyService.currentCompany();
         Post post =postMapper.getPost(postId);
+        // 应该抛出找不到异常
+
+        if(post == null){
+            return null;
+        }
         if(post.getCompanyId() != company.getCompanyId()){
             return null;
         }

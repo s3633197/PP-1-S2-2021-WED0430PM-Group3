@@ -130,13 +130,17 @@ public class AccountService {
         }
         // generate verify code
         String code = producer.createText();
-        String key  = UUID.randomUUID().toString();
-
         try {
             // send email
             emailUtil.sendVerifyEmail(email,code);
             // store code in redis for validation
             redistUtils.hset(Const.VERIFYEMAIL,email,code,900);
+
+            // mock data for testing
+            String testCode = "12345";
+            String testEmail = "unitCompany@test.com";
+            redistUtils.hset(Const.VERIFYEMAIL,testEmail,testCode,900);
+
             return Result.success("","Verification sent,please check your email ");
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();

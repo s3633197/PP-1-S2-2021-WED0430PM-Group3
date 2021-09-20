@@ -26,7 +26,7 @@ public class Result {
 
 
     public static Result success(Object data){
-        return new Result(StatusCode.SUCCESS.getCode(),StatusCode.SUCCESS.getMessage(),data);
+        return new Result(StatusCode.SUCCESS.getCode(),null,data);
     }
 
     public static Result success(Object data,String message){

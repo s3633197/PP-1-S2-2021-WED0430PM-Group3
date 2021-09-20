@@ -23,9 +23,6 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
-
-
-
     @PostMapping("/register")
     public Result signUp(@RequestBody Account account){
         return accountService.createAccount(account);
