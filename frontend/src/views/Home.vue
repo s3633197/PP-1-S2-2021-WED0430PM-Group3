@@ -1,95 +1,80 @@
 <template>
-  <div id="app">
-
-    <div id="logoo">
-      <img alt="logo" src="../assets/Logo.svg">
-    </div>
+  <div>
     <div id="nav">
-      <div id="nav1">
-        <router-link to="/Index" style="margin-right:20px;">Home</router-link>
-        <router-link to="/get-All-Post" style="margin-right:20px;">Posts</router-link>
-        <router-link to="/get-All-Company-Post" v-if="company">My Posts</router-link> 
-      </div>
-      <div id="nav2">
-        <router-link to="/SignUp" v-if="logout" class="nav22">Sign Up | </router-link> 
-        <router-link to="/SignIn" v-if="logout" class="nav22">Sign In</router-link>
-      </div>
-      <div id="nav22">
-        <el-dropdown v-if="login">
-          <el-avatar :src="require('../assets/a.png')" :size="50" ></el-avatar>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item v-if="personal"><router-link class="router-link-active" to="/profile">Profile</router-link></el-dropdown-item>
-            <el-dropdown-item v-if="personal"><router-link class="router-link-active" to="/resume">Resume</router-link></el-dropdown-item>
-            <el-dropdown-item v-if="company"><router-link class="router-link-active" to="/create-Post">create-Post</router-link></el-dropdown-item>
-            <el-dropdown-item v-if="company"><router-link class="router-link-active" to="/create-company">create-company</router-link></el-dropdown-item>
-            <el-dropdown-item v-if="company"><router-link class="router-link-active" to="/company-info">company-info</router-link></el-dropdown-item>
-            <hr>
-            <el-dropdown-item  id="logoutList"><el-button id="logout" type="primary" @click="logoutButton()" v-if="login">Log out</el-button></el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </div>
+        <img alt="logo" src="../assets/Logo.svg">
+        <div class="navleft">
+          <router-link to="/Index">Home</router-link>
+          <router-link to="/get-All-Post">Posts</router-link>
+          <router-link to="/get-All-Company-Post" v-if="company">My Posts</router-link>
+        </div>
+        <div class="navright1" v-if="logout">
+          <router-link to="/SignUp">Sign Up | </router-link> 
+          <router-link to="/SignIn">Sign In</router-link>
+        </div>
+        <div class="navright2" v-if="login">
+          <el-dropdown>
+            <el-avatar :src="require('../assets/a.png')" class="avatar" width="10%"></el-avatar>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item v-if="personal"><router-link class="droplist" to="/profile">Profile</router-link></el-dropdown-item>
+              <el-dropdown-item v-if="personal"><router-link class="droplist" to="/resume">Resume</router-link></el-dropdown-item>
+              <el-dropdown-item v-if="company"><router-link class="droplist" to="/create-Post">create-Post</router-link></el-dropdown-item>
+              <el-dropdown-item v-if="company"><router-link class="droplist" to="/create-company">create-company</router-link></el-dropdown-item>
+              <el-dropdown-item v-if="company"><router-link class="droplist" to="/company-info">company-info</router-link></el-dropdown-item>
+              <hr>
+              <el-dropdown-item  id="logoutList"><el-button id="logout" type="primary" @click="logoutButton()" v-if="login">Log out</el-button></el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </div>
+        
     </div>
-
-    <router-view/>
+    <router-view class="back"/>
+    <div style="text-align:center;">
+      <hr>
+      <span>© 2021 project one, RMIT</span>
+    </div>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+<style  scoped>
+#nav{
+  background-color: rgb(240, 240, 240);
+  width: 100%;
+  height: 70px;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+#nav img{
   height: 100%;
-  width: 100%;
-}
-#logoo {
   width: 20%;
-  height: 78px;
   float: left;
-  background-color: rgb(240, 240, 240);
-}
-#logoo img{
-  width: 100%;
-  height: 80%;
   margin: 0;
-  padding-top: 3%;
-}
-#nav {
-  padding: 0px;
-  height: 78px;
-  width: 80%;
-  display: inline-block;
-  background-color: rgb(240, 240, 240);
-}
-#nav1 {
-  height: auto;
-  display: inline-block;
-  margin-top: 32px;
-}
-#nav2 {
-  float: right;
-  margin-right: 20px;
-  margin-top: 30px;
-}
-#nav22 {
-  float: right;
-  margin-right: 20px;
-  margin-top: 15px;
 }
 #nav a {
   font-weight: bold;
   color: #2c3e50;
   text-decoration: none;
+  margin-right:20px;
+  font-size: 18px;
 }
 #nav a.router-link-exact-active {
   color: #42b983;
   text-decoration: none;
 }
-.img {
-  height: 80%;
-  width: 100%;
-  margin: 0;
+.navleft{
+  width: 60%;
+  display: inline-block;
+  margin: 0 !important;
+  padding-top: 25px !important;
+}
+.navright1{
+  padding-top: 25px !important;
+  margin-right: 50px;
+  float: right;
+}
+.navright2{
+  padding-top: 15px !important;
+  margin-right: 50px;
+  float: right;
 }
 #logout{
   background-color: white;
@@ -108,23 +93,33 @@
 }
 #logout:hover {
   background-color: #ecf5ff; /* Green */
-
 }
-a {
-text-decoration: none;
-}
-.router-link-active {
+.droplist {
 text-decoration: none;
 color: black;
+}
+@media only screen and (max-width: 1150px) {
+  .navleft{
+    width: 40%;
+  }
+  .navright1{
+    margin-right: 20px;
+  }
+  .navright2{
+    margin-right: 20px;
+  }
+  #nav a {
+    margin-right:10px;
+    font-size: 10px;
+  }
 }
 </style>
 
 <script>
 // @ is an alias to /src
 // import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-   created() {
+  created() {
       this.loginOrnot();
       this.personalOrCompany();
     },
@@ -134,6 +129,7 @@ export default {
       logout:true,
       personal:false,
       company:false,
+      
     }
   },
   methods: {

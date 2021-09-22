@@ -1,73 +1,128 @@
 <template>
   <div>
-    <el-row type="flex" class="form" justify="center">
-      <el-col :span="8">
-        <div>
-          <el-form :model="informationForm" ref="informationForm" label-width="200px">
-            <el-form-item>
-                <h1>Your profile</h1>
-            </el-form-item>
-
-            <el-form-item label="First Name: ">
-                <span v-text="informationForm.firstName"></span>
-            </el-form-item>
-            
-            <el-form-item label="Last Name: ">
-                <span v-text="informationForm.lastName"></span>
-            </el-form-item>
-
-            <el-form-item label="Gender: ">
-                <span v-text="informationForm.gender"></span>
-            </el-form-item>
-
-            <el-form-item label="Phone: ">
-                <span v-text="informationForm.phone"></span>
-            </el-form-item>
-
-            <el-form-item label="Date of Birth: ">
-                <span v-text="informationForm.dateOfBirth"></span>
-            </el-form-item>
-
-            <el-form-item label="School Name: ">
-                <span v-text="informationForm.schoolName"></span>
-            </el-form-item>
-
-            <el-form-item label="Major: ">
-                <span v-text="informationForm.major"></span>
-            </el-form-item>
-
-            <el-form-item label="Educational Background: ">
-                <span v-text="informationForm.educationalBackground"></span>
-            </el-form-item>
-
-            <el-form-item label="skill: ">
-                <span v-text="informationForm.skill"></span>
-            </el-form-item>
-
-            <el-form-item label="statement: ">
-                <span v-text="informationForm.statement"></span>
-            </el-form-item>
-
-            <el-form-item label="location: ">
-                <span v-text="informationForm.location"></span>
-            </el-form-item>
-
-            <el-form-item label="Wanted Industry: ">
-                <span v-text="informationForm.wantedIndustry"></span>
-            </el-form-item>
-
-            <el-form-item label="Job Type: ">
-                <span v-text="informationForm.jobType"></span>
-            </el-form-item>
-
-            <el-form-item label="Expected Salary: ">
-                <span v-text="informationForm.expectedSalary"></span>
-            </el-form-item>
-
-          </el-form>
-        </div>
-      </el-col>
-    </el-row>
+    <br>
+      <h1>Your Profile</h1>
+      <el-card class="cardseeker">
+              <el-descriptions class="margin-top" :column="size"  border>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Name</template>{{ informationForm.firstName }} {{ informationForm.lastName }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Gender</template>{{ informationForm.gender }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                         <el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar>
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label" ><i class="el-icon-office-building"></i>Phone</template>{{ informationForm.phone }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Birthday</template>{{ informationForm.dateOfBirth }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>SchoolName</template>{{ informationForm.schoolName }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Major</template>{{ informationForm.major }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-office-building"></i>EducationalBackground</template>{{ informationForm.educationalBackground }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-tickets"></i>Skill</template>{{ informationForm.skill }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label" ><i class="el-icon-office-building"></i>Location</template>{{ informationForm.location }}
+                      </el-descriptions-item>
+                       <el-descriptions-item>
+                        <template slot="label" ><i class="el-icon-office-building"></i>Statement</template>{{ informationForm.statement }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label" ><i class="el-icon-office-building"></i>Wanted Industry</template>{{ informationForm.wantedIndustry }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class=""></i>Job Type</template>{{ informationForm.jobType }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class=""></i>Expected Salary</template>{{ informationForm.expectedSalary }} / month
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template >
+                          <el-button type="primary" class="submit">
+                            <router-link style="color:white;text-decoration: none;" :to="{path:'/updateResume',query:{informationForm:this.informationForm}}">
+                              Update
+                            </router-link>
+                          </el-button>
+                       </template>
+                      </el-descriptions-item>
+                    </el-descriptions>
+            </el-card>
+            <br>
+    <!-- <table class="table">
+      <tr>
+        <th>First Name:</th>
+        <th>{{ informationForm.firstName }}</th>
+      </tr>
+      <tr>
+        <th>Last Name:</th>
+        <td>{{ informationForm.lastName }}</td>
+      </tr>
+      <tr>
+        <th>Gender:</th>
+        <td>{{ informationForm.gender }}</td>
+      </tr>
+      <tr>
+        <th>Phone:</th>
+        <td>{{ informationForm.phone }}</td>
+      </tr>  
+      <tr>
+        <th>DateOfBirth:</th>
+        <td>{{ informationForm.dateOfBirth }}</td>
+      </tr> 
+      <tr>
+        <th>SchoolName:</th>
+        <td>{{ informationForm.schoolName }}</td>
+      </tr>     
+      <tr>
+        <th>Major:</th>
+        <td>{{ informationForm.major }}</td>
+      </tr> 
+      <tr>
+        <th>EducationalBackground:</th>
+        <td>{{ informationForm.educationalBackground }}</td>
+      </tr> 
+      <tr>
+        <th>Skill:</th>
+        <td>{{ informationForm.skill }}</td>
+      </tr> 
+      <tr>
+        <th>Location:</th>
+        <td>{{ informationForm.location }}</td>
+      </tr> 
+      <tr>
+        <th>Statement:</th>
+        <td>{{ informationForm.statement }}</td>
+      </tr>
+      <tr>
+        <th>Wanted Industry:</th>
+        <td>{{ informationForm.wantedIndustry }}</td>
+      </tr>
+      <tr>
+        <th>Job Type:</th>
+        <td>{{ informationForm.jobType }}</td>
+      </tr>
+      <tr>
+        <th>Expected Salary:</th>
+        <td>{{ informationForm.expectedSalary }}</td>
+      </tr>
+    </table> -->
+    <!-- <br><br>
+     <el-button type="primary" class="submit">
+        <router-link style="color:white;" :to="{path:'/updateResume',query:{informationForm:this.informationForm}}">
+          Update
+        </router-link>
+      </el-button>
+     <br><br><br><br> -->
   </div>
 </template>
 
@@ -78,6 +133,7 @@
 export default {
   data() {
         return {
+          size:3,
           informationForm:{
               seekerId: null,
               firstName: '',
@@ -100,9 +156,17 @@ export default {
         };
     },
       created() {
+        window.addEventListener('resize', this.onResize)
         this.getResume();
       },
     methods: {
+      onResize() {
+        if (window.innerWidth <= 900) {
+          this.size = 1
+        }else {
+          this.size = 3
+        }
+      },
       getResume(){
         this.$axios.get('/api/seeker/resume').then(res => {
           // this.signupForm.token = res.data.data.token
@@ -132,40 +196,27 @@ export default {
 
 <style scoped>
 
-.step{
-  height: 200px;
-  align-items: center;
-  margin: 0ch;
-}
-.form{
-  padding: 15px;
-}
-.step2{
-  width: 500px;
-}
-.submit{
-  background-color: #54c685;
-  
-}
-span{
-  margin-left: 20px;
-  padding-left: 50px;
+.cardseeker{
+  width:65%;
+  margin-left:17%;
+  margin-bottom: 2%;
+  border-radius: 15px !important;
 }
 
-/* .submit:hover{
-  background-color: #3ea56a;
-}
-.submit:visited{
+.submit{
   background-color: #54c685;
 }
-.submit:active{
-  background-color: #54c685;
-} */
 .submit:focus{
   background-color: #54c685;
 }
-button{
-  margin-left: 20%;
-  /* background-color: #54c685; */
+.submit:hover{
+  background-color: #3ea56a;
+}
+
+@media only screen and (max-width: 500px) {
+  .cardseeker{
+    width:80%;
+    margin-left:10%;
+  }
 }
 </style>

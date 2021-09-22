@@ -5,7 +5,7 @@ import Element from "element-ui";
 axios.defaults.baseURL = "http://localhost:9000"
 
 const request = axios.create ({
-    timeout: 5000,
+    timeout:5000,
     headers: {
         // 'Content-Type' : "application/json;"
         'Content-Type' : "application/json; charset=utf-8",
@@ -26,7 +26,9 @@ request.interceptors.response.use(
         console.log(response)
         let res = response.data
         if(res.statusCode === 201 || res.statusCode === 200){
-            Element.Message.success(res.message)
+            if(res.message !== null){
+                Element.Message.success(res.message)
+            }
             return response
         }else if(res.statusCode === 400){
             Element.Message.error(res.message)
@@ -46,13 +48,12 @@ request.interceptors.response.use(
     }, 
 
     error =>{
-        // console.log(error.response)
+        console.log("error: "+error)
+        console.log("error response: "+error.response.status)
         if(error.response.status === 403){
-            router.push("/index")
+            router.push("/")
         }
         Element.Message.error(error.response.data.message, {duration:3000})
-        
-
         return Promise.reject(error)
     }
     

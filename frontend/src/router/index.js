@@ -11,6 +11,11 @@ import getAllPost from '../views/getAllPost.vue'
 import getAllCompanyPost from '../views/getAllCompanyPost.vue'
 import createCompany from '../views/createCompany.vue'
 import companyInfo from '../views/companyInfo.vue'
+import PostDetail from '../views/PostDetail.vue'
+import PostDetailCompany from '../views/PostDetailCompany.vue'
+import UpdateResume from '../views/UpdateResume.vue'
+import UpdateCompanyInfo from '../views/UpdateCompanyInfo.vue'
+import UpdatePost from '../views/UpdatePost.vue'
 Vue.use(VueRouter)
 
 
@@ -46,6 +51,11 @@ const routes = [
         component: Resume
       },
       {
+        path: '/updateResume',
+        name: 'UpdateResume',
+        component: UpdateResume
+      },
+      {
         path: '/create-Post',
         name: 'createPost',
         component: createPost
@@ -54,6 +64,21 @@ const routes = [
         path: '/get-All-Post',
         name: 'getAllPost',
         component: getAllPost
+      },
+      {
+        path: '/updatePost',
+        name: 'UpdatePost',
+        component: UpdatePost
+      },
+      {
+        path: '/Post-Detail',
+        name: 'PostDetail',
+        component: PostDetail
+      },
+      {
+        path: '/Post-Detail-Company',
+        name: 'PostDetailCompany',
+        component: PostDetailCompany
       },
       {
         path: '/get-All-Company-Post',
@@ -69,6 +94,11 @@ const routes = [
         path: '/company-info',
         name: 'companyInfo',
         component: companyInfo
+      },
+      {
+        path: '/updateCompanyInfo',
+        name: 'UpdateCompanyInfo',
+        component: UpdateCompanyInfo
       },
   ]
   },

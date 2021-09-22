@@ -1,33 +1,62 @@
 <template>
   <div>
-    <el-row type="flex" class="form" justify="center">
-      <el-col :span="8">
-        <div>
-          <el-form :model="informationForm" ref="informationForm" label-width="200px">
-            <el-form-item>
-                <h1>Your profile</h1>
-            </el-form-item>
-
-            <el-form-item label="Company Name: ">
-                <span v-text="informationForm.companyName"></span>
-            </el-form-item>
-            
-            <el-form-item label="Start Up Date: ">
-                <span v-text="informationForm.startUpDate"></span>
-            </el-form-item>
-
-            <el-form-item label="Owner: ">
-                <span v-text="informationForm.owner"></span>
-            </el-form-item>
-
-            <el-form-item label="Industry: ">
-                <span v-text="informationForm.industry"></span>
-            </el-form-item>
-
-          </el-form>
-        </div>
-      </el-col>
-    </el-row>
+    <br>
+    <h1>Your profile</h1>
+    <el-card class="cardseeker">
+              <el-descriptions class="margin-top" :column="size"  border>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Company Name</template>{{ informationForm.companyName }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Start Up Date</template>{{ informationForm.startUpDate }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                         <el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar>
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label" ><i class="el-icon-office-building"></i>Owner</template>{{ informationForm.owner }}
+                      </el-descriptions-item>
+                      <el-descriptions-item>
+                        <template slot="label"><i class="el-icon-user"></i>Industry</template>{{ informationForm.industry }}
+                      </el-descriptions-item>
+                      
+                      <el-descriptions-item>
+                        <template >
+                          <el-button type="primary" class="submit">
+                            <router-link style="color:white;text-decoration: none;" :to="{path:'/updateCompanyInfo',query:{informationForm:this.informationForm}}">
+                              Update
+                            </router-link>
+                          </el-button>
+                       </template>
+                      </el-descriptions-item>
+                    </el-descriptions>
+            </el-card>
+            <br>
+    <!-- <table class="table">
+      <tr>
+        <th>Company Name:</th>
+        <th>{{ informationForm.companyName }}</th>
+      </tr>
+      <tr>
+        <th>Start Up Date:</th>
+        <td>{{ informationForm.startUpDate }}</td>
+      </tr>
+      <tr>
+        <th>Owner:</th>
+        <td>{{ informationForm.owner }}</td>
+      </tr>
+      <tr>
+        <th>Industry: </th>
+        <td>{{ informationForm.industry }}</td>
+      </tr>        
+    </table>
+    <br><br>
+     <el-button type="primary" class="submit">
+        <router-link style="color:white;" :to="{path:'/updateCompanyInfo',query:{informationForm:this.informationForm}}">
+          Update
+        </router-link>
+      </el-button>
+    <br><br><br><br> -->
   </div>
 </template>
 
@@ -64,48 +93,30 @@ export default {
       }
     }
 }
-
-
-
-
 </script>
 
 <style scoped>
+.cardseeker{
+  width:65%;
+  margin-left:17%;
+  margin-bottom: 2%;
+  border-radius: 15px !important;
+}
 
-.step{
-  height: 200px;
-  align-items: center;
-  margin: 0ch;
-}
-.form{
-  padding: 15px;
-}
-.step2{
-  width: 500px;
-}
 .submit{
   background-color: #54c685;
-  
 }
-span{
-  margin-left: 20px;
-  padding-left: 50px;
-}
-
-/* .submit:hover{
-  background-color: #3ea56a;
-}
-.submit:visited{
-  background-color: #54c685;
-}
-.submit:active{
-  background-color: #54c685;
-} */
 .submit:focus{
   background-color: #54c685;
 }
-button{
-  margin-left: 20%;
-  /* background-color: #54c685; */
+.submit:hover{
+  background-color: #3ea56a;
+}
+
+@media only screen and (max-width: 500px) {
+  .cardseeker{
+    width:80%;
+    margin-left:10%;
+  }
 }
 </style>

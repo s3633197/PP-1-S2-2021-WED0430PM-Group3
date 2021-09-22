@@ -1,16 +1,18 @@
 <template>
-  <div>
-    <br>
+      <div>
+        <br>
         <div class="form">
-           <h1>Create company</h1>
+          <h1 class="h1">Update company</h1>
           <el-form :model="informationForm" :rules="rules" ref="informationForm">
             <el-form-item label="Company Name" prop="companyName">
                 <el-input v-model="informationForm.companyName"></el-input>
             </el-form-item>
-            
-            
             <el-form-item label="Start Up Date" prop="startUpDate" >
-                <el-date-picker style="width:100%;"  v-model="informationForm.startUpDate" type="date" placeholder="select a date">
+                <el-date-picker
+                    style="width: 100%;"
+                    v-model="informationForm.startUpDate"
+                    type="date"
+                    placeholder="select a date">
                 </el-date-picker>
             </el-form-item>
 
@@ -69,15 +71,17 @@ export default {
         };
       
     },
-
+    created() {
+       this.informationForm = this.$route.query.informationForm
+     },
     methods: {
       submitForm(formName) {
         
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$axios.post('/api/company/create',this.informationForm).then(res => {
-              
-              // this.$router.push("/resume")
+            this.$axios.put('/api/company/update',this.informationForm).then(res => {
+                this.$router.push("/company-info")
+                this.$router.go(0)
             });
           }else {
             return false;
@@ -99,7 +103,6 @@ export default {
 </script>
 
 <style scoped>
-
 .submit{
   background-color: #54c685;
 }

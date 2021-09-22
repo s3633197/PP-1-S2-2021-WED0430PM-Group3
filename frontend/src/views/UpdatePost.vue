@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <br>
+      <div><br>
         <div class="form">
-          <h1 class="h1">Create posts</h1>
+          <h1>Update posts</h1>
           <el-form :model="postInformation" :rules="rules" ref="postInformation" label-position="left">
             <el-form-item label="Title" prop="title">
                 <el-input v-model="postInformation.title"></el-input>
@@ -24,7 +23,7 @@
             </el-form-item>
            
             <el-form-item label="Employment Type" prop="employmentType" >
-                <el-select class="role" v-model="postInformation.employmentType" placeholder="Please select">
+                <el-select v-model="postInformation.employmentType" placeholder="Please select"  class="role">
                     <el-option
                         v-for="item in employmentTypeOptions"
                         :key="item.value"
@@ -52,8 +51,6 @@
              <el-form-item label="Max Salary" prop="maxSalary" >
                 <el-input v-model="postInformation.maxSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
-
-            
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('postInformation')">submit</el-button>
               <el-button @click="resetForm('postInformation')">replace</el-button>
@@ -61,7 +58,7 @@
           </el-form>
         </div>
         <br>
-  </div>
+      </div>
 </template>
 
 
@@ -82,12 +79,12 @@ export default {
                 educationalBackground: '',
                 minSalary: null,
                 maxSalary: null,
+                postId:null,
             },
 
             rules: {
                 title: [
                     { required: true, message: 'Please enter your first name!', trigger: 'blur' },
-                    { min: 30, message: '30 letters or less!', trigger: 'blur' }
                 ],
                 description: [
                     { required: true, message: 'Please enter your last name!', trigger: 'blur' },
@@ -139,12 +136,15 @@ export default {
         };
       
     },
+    created() {
+       this.postInformation = this.$route.query.item
+     },
     methods: {
       submitForm(formName) {
         console.log(qs.stringify(this.postInformation))
         this.$refs[formName].validate((valid) => {
           if (valid) {
-             this.$axios.post('/api/post/create',this.postInformation).then(res => {
+             this.$axios.put('/api/post/update/'+this.postInformation.postId,this.postInformation).then(res => {
                this.$router.push("/get-All-Company-Post")
              });
           }else {
@@ -160,6 +160,9 @@ export default {
       },
     }
 }
+
+
+
 
 </script>
 
@@ -197,4 +200,5 @@ export default {
     margin-left:6%;
   }
 }
+
 </style>

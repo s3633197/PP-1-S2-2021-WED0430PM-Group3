@@ -1,37 +1,30 @@
 <template>
-  <div>
-    <el-row type="flex" class="form" justify="center">
-      <el-col :span="8">
-        <div>
-          <el-form :model="signinForm" :rules="rules" ref="signinForm" label-width="200px">
+      <div>
+        <br>
+        <div class="form">
+          <h1 class="h1">Sign In</h1>
+          <el-form :model="signinForm" :rules="rules" ref="signinForm">
             <el-form-item label="email" prop="username">
                 <el-input v-model="signinForm.username"></el-input>
             </el-form-item>
             <el-form-item label="password" prop="password" >
                 <el-input v-model="signinForm.password" type="password"></el-input>
             </el-form-item>
-            
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('signinForm')">submit</el-button>
               <el-button @click="forgotPassword('signinForm')">forgot password</el-button>
             </el-form-item>
           </el-form>
         </div>
-      </el-col>
-    </el-row>
+         <br>
   </div>
 </template>
 
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import qs from 'qs'
 export default {
   name: 'SignIn',
-  // components: {
-  //   HelloWorld
-  // }
   data() {
       return {
         active: 0,
@@ -43,7 +36,17 @@ export default {
         rules: {
           username: [
             { required: true, message: 'Please enter email number!', trigger: 'blur' },
-            { min: 5, max: 20, message: '5-10 number or letters!', trigger: 'blur' }
+            { min: 5, message: 'At lease 5 number or letters!', trigger: 'blur' },
+            {
+              validator: function(rule, value, callback) {
+                if (/^\w{1,64}@[a-z0-9\-]{1,256}(\.[a-z]{2,6}){1,2}$/i.test(value) == false) {
+                  callback(new Error("Wrong email format!"));
+                } else {
+                  callback();
+                }
+              },
+              trigger: "blur"
+            }
           ],
           password: [
             { required: true, message: 'Please enter password!', trigger: 'blur' },
@@ -52,28 +55,20 @@ export default {
         }
       };
     },
-    //  created() {
-    //    this.getemail();
-    //  },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-              console.log(this.signinForm.password+"   pass")
-              console.log(this.signinForm.username+"   username")
               this.$axios.post('/login?',qs.stringify(this.signinForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
-              // this.$axios.post('/login',qs.stringify(this.signinForm)).then(res => {
-                
                 const jwt = res.headers['authentication']
                 const roleId = res.data.data.roleId
-                // const email = res.data.data.email
                 this.$store.commit('SET_TOKEN',jwt)
-                // this.$store.commit('SET_EMAIL',jwt)
                 this.$store.commit('SET_ROLEID',roleId)
                 this.$router.push("/index")
                 this.$router.go(0)
               });
           }else {
+            console.log("login fail")
             return false;
           }
         });
@@ -87,45 +82,38 @@ export default {
       next() {
         if (this.active++ > 2) this.active = 0;
       },
-      // getemail(){
-      //   this.$axios.get('/api/user/register').then(res => {
-      //     // this.signupForm.token = res.data.data.token
-      //     this.email = res.data.dat.email
-      //     this.passwordexist = res.data.dat.password
-      //     console.log(this.email)
-      //     console.log(this.passwordexist)
-      //   });
-      // }
     }
 }
 </script>
 
 <style scoped>
-
-.step{
-  height: 200px;
-  align-items: center;
-  margin: 0ch;
-}
 .form{
-  padding: 15px;
-}
-.step2{
-  width: 500px;
+  width: 30%;
+  margin-left:30.5%;
+  margin-top: 5%;
+  margin-bottom:5%;
+  border: 1px solid black;
+  background-color: rgb(240, 245, 250);
+  border-radius: 15px;
+  padding: 5%;
+  padding-top: 3%;
+  padding-bottom: 3%;
 }
 .submit{
   background-color: #54c685;
-  
 }
 .submit:hover{
   background-color: #3ea56a;
-  
 }
 .submit:focus{
   background-color: #54c685;
 }
-button{
-  margin-left: 5%;
-  /* background-color: #54c685; */
+@media only screen and (max-width: 800px) {
+  .form{
+    width: 80%;
+    margin-bottom:5%;
+    margin-top: 10%;
+    margin-left:6%;
+  }
 }
 </style>
