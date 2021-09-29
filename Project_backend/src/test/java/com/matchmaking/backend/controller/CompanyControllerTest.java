@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.matchmaking.backend.entity.Company;
 import com.matchmaking.backend.utils.JwtUtils;
 import com.matchmaking.backend.utils.RedistUtils;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +37,13 @@ public class CompanyControllerTest {
 
     private String token;
 
+    private String validToken;
+
     private static final String API = "/api/company";
 
     @BeforeEach
     public void setUp(){
-        System.out.println("---------Start testing account API---------");
+        System.out.println("---------Start testing company API---------");
 
         // mock company information
         company = new Company();
@@ -50,10 +52,20 @@ public class CompanyControllerTest {
         company.setOwner("Ken");
         company.setStartUpDate(new Date());
         // company role token
-        token = jwtUtils.generateToken("764449793@qq.com");
-        redistUtils.set(token,"764449793@qq.com",60*60);
+        token = jwtUtils.generateToken("company@test.com");
+        redistUtils.set(token,"company@test.com",60*60);
+
+        // company info token
+        validToken = jwtUtils.generateToken("linlin@test.com");
+        redistUtils.set(validToken,"linlin@test.com",60*60);
 
         System.out.println("Mock data created");
+    }
+
+    @AfterEach
+    void tearDown(){
+        redistUtils.del(validToken);
+        redistUtils.del(token);
     }
 
     @Test
@@ -71,13 +83,28 @@ public class CompanyControllerTest {
     }
 
     @Test
-    void getCompanyInfo(){
-
+    void getCompanyInfo() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+        .get(API+"/info")
+        .accept(MediaType.APPLICATION_JSON)
+        .contentType(MediaType.APPLICATION_JSON)
+        .header("Authentication",validToken)
+        )
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andDo(print());
     }
 
     @Test
-    void updateCompanyInfo(){
-
+    void updateCompanyInfo() throws Exception {
+            mockMvc.perform(MockMvcRequestBuilders
+            .put(API+"/update")
+            .content(JSONUtil.parse(company).toStringPretty())
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .header("Authentication",validToken)
+        )
+        .andExpect(MockMvcResultMatchers.status().isOk())
+        .andDo(print());
     }
 
 }
