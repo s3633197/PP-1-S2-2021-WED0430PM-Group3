@@ -3,7 +3,7 @@
       <br>
       <h1>My Posts</h1><br>
       <el-card class="cardpost" v-for="item in array" :key="item.title">
-        <el-descriptions class="margin-top" :column="size"  border>
+        <!-- <el-descriptions class="margin-top" :column="size"  border>
                       <el-descriptions-item>
                         <template slot="label"><i class=""></i>Title</template>{{ item.title }}
                       </el-descriptions-item>
@@ -39,15 +39,15 @@
                           </el-button>
                        </template>
 
-                    </el-descriptions>
-        <!-- <table>
+                    </el-descriptions> -->
+        <table>
           <tr>
-            <td ><b>Title: </b>{{ item.title }}</td>
-            <td><b>Address: </b>{{ item.location || 'empty' }}</td>
-            <td><b>Industry: </b>{{ item.industry }}</td>
+            <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
+            <td style="color:#42b983;"><b>Address: </b>{{ item.location || 'empty' }}</td>
+            <td style="color:#42b983;"><b>Industry: </b>{{ item.industry }}</td>
           </tr>
           <tr>
-            <td><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/month</td>
+            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
             <td><b>JobType: </b>{{ item.employmentType }}</td> 
           </tr>
           <tr>
@@ -67,7 +67,7 @@
                 <el-button type="danger" @click="handleDelete(item.postId)">Delete</el-button>
              </td>
           </tr>
-         </table> -->
+         </table>
       </el-card>
       <br>
     </div>

@@ -4,10 +4,10 @@
         <div class="form">
           <h1 class="h1">Sign In</h1>
           <el-form :model="signinForm" :rules="rules" ref="signinForm">
-            <el-form-item label="email" prop="username">
+            <el-form-item label="Email" prop="username">
                 <el-input v-model="signinForm.username"></el-input>
             </el-form-item>
-            <el-form-item label="password" prop="password" >
+            <el-form-item label="Password" prop="password" >
                 <el-input v-model="signinForm.password" type="password"></el-input>
             </el-form-item>
             <el-form-item>
@@ -92,7 +92,7 @@ export default {
   margin-left:30.5%;
   margin-top: 5%;
   margin-bottom:5%;
-  border: 1px solid black;
+  box-shadow: 5px 10px 5px #888888;
   background-color: rgb(240, 245, 250);
   border-radius: 15px;
   padding: 5%;

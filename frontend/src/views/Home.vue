@@ -1,14 +1,16 @@
 <template>
   <div>
     <div id="nav">
-        <img alt="logo" src="../assets/Logo.svg">
+        <img alt="logo" src="../assets/logo.png">
         <div class="navleft">
           <router-link to="/Index">Home</router-link>
           <router-link to="/get-All-Post">Posts</router-link>
           <router-link to="/get-All-Company-Post" v-if="company">My Posts</router-link>
+          <b v-if="personal" style="color:whitesmoke;font-size:18px;float:right;">Current login as <b style="color:#42b983;">personal</b> !</b>
+          <b v-if="company" style="color:whitesmoke;font-size:18px;float:right;">Current login as  <b style="color:#42b983;">company</b> !</b>
         </div>
         <div class="navright1" v-if="logout">
-          <router-link to="/SignUp">Sign Up | </router-link> 
+          <router-link to="/SignUp">Sign Up</router-link> 
           <router-link to="/SignIn">Sign In</router-link>
         </div>
         <div class="navright2" v-if="login">
@@ -28,8 +30,7 @@
         
     </div>
     <router-view class="back"/>
-    <div style="text-align:center;">
-      <hr>
+    <div style="text-align:center;background-color:#42b983;padding:20px;margin-top:0px;">
       <span>© 2021 project one, RMIT</span>
     </div>
   </div>
@@ -37,21 +38,22 @@
 
 <style  scoped>
 #nav{
-  background-color: rgb(240, 240, 240);
+  background-color: #222;
   width: 100%;
   height: 70px;
   margin: 0 !important;
-  padding: 0 !important;
+  padding: 10px 0!important;
+  box-shadow: #222;
 }
 #nav img{
   height: 100%;
   width: 20%;
   float: left;
-  margin: 0;
+  margin: 0px;
 }
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
   text-decoration: none;
   margin-right:20px;
   font-size: 18px;

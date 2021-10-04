@@ -118,7 +118,7 @@ export default {
   margin-left:30.5%;
   margin-top: 5%;
   margin-bottom:5%;
-  border: 1px solid black;
+  box-shadow: 5px 10px 5px #888888;
   background-color: rgb(240, 245, 250);
   border-radius: 15px;
   padding:5%;

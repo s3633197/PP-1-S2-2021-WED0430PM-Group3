@@ -1,12 +1,11 @@
 <template>
   <div >
-    <br>
     <div class="form">
-      <h1>Post Detail</h1>
+      <h1>Post Detail</h1><br>
       <el-card style="background-color:#42b983;text-align:left;padding:2%;">
         <b style="font-size:40px;color:white;">Title: {{this.description}}</b><br><br><br>
         <p>Location: {{this.location || 'empty'}}  |  Educational Background: {{this.educationalBackground}}</p><br>
-        <b style="font-size:25px;color:rgba(201, 70, 70, 0.856);">${{this.maxSalary}} / month</b><br><br>
+        <b style="font-size:25px;color:rgba(201, 70, 70, 0.856);">${{this.maxSalary}} / hour</b><br><br>
       </el-card>
       <div style="text-align:left;height:400px;background-color:white;padding:2%;" >
         <h2>Description</h2>

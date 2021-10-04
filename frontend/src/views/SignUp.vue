@@ -4,16 +4,16 @@
         <div class="form">
           <h1>Sign Up</h1>
           <el-form :model="signupForm" :rules="rules" ref="signupForm"  label-position="left">
-            <el-form-item label="email" prop="email">
+            <el-form-item label="Email" prop="email">
                 <el-input v-model="signupForm.email"></el-input>
             </el-form-item>
-            <el-form-item label="password" prop="password">
+            <el-form-item label="Password" prop="password">
                 <el-input v-model="signupForm.password" type="password"></el-input>
             </el-form-item>
-            <el-form-item label="confirm"  prop="password_confirm">
+            <el-form-item label="Password Confirm"  prop="password_confirm">
                 <el-input v-model="signupForm.password_confirm" type="password"></el-input>
             </el-form-item>
-            <el-form-item label="account role" prop="roleId" >
+            <el-form-item label="Account Role" prop="roleId" >
               <el-select v-model="signupForm.roleId" class="role">
                 <el-option
                   v-for="item in options"
@@ -23,7 +23,7 @@
                 </el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="verify code" prop="verifyCode">
+            <el-form-item label="Verify Code" prop="verifyCode">
               <br>
                 <el-input v-model="signupForm.verifyCode" class="input"></el-input>
                 <el-button type="primary"  class="submit" @click="sendVerifyCode('signupForm')">send</el-button>
@@ -44,7 +44,7 @@
   margin-left:30.5%;
   margin-top: 5%;
   margin-bottom:5%;
-  border: 1px solid black;
+  box-shadow: 5px 10px 5px #888888;
   background-color: rgb(240, 245, 250);
   border-radius: 15px;
   padding: 5%;

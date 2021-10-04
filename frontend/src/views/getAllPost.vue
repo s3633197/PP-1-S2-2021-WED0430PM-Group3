@@ -3,7 +3,7 @@
       <br>
       <h1>All Posts</h1><br>
       <el-card class="cardpost" v-for="item in array" :key="item.postid">
-        <el-descriptions class="margin-top" :column="size"  border>
+        <!-- <el-descriptions class="margin-top" :column="size"  border>
                       <el-descriptions-item>
                         <template slot="label"><i class=""></i>Title</template>{{ item.title }}
                       </el-descriptions-item>
@@ -34,15 +34,15 @@
                           </el-button>
                        </template>
                       </el-descriptions-item>
-                    </el-descriptions>
-        <!-- <table>
+                    </el-descriptions> -->
+        <table>
           <tr>
             <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
             <td style="color:#42b983;"><b>Address: </b>{{ item.location || 'empty' }}</td>
             <td style="color:#42b983;"><b>Company Name: </b>{{ item.companyName }}</td>
           </tr>
           <tr>
-            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/month</td>
+            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
             <td><b>JobType: </b>{{ item.jobType }}</td>
             <td><b>Industry: </b>{{ item.industry }} / Start Up Year: {{ item.startUpYear }}</td>
           </tr>
@@ -57,7 +57,7 @@
                 </el-button>
              </td>
           </tr>
-         </table> -->
+         </table>
       </el-card>
         <br>
     </div>

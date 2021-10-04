@@ -1,92 +1,96 @@
 <template>
     <div>
+      <br> <br>
+      <h1 style="margin:0;">Easy to find a job, there's no better way.</h1>
         <img src="../assets/img.jpg">
         <img src="../assets/img.jpg">
         <div v-if="company">
-          <hr>
           <h1>All JobSeekers</h1> 
             <el-card class="cardseeker" v-for="item in array" :key="item.seekerId">
-              <el-descriptions class="margin-top" :column="size"  border>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-user"></i>Name</template>{{ item.firstName }} {{ item.lastName }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-user"></i>Gender</template>{{ item.gender }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label">Seeker Avatar</template>
-                         <el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar>
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-user"></i>Birthday</template>{{ item.dateOfBirth }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-office-building"></i>EducationalBackground</template>{{ item.educationalBackground }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class=""></i>Expected Salary</template>{{ item.expectedSalary }} / month
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-tickets"></i>Skill</template>{{ item.skill }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label" ><i class="el-icon-office-building"></i>Phone</template>{{ item.phone }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template >
-                          <el-button type="primary" class="submit" >
+              <table>
+                <tr>
+                  <td style="color:#42b983;"><b>Name: </b>{{ item.firstName }} {{ item.lastName }}</td>
+                  <td><b>EducationalBackground:  </b>{{ item.educationalBackground }}</td>
+                  <td rowspan="2"><el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar></td>
+                </tr>
+                <tr>
+                  <td style="color:rgba(201, 70, 70, 0.856)"><b>Expected Salary: </b>{{ item.expectedSalary }} / hour</td>
+                  <td><b>Skill: </b>{{ item.skill }}</td>
+                </tr>
+                <tr>
+                   <td><b>Phone: </b>{{ item.phone }}</td>
+                   <td></td>
+                      <td>
+                        <el-button type="primary"  class="submit" >
                             <router-link :to="{path:'/resume',query:{seekerId:item.seekerId}}" style="color: #fff;text-decoration: none;">
                               Details
                             </router-link>
                           </el-button>
-                       </template>
-                      </el-descriptions-item>
-                    </el-descriptions>
+                      </td>
+                </tr>
+              </table>
             </el-card>
+             <br>
         </div>
         <div v-if="personal">
-          <hr>
           <h1>Suggest Posts</h1>
                 <el-card v-for="item in recommendPosts" :key="item.title" class="cardpost">
-                    <el-descriptions class="margin-top" :column="size"  border>
-                      <el-descriptions-item>
-                        <template slot="label"><i class=""></i>Title</template>{{ item.title }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-office-building"></i>Location</template>{{ item.address || 'empty' }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label">Company Avatar</template>
-                         <el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar>
-                      </el-descriptions-item>
-                      <el-descriptions-item><template slot="label"><i class="el-icon-user"></i>CompanyName</template>{{ item.companyName }}
-                      </el-descriptions-item>
-                      <el-descriptions-item><template slot="label"><i class="el-icon-tickets"></i>Salary</template>{{ item.minSalary }}-{{ item.maxSalary }} / month
-                      </el-descriptions-item>
-                      <el-descriptions-item><template slot="label"><i class="el-icon-office-building"></i>Position</template>{{ item.position }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-office-building"></i>Industry</template>{{ item.industry }}
-                      </el-descriptions-item>
-                      <el-descriptions-item >
-                        <template slot="label"><i class="el-icon-office-building"></i>EducationalBackground</template>{{ item.educationalBackground }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                       <template>
-                          <el-button type="primary" class="submit" >
+                  <el-table>
+                    <tr>
+                      <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
+                      <td style="color:#42b983;"><b>Location: </b>{{ item.address || 'empty' }}</td>
+                      <td style="color:#42b983;"><b>CompanyName: </b>{{ item.companyName }}</td>
+                    </tr>
+                    <tr>
+                      <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }} / month</td>
+                      <td><b>JobType: </b>{{ item.position }}</td>
+                      <td><b>Industry: </b>{{ item.industry }} / Start Up Date : {{ item.startUpDate }}</td>
+                    </tr>
+                    <tr>
+                      <td><b>EducationalBackground: </b>{{ item.educationalBackground }}</td>
+                      <td></td>
+                      <td>
+                        <el-button type="primary"  class="submit" >
                             <router-link :to="{path:'/Post-Detail',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
                               Details
                             </router-link>
                           </el-button>
-                       </template>
-                      </el-descriptions-item>
-                    </el-descriptions>
+                      </td>
+                    </tr>
+                  </el-table>
                 </el-card>
+                <br>
         </div>
-        <hr>
-        <h1>Slogan</h1>
-        <img src="../assets/img.jpg">
-        <img src="../assets/img.jpg">
+        <div v-if="defaultt">
+      <br>
+      <h1>All Posts</h1><br>
+      <el-card class="cardpost" v-for="item in array" :key="item.postid">
+        <table>
+          <tr>
+            <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
+            <td style="color:#42b983;"><b>Address: </b>{{ item.location || 'empty' }}</td>
+            <td style="color:#42b983;"><b>Company Name: </b>{{ item.companyName }}</td>
+          </tr>
+          <tr>
+            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
+            <td><b>JobType: </b>{{ item.jobType }}</td>
+            <td><b>Industry: </b>{{ item.industry }} / Start Up Year: {{ item.startUpYear }}</td>
+          </tr>
+          <tr>
+             <td><b>Educational Background: </b>{{ item.educationalBackground }}</td>
+             <td></td>
+             <td>
+               <el-button type="primary"  class="submit" >
+                  <router-link :to="{path:'/Post-Detail',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
+                    Details
+                  </router-link>
+                </el-button>
+             </td>
+          </tr>
+         </table>
+      </el-card>
+        <br>
+    </div>
     </div>
 </template>
 
@@ -103,17 +107,30 @@ img{
 hr{
   border: 1px solid black;
 }
+
 .cardseeker{
   width:65%;
   margin-left:17%;
   margin-bottom: 2%;
   border-radius: 15px !important;
+  background-color: rgb(240, 245, 250)!important;
+}
+.cardseeker td{
+  text-align: left;
+  width: 44.5%;
+  padding-left: 8%;
 }
 .cardpost{
   width:65%;
   margin-left:17%;
   margin-bottom: 2%;
-  border-radius: 15px !important; 
+  border-radius: 15px !important;
+  background-color: rgb(240, 245, 250)!important;
+}
+.cardpost td{
+  text-align: left;
+  width: 20%;
+  padding: 1.5%;
 }
 .submit{
   background-color: #54c685 !important;
@@ -140,38 +157,30 @@ hr{
   export default {
     data() {
       return {
-        size:3,
         recommendPosts:null,
         // recommendSeekers:null,
         array: null,
         personal:false,
         company:false,
+        defaultt:true,
         login:false,
       }
     },
     
     created() {
-      window.addEventListener('resize', this.onResize)
       this.personalOrCompany();
       this.loginOrnot();
       if(this.login){
         if(this.personal==true){
           this.getRecommendPost();
-        }else{
-          // this.getRecommendJobSeeker()
-           this.getAllPost();
+        }else if(this.company==true){
+           this.getAllSeekers();
         }
+      }else{
+          this.getAllPost();
       }
     },
-
     methods: {
-      onResize() {
-        if (window.innerWidth <= 900) {
-          this.size = 1
-        }else {
-          this.size = 3
-        }
-      },
       handleEdit(index, row) {
         console.log(index, row);
       },
@@ -185,6 +194,11 @@ hr{
         });
       },
       getAllPost(){
+        this.$axios.get('/api/post/all').then(res => {
+          this.array = res.data.data
+        });
+      },
+      getAllSeekers(){
         this.$axios.get('/api/seeker/all').then(res => {
           this.array = res.data.data
         });
@@ -202,13 +216,13 @@ hr{
       loginOrnot(){
         if(localStorage.getItem('token')==null){
           this.login = false
+          this.defaultt = true
         }
         if(localStorage.getItem('token')!=null){
           this.login = true
+          this.defaultt = false
         }
       },
     }
   }
-
-
 </script>
