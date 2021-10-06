@@ -8,15 +8,40 @@ mybatis:
     mapUnderscoreToCamelCase: true
     map-underscore-to-camel-case: true
 
-# 数据库相关配置
+
+
+
+# 本地数据库相关配置
 spring:
   datasource:
     username: root
     password: 12345
-    url: jdbc:mysql://localhost:3306
+    url: jdbc:mysql://localhost:3306/project1
+#  datasource:
+#    username: admin
+#    password: 123456789
+#    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
 
-# security测试使用
-  security:
-    user:
-      name: test
-      password: 12345
+
+  # 配置redis缓存
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  # email configuration
+  mail:
+    host: smtp.126.com
+    username: kenlbd61@126.com
+    password: TNFIAMJHYCBIZMCV
+
+token:
+  jwt:
+    header: Authentication
+    # 加密密钥 32位
+    secret: ji8n3439n439n43ld9ne9343fdfer49h
+    # token过期时间(1个小时)
+    expire: 3600
+
+
+
+
