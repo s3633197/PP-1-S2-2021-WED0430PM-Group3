@@ -24,6 +24,10 @@ public class PostPageVO {
 
     private String owner;
 
+    private String employmentType;
+
+    private String industry;
+
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startUpDate;
 
