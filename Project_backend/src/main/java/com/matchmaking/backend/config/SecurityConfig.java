@@ -30,7 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/company/all",
             "/api/post/all",
             "/api/company/select/{companyId}",
-            "/api/post/select/{postId}"
+            "/api/post/select/{postId}",
+            "/test/kmp"
     };
 
     @Autowired

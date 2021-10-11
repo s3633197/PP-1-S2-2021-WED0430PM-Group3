@@ -29,6 +29,7 @@ public class ResumeService {
     RecommendAlgorithm recommendAlgorithm;
 
 
+    // create resume if user haven't created
     public Result createResume(Resume resume){
         if(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()) != null){
             return Result.failed("You have already created your CV");
@@ -38,6 +39,7 @@ public class ResumeService {
         return Result.create("","Successfully Created");
     }
 
+    // get resume of user
     public Result getResume(){
         Resume resume = resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId());
         if(resume == null){
@@ -63,6 +65,7 @@ public class ResumeService {
         return Result.success("Successfully updated");
     }
 
+    // show all resume to company role user
     public Result getAllResume(){
         List<Resume> resumeList = resumeMapper.getAllResume();
         List<ResumeVO> resumeVOList = resumeList.stream().map(
@@ -86,14 +89,27 @@ public class ResumeService {
         return Result.success(resumeVOList);
     }
 
+    // get recommendPost base on job seeker's experience
     public List<Post> getAllRecommendPost(){
         Resume resume = getCurrentResume();
         if(resume == null){
             return null;
         }
         Target target = recommendAlgorithm.resumeCovertToTarget(getCurrentResume());
+        // get all post as target for match
         List<Post> postList = postMapper.getAllPosts();
-        return recommendAlgorithm.matchPost(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),postList);
+        // represent job type, educational background to number
+        return recommendAlgorithm.matchPost(target.getJobType().getValue(),target.getDegree().getValue(),
+                resume.getLocation(),resume.getWantedIndustry(),
+                postList);
     }
 
+    // check user have resume or not
+    public Result  checkResume(){
+        Resume resume = getCurrentResume();
+        if(resume==null){
+            return Result.failed(false);
+        }
+        return Result.success(true);
+    }
 }

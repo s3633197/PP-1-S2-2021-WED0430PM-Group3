@@ -56,4 +56,15 @@ public class ResumeController {
         return Result.success("","No Recommendation");
     }
 
+    /**
+     * Check if user has resume or not
+     * @return boolean
+     */
+    @PreAuthorize("hasAnyRole('Personal')")
+    @GetMapping("/check/resume")
+    public Result checkResume(){
+        return resumeService.checkResume();
+    }
+
+
 }

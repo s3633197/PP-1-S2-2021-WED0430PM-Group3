@@ -74,7 +74,6 @@ public class AccountService {
     }
 
     public Account findAccountByEmail(String email){
-        // 需要抛出找不到用户的异常
       return accountMapper.findAccountByEmail(email);
     }
 
@@ -108,7 +107,6 @@ public class AccountService {
     }
 
     public Result checkAuthCompany(){
-        System.out.println(currentAccount().getRoleId());
         if(currentAccount().getRoleId() != 2){
             return Result.notAuthorised("Not authorised");
         }
@@ -135,12 +133,6 @@ public class AccountService {
             emailUtil.sendVerifyEmail(email,code);
             // store code in redis for validation
             redistUtils.hset(Const.VERIFYEMAIL,email,code,900);
-
-            // mock data for testing
-            String testCode = "12345";
-            String testEmail = "unitCompany@test.com";
-            redistUtils.hset(Const.VERIFYEMAIL,testEmail,testCode,900);
-
             return Result.success("","Verification sent,please check your email ");
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();

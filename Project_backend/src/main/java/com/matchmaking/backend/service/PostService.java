@@ -141,6 +141,6 @@ public class PostService {
         }
         Target target = recommendAlgorithm.postCovertToTarget(post);
         List<Resume> resumeList = resumeMapper.getAllResume();
-        return recommendAlgorithm.matchResume(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),resumeList);
+        return recommendAlgorithm.matchResume(target.getJobType().getValue(),target.getDegree().getValue(),resumeList);
     }
 }
