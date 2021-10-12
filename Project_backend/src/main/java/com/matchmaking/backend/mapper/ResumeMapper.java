@@ -14,6 +14,8 @@ public interface ResumeMapper {
 
     void updateResume(Resume resume);
 
+    Resume getResumeById(int seekerId);
+
     List<Resume> getAllResume();
 
 }

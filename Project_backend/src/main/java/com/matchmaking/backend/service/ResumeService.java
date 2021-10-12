@@ -48,9 +48,19 @@ public class ResumeService {
         return Result.success(resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId()));
     }
 
+    /**
+     *  get current login user's resume
+     * @return Resume
+     */
     public Resume getCurrentResume(){
       return resumeMapper.getResumeByAccountId(accountService.currentAccount().getAccountId());
     }
+
+    /**
+     * Update user resume
+     * @param resume
+     * @return Result
+     */
 
     public Result updateResume(Resume resume){
         // get current resume
@@ -68,6 +78,8 @@ public class ResumeService {
     // show all resume to company role user
     public Result getAllResume(){
         List<Resume> resumeList = resumeMapper.getAllResume();
+
+        // convert to VO for frontend
         List<ResumeVO> resumeVOList = resumeList.stream().map(
                 e->new ResumeVO(
                  e.getSeekerId(),
@@ -112,4 +124,18 @@ public class ResumeService {
         }
         return Result.success(true);
     }
+
+    /**
+     * Get resume by seeker id
+     * @param seekerId
+     * @return Resume
+     */
+    public Result getResumeById(int seekerId){
+        Resume resume = resumeMapper.getResumeById(seekerId);
+        if(resume == null){
+            return Result.failed("Can not found this resume");
+        }
+        return Result.success(resume);
+    }
+
 }

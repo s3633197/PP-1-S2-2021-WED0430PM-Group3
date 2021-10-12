@@ -30,7 +30,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Account user = accountService.findAccountByEmail(email);
 
         if(user != null){
-            System.out.println(user);
             return new AccountDetails((long) user.getAccountId(),user.getPassword(),user.getEmail(),getAuthorities(user.getRoleId()));
         }else{
             throw new UsernameNotFoundException("Email does not exist");

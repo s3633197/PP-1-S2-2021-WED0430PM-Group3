@@ -26,7 +26,7 @@ public class ResumeController {
     }
 
 
-    @PreAuthorize("hasRole('Personal')")
+    @PreAuthorize("hasAnyRole('Personal')")
     @GetMapping("/resume")
     public Result getResume(){
         return  resumeService.getResume();
@@ -40,11 +40,21 @@ public class ResumeController {
     }
 
 
+    /**
+     * Only company can get all resume
+     * @return List of resumes
+     */
     @PreAuthorize("hasAnyRole('Company')")
     @GetMapping("/all")
     public Result getAllResume(){
         return resumeService.getAllResume();
     }
+
+
+    /**
+     * Only after upload CV to get recommend post
+     * @return List of recommend post
+     */
 
     @PreAuthorize("hasAnyRole('Personal')")
     @GetMapping("/recommend/all")
@@ -64,6 +74,18 @@ public class ResumeController {
     @GetMapping("/check/resume")
     public Result checkResume(){
         return resumeService.checkResume();
+    }
+
+
+    /**
+     * Allow company user to view more details of a resume
+     * @param seekerId
+     * @return Result
+     */
+    @PreAuthorize("hasAnyRole('Company')")
+    @GetMapping("/get/{seekerId}")
+    public Result getResumeById(@PathVariable int seekerId){
+        return resumeService.getResumeById(seekerId);
     }
 
 

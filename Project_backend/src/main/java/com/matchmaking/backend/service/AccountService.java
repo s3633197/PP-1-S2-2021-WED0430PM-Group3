@@ -131,6 +131,7 @@ public class AccountService {
         try {
             // send email
             emailUtil.sendVerifyEmail(email,code);
+            System.out.println(code);
             // store code in redis for validation
             redistUtils.hset(Const.VERIFYEMAIL,email,code,900);
             return Result.success("","Verification sent,please check your email ");

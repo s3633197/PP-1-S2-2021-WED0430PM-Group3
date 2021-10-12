@@ -71,8 +71,12 @@ public class CompanyController {
         return Result.success(companyService.selectCompany(companyId));
     }
 
+    /**
+     * Check if company has created company information
+     * @return
+     */
     @PreAuthorize("hasAnyRole('Company')")
-    @GetMapping("/check/infor")
+    @GetMapping("/check/info")
     public Result checkCompanyInfo(){
         return companyService.checkInformation();
     }

@@ -25,6 +25,7 @@ public class AccountController {
 
     @PostMapping("/register")
     public Result signUp(@RequestBody Account account){
+        System.out.println(account);
         return accountService.createAccount(account);
     }
 
@@ -43,7 +44,7 @@ public class AccountController {
         return accountService.checkAuthSeeker();
     }
 
-    @GetMapping("/verify/email")
+    @PostMapping("/verify/email")
     public Result getEmailCaptcha(@RequestBody String email){
         return accountService.sendEmail(email);
     }

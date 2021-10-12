@@ -27,4 +27,8 @@
     <select id="getAllResume" resultType="com.matchmaking.backend.entity.Resume">
         select * from jobSeeker
     </select>
+
+    <select id="getResumeById" resultType="com.matchmaking.backend.entity.Resume">
+        select * from jobseeker where seeker_id = #{seekerId}
+    </select>
 </mapper>
