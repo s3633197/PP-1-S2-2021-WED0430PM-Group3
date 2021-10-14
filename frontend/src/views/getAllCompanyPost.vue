@@ -1,73 +1,37 @@
 <template>
+<!-- html -->
     <div>
       <br>
       <h1>My Posts</h1><br>
-      <el-card class="cardpost" v-for="item in array" :key="item.title">
-        <!-- <el-descriptions class="margin-top" :column="size"  border>
-                      <el-descriptions-item>
-                        <template slot="label"><i class=""></i>Title</template>{{ item.title }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-office-building"></i>Location</template>{{ item.location || 'empty' }}
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                         <el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar>
-                      </el-descriptions-item>
-                      <el-descriptions-item>
-                        <template slot="label"><i class="el-icon-office-building"></i>Industry</template>{{ item.industry }}
-                      </el-descriptions-item>
-                      <el-descriptions-item><template slot="label"><i class="el-icon-tickets"></i>Salary</template>{{ item.minSalary }}-{{ item.maxSalary }} / month
-                      </el-descriptions-item>
-                      <el-descriptions-item><template slot="label"><i class="el-icon-office-building"></i>JobType</template>{{ item.employmentType }}
-                      </el-descriptions-item>
-                      <el-descriptions-item >
-                        <template slot="label"><i class="el-icon-office-building"></i>EducationalBackground</template>{{ item.educationalBackground }}
-                      </el-descriptions-item>
-                       <template slot="extra">
-                          <el-button  class="submit">
-                            <router-link :to="{path:'/UpdatePost',query:{item:item}}" style="color: #fff;text-decoration: none;">
-                              Update
-                            </router-link>
-                          </el-button>
-                          <el-button type="primary" >
-                            <router-link :to="{path:'/Post-Detail-Company',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
-                              Details
-                            </router-link>
-                          </el-button>
-                          <el-button type="danger" @click="handleDelete(item.postId)">
-                              Delete
-                          </el-button>
-                       </template>
-
-                    </el-descriptions> -->
-        <table>
-          <tr>
-            <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
-            <td style="color:#42b983;"><b>Address: </b>{{ item.location || 'empty' }}</td>
-            <td style="color:#42b983;"><b>Industry: </b>{{ item.industry }}</td>
-          </tr>
-          <tr>
-            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
-            <td><b>JobType: </b>{{ item.employmentType }}</td> 
-          </tr>
-          <tr>
-             <td><b>Educational Background: </b>{{ item.educationalBackground }}</td>
-             <td></td>
-             <td>
-               <el-button  class="submit">
-                  <router-link :to="{path:'/UpdatePost',query:{item:item}}" style="color: #fff;text-decoration: none;">
-                    Update
-                  </router-link>
-                </el-button>
-                <el-button type="primary" >
-                  <router-link :to="{path:'/Post-Detail-Company',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
-                    Details
-                  </router-link>
-                </el-button>
-                <el-button type="danger" @click="handleDelete(item.postId)">Delete</el-button>
-             </td>
-          </tr>
-         </table>
+       <el-card class="cardpost" v-for="item in array" :key="item.postid">
+         <table>
+              <tr>
+                <td class="importantInfo" colspan="3">{{ item.title }} [{{ item.location || 'empty' }}]</td>
+                <td class="importantInfo" colspan="2">{{ item.companyName || 'empty'}}</td>
+                <td rowspan="3" colspan="1" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
+              </tr>
+              <tr>
+                <td colspan="3"  style="color:rgba(201, 70, 70, 0.856)">{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
+                <td colspan="2" >{{ item.industry || 'empty'}} {{ item.startUpYear || 'empty'}}</td>
+              </tr>
+              <tr>
+                <td colspan="2" >{{ item.jobType || 'empty'}} | {{ item.educationalBackground || 'empty'}}</td>
+                
+              </tr>
+              <tr>
+                <td colspan="6" style="text-align:right;">
+                  <el-button  class="submit">
+                      <router-link :to="{path:'/UpdatePost',query:{item:item}}" style="color: #fff;text-decoration: none;">
+                        Update
+                      </router-link>
+                    </el-button>
+                  <el-button type="primary"  @click.native="postDetail(item.postId)">
+                      Details
+                  </el-button>
+                  <el-button type="danger" @click="handleDelete(item.postId)">Delete</el-button>
+                </td>
+              </tr>
+            </table>
       </el-card>
       <br>
     </div>
@@ -75,6 +39,10 @@
 </template>
 
 <style scoped>
+  .importantInfo{
+    font-size: 25px;
+    color:#42b983;
+  }
 .submit{
   background-color: #54c685 !important;
 }
@@ -89,24 +57,53 @@
   box-shadow: 0 10px 10px rgb(63, 62, 62) !important;
 }
 .cardpost{
-  width:70%;
-  margin-left:17%;
+  width:60%;
+  margin-left:20%;
   margin-bottom: 2%;
   border-radius: 15px !important;
-  background-color: rgb(240, 245, 250)!important;
+  background-color: rgb(255, 255, 255)!important;
+  font-size: 15px;
 }
-td{
+.cardpost:hover{
+  box-shadow: 5px 10px 5px #888888;
+}
+.cardpost table{
+  margin-left:5%;
+  width: 90%;
+}
+.cardpost td{
   text-align: left;
-  width: 20%;
-  padding: 1.5%;
+  width: 78px;
 }
-b{
-  font-size: 18px;
+.avatar{
+    width: 80px;
+    height: 80px;
 }
-@media only screen and (max-width: 500px) {
-  .cardseeker{
-    width:80%;
-    margin-left:10%;
+/*css only for small size screen like mobile phone*/
+@media only screen and (max-width: 1150px) {
+    .importantInfo{
+    font-size: 15px !important;
+    color:#42b983;
+  }
+  .avatar{
+    width: 30px;
+    height: 30px;
+  }
+  .cardpost{
+    width:100%;
+    margin-left:0%;
+    font-size: 15px;
+  }
+  .cardpost table{
+    margin-left:0%;
+    width: 100%;
+  }
+  .cardpost td{
+    width: 60%;
+  }
+  button{
+    font-size: 10x;
+    padding:5px;
   }
 }
 </style>
@@ -116,39 +113,40 @@ b{
     
     data() {
       return {
-        size:3,
-        array:null,
+        informationForm: {
+              companyId: '',
+              companyName: '',
+              startUpDate: '',
+              owner: '',
+              industry: '',
+              accountId: '',
+            },
       }
     },
-    created() {
-       window.addEventListener('resize', this.onResize)
-      this.getAllPost();
+    props:{
+        array:{
+          type:Array,
+          default:""
+        }
     },
     methods: {
-      onResize() {
-        if (window.innerWidth <= 900) {
-          this.size = 1
-        }else {
-          this.size = 3
-        }
+      //see detail of the post with this id
+      postDetail(postId){
+        this.$router.push({name: 'PostDetailCompany', params: { postId: postId }})
       },
-      handleEdit(index, row) {
-        console.log(index, row);
-      },
-      handleDelete(index, row) {
-        console.log(index, row);
-      },
+      //contact to backend and get all post info
       getAllPost(){
         this.$axios.get('/api/post/getAll').then(res => {
           this.array = res.data.data
         });
       },
+      //contact to backend to delete this post with this id
       handleDelete(postId){
         this.$axios.delete('/api/post/delete/'+postId).then(res => {
           this.$router.push("/get-All-Company-Post")
           this.$router.go(0)
         });
-      }
+      },
     }
   }
 </script>

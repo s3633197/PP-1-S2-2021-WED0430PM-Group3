@@ -1,4 +1,5 @@
 <template>
+<!-- html -->
       <div>
         <br>
         <div class="form">
@@ -12,7 +13,7 @@
             </el-form-item>
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('signinForm')">submit</el-button>
-              <el-button @click="forgotPassword('signinForm')">forgot password</el-button>
+              <el-button>forgot password</el-button>
             </el-form-item>
           </el-form>
         </div>
@@ -33,6 +34,7 @@ export default {
           password: null,
           
         },
+        //rules for all input
         rules: {
           username: [
             { required: true, message: 'Please enter email number!', trigger: 'blur' },
@@ -56,6 +58,7 @@ export default {
       };
     },
     methods: {
+      // contact to backend post the email and password
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -68,25 +71,16 @@ export default {
                 this.$router.go(0)
               });
           }else {
-            console.log("login fail")
             return false;
           }
         });
-      },
-      forgotPassword(formName) {
-        // this.$axios.post('/forgot?',qs.stringify(this.signinForm),{headers:{'Content-Type' : "application/x-www-form-urlencoded; application/json"}}).then(res => {
-        //       // this.$axios.post('/login',qs.stringify(this.signinForm)).then(res => {
-
-        // });
-      },
-      next() {
-        if (this.active++ > 2) this.active = 0;
       },
     }
 }
 </script>
 
 <style scoped>
+/* //css */
 .form{
   width: 30%;
   margin-left:30.5%;
@@ -108,6 +102,7 @@ export default {
 .submit:focus{
   background-color: #54c685;
 }
+/*css only for small size screen like mobile phone*/
 @media only screen and (max-width: 800px) {
   .form{
     width: 80%;

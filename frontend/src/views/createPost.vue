@@ -1,41 +1,25 @@
 <template>
+<!-- html -->
   <div>
     <br>
         <div class="form">
-          <h1 class="h1">Create posts</h1>
-          <el-form :model="postInformation" :rules="rules" ref="postInformation" label-position="left">
-            <el-form-item label="Title" prop="title">
-                <el-input v-model="postInformation.title"></el-input>
-            </el-form-item>
+          <h1 class="h1">Create Post</h1>
+          <el-form :inline="true" :model="postInformation" :rules="rules" ref="postInformation" :label-position="left">
+            <el-row>
+              <el-col>
+                <el-form-item label="Title" prop="title">
+                    <el-input v-model="postInformation.title" class="shortInput"></el-input>
+                </el-form-item>
 
-            <el-form-item label="Description" prop="description" >
-                <el-input v-model="postInformation.description"></el-input>
-            </el-form-item>
-
-            <el-form-item label="Industry" prop="industry" >
-                <el-input v-model="postInformation.industry"></el-input>
-            </el-form-item>
+                <el-form-item label="Position" prop="Position" >
+                    <el-input v-model="postInformation.position" class="shortInput"></el-input>
+                </el-form-item>
+              </el-col>
+            </el-row>
             
-            <el-form-item label="Position" prop="Position" >
-                <el-input v-model="postInformation.position"></el-input>
-            </el-form-item>
-            <el-form-item label="Address" prop="address" >
-                <el-input v-model="postInformation.address"></el-input>
-            </el-form-item>
-           
-            <el-form-item label="Employment Type" prop="employmentType" >
-                <el-select class="role" v-model="postInformation.employmentType" placeholder="Please select">
-                    <el-option
-                        v-for="item in employmentTypeOptions"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value">
-                    </el-option>
-                </el-select>
-            </el-form-item>
 
-            <el-form-item label="Educational Background" prop="educationalBackground" >
-                <el-select class="role" v-model="postInformation.educationalBackground" placeholder="Please select">
+           <el-form-item label="Education" prop="educationalBackground" >
+                <el-select class="shortInput" v-model="postInformation.educationalBackground" placeholder="Please select">
                     <el-option
                         v-for="item in backgroundOptions"
                         :key="item.value"
@@ -44,16 +28,39 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="Employment Type" prop="employmentType" >
+                <el-select v-model="postInformation.employmentType" placeholder="Please select" class="shortInput">
+                    <el-option
+                        v-for="item in employmentTypeOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            
+            <el-form-item label="Address" prop="address" >
+                <el-input v-model="postInformation.address" class="longInput"></el-input>
+            </el-form-item>
+           
+            
+            <el-form-item label="Industry" prop="industry" >
+                <el-input v-model="postInformation.industry" class="longInput"></el-input>
+            </el-form-item>
+            
 
             <el-form-item label="Min Salary" prop="minSalary" >
-                <el-input v-model="postInformation.minSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
+                <el-input class="shortInput" v-model="postInformation.minSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
 
              <el-form-item label="Max Salary" prop="maxSalary" >
-                <el-input v-model="postInformation.maxSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
+                <el-input class="shortInput" v-model="postInformation.maxSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
             </el-form-item>
 
-            
+            <el-form-item label="Description" prop="description" >
+                <textarea v-model="postInformation.description" rows="10" cols="50" class="longInput"></textarea>
+            </el-form-item>
+
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('postInformation')">submit</el-button>
               <el-button @click="resetForm('postInformation')">replace</el-button>
@@ -66,12 +73,11 @@
 
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import qs from 'qs'
 export default {
   data() {
         return {
+          // data use to store the infor from backend
             postInformation: {
                 title:'',
                 description: '',
@@ -83,11 +89,11 @@ export default {
                 minSalary: null,
                 maxSalary: null,
             },
-
+             // rules for all user input
             rules: {
                 title: [
                     { required: true, message: 'Please enter your first name!', trigger: 'blur' },
-                    { min: 30, message: '30 letters or less!', trigger: 'blur' }
+                    { max: 30, message: '30 letters or less!', trigger: 'blur' }
                 ],
                 description: [
                     { required: true, message: 'Please enter your last name!', trigger: 'blur' },
@@ -99,7 +105,7 @@ export default {
                     { required: true, message: 'Please select your employment type!', trigger: 'blur' },
                 ],
             },
-
+            //selections for user to select
             employmentTypeOptions: [{
             value: 'Full-time',
             label: 'Full-Time'
@@ -140,6 +146,7 @@ export default {
       
     },
     methods: {
+     //post the info from input to backend and rediret to all company post page
       submitForm(formName) {
         console.log(qs.stringify(this.postInformation))
         this.$refs[formName].validate((valid) => {
@@ -152,11 +159,9 @@ export default {
           }
         });
       },
+      //clean all data in the input
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      },
-      next() {
-        if (this.active++ > 2) this.active = 0;
       },
     }
 }
@@ -164,22 +169,17 @@ export default {
 </script>
 
 <style scoped>
-.role{
-  width: 100%;
-}
 .form{
-  width: 30%;
-  margin-left:30.5%;
+  width: 810px;
+  margin-left:20.5%;
   margin-top: 5%;
   margin-bottom:5%;
   box-shadow: 5px 10px 5px #888888;
-  background-color: rgb(240, 245, 250);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  padding: 5%;
-  padding-top: 3%;
-  padding-bottom: 3%;
+  text-align: center;
+  padding: 20px;
 }
-
 .submit{
   background-color: #54c685;
 }
@@ -189,6 +189,14 @@ export default {
 .submit:hover{
   background-color: #3ea56a;
 }
+.shortInput{
+  width: 220px;
+}
+.longInput{
+  width: 580px;
+  resize: none;
+}
+/*css only for small size screen like mobile phone*/
 @media only screen and (max-width: 900px) {
   .form{
     width: 80%;

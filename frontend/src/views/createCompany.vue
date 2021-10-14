@@ -1,4 +1,5 @@
 <template>
+<!-- html -->
   <div>
     <br>
         <div class="form">
@@ -34,18 +35,17 @@
 
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 export default {
   data() {
         return {
+           //data to store all information from backend
             informationForm: {
               companyName: '',
               startUpDate: '',
               owner: '',
               industry: '',
             },
-
+            // rules for all input
             rules: {
                 companyName: [
                     { required: true, message: 'Please enter company name!', trigger: 'blur' },
@@ -72,23 +72,20 @@ export default {
 
     methods: {
       submitForm(formName) {
-        
+        //post the info from input to backend and rediret to resume page
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$axios.post('/api/company/create',this.informationForm).then(res => {
-              
-              // this.$router.push("/resume")
+              this.$router.push("/company-info")
             });
           }else {
             return false;
           }
         });
       },
+      //clean all data in the input
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      },
-      next() {
-        if (this.active++ > 2) this.active = 0;
       },
     }
 }
@@ -116,12 +113,13 @@ export default {
   margin-top: 5%;
   margin-bottom:5%;
   box-shadow: 5px 10px 5px #888888;
-  background-color: rgb(240, 245, 250);
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
   padding:5%;
   padding-top: 3%;
   padding-bottom: 3%;
 }
+/*css only for small size screen like mobile phone*/
 @media only screen and (max-width: 800px) {
   .form{
     width: 80%;

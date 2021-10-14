@@ -1,154 +1,203 @@
 <template>
+<!-- html -->
     <div>
       <br> <br>
       <h1 style="margin:0;">Easy to find a job, there's no better way.</h1>
-        <img src="../assets/img.jpg">
-        <img src="../assets/img.jpg">
-        <div v-if="company">
+        <img src="../assets/homeImg1.jpg">
+        <img src="../assets/homeImg2.jpg">
+        <div v-if="company" class="div">
           <h1>All JobSeekers</h1> 
-            <el-card class="cardseeker" v-for="item in array" :key="item.seekerId">
+            <el-card class="cardseeker" v-for="item in array" :key="item.seekerId" @click.native="seekerCardClick(item.seekerId)">
+            
               <table>
                 <tr>
-                  <td style="color:#42b983;"><b>Name: </b>{{ item.firstName }} {{ item.lastName }}</td>
-                  <td><b>EducationalBackground:  </b>{{ item.educationalBackground }}</td>
-                  <td rowspan="2"><el-avatar :src="require('../assets/a.png')" :size="80"></el-avatar></td>
+                  <td class="importantInfo" colspan="2">{{ item.firstName }} {{ item.lastName }}</td>
+                  <td colspan="3">{{ item.educationalBackground }}</td>
+                  <td rowspan="3" style="text-align:center;"><el-avatar :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
                 </tr>
                 <tr>
-                  <td style="color:rgba(201, 70, 70, 0.856)"><b>Expected Salary: </b>{{ item.expectedSalary }} / hour</td>
-                  <td><b>Skill: </b>{{ item.skill }}</td>
+                  <td colspan="2" style="color:rgba(201, 70, 70, 0.856)">{{ item.expectedSalary }} / hour</td>
+                  <td colspan="3" >{{ item.skill }}</td>
                 </tr>
                 <tr>
-                   <td><b>Phone: </b>{{ item.phone }}</td>
-                   <td></td>
-                      <td>
-                        <el-button type="primary"  class="submit" >
-                            <router-link :to="{path:'/resume',query:{seekerId:item.seekerId}}" style="color: #fff;text-decoration: none;">
-                              Details
-                            </router-link>
-                          </el-button>
-                      </td>
+                   <td>{{ item.phone }}</td>
+                   <td></td><td></td><td></td>
                 </tr>
               </table>
             </el-card>
+            <el-pagination
+                @current-change="handleCurrentChange"
+                :current-page="currentPage"
+                :page-size="20" 
+                layout="total, prev, pager, next, jumper"
+                :total="questionsNum"
+            ></el-pagination>
              <br>
         </div>
         <div v-if="personal">
           <h1>Suggest Posts</h1>
-                <el-card v-for="item in recommendPosts" :key="item.title" class="cardpost">
-                  <el-table>
+                <el-card v-for="item in recommendPosts" :key="item.postId" class="cardpost" @click.native="postCardClick(item.postId)">
+                  <table>
                     <tr>
-                      <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
-                      <td style="color:#42b983;"><b>Location: </b>{{ item.address || 'empty' }}</td>
-                      <td style="color:#42b983;"><b>CompanyName: </b>{{ item.companyName }}</td>
+                      <td class="importantInfo" colspan="2">{{ item.title }}{{ item.address || 'empty' }}</td>
+                      <td class="importantInfo" colspan="3">{{ item.companyName || 'empty' }}</td>
+                      <td rowspan="3" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
                     </tr>
                     <tr>
-                      <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }} / month</td>
-                      <td><b>JobType: </b>{{ item.position }}</td>
-                      <td><b>Industry: </b>{{ item.industry }} / Start Up Date : {{ item.startUpDate }}</td>
+                      <td style="color:rgba(201, 70, 70, 0.856)">{{ item.minSalary }}-{{ item.maxSalary }} / hour</td>
+                      <td></td><td></td><td></td>
                     </tr>
                     <tr>
-                      <td><b>EducationalBackground: </b>{{ item.educationalBackground }}</td>
-                      <td></td>
-                      <td>
-                        <el-button type="primary"  class="submit" >
-                            <router-link :to="{path:'/Post-Detail',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
-                              Details
-                            </router-link>
-                          </el-button>
-                      </td>
+                      <td colspan="2">{{ item.position }} | {{ item.educationalBackground }}</td>
+                      <td colspan="3">{{ item.industry }} / {{ item.startUpDate }}</td>
                     </tr>
-                  </el-table>
+                  </table>
                 </el-card>
                 <br>
         </div>
-        <div v-if="defaultt">
-      <br>
-      <h1>All Posts</h1><br>
-      <el-card class="cardpost" v-for="item in array" :key="item.postid">
-        <table>
-          <tr>
-            <td style="color:#42b983;"><b>Title: </b>{{ item.title }}</td>
-            <td style="color:#42b983;"><b>Address: </b>{{ item.location || 'empty' }}</td>
-            <td style="color:#42b983;"><b>Company Name: </b>{{ item.companyName }}</td>
-          </tr>
-          <tr>
-            <td style="color:rgba(201, 70, 70, 0.856)"><b>Salary: </b>{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
-            <td><b>JobType: </b>{{ item.jobType }}</td>
-            <td><b>Industry: </b>{{ item.industry }} / Start Up Year: {{ item.startUpYear }}</td>
-          </tr>
-          <tr>
-             <td><b>Educational Background: </b>{{ item.educationalBackground }}</td>
-             <td></td>
-             <td>
-               <el-button type="primary"  class="submit" >
-                  <router-link :to="{path:'/Post-Detail',query:{postId:item.postId}}" style="color: #fff;text-decoration: none;">
-                    Details
-                  </router-link>
-                </el-button>
-             </td>
-          </tr>
-         </table>
-      </el-card>
-        <br>
-    </div>
+        <div v-if="defaultt" class="div">
+          <br>
+          <h1>All Posts</h1><br>
+          <el-card class="cardpost" v-for="item in array" :key="item.postid" @click.native="postCardClick(item.postId)">
+            <table>
+              <tr>
+                <td class="importantInfo" colspan="2">{{ item.title }} [{{ item.location || 'empty' }}]</td>
+                <td class="importantInfo" colspan="3">{{ item.companyName }}</td>
+                <td rowspan="3" colspan="1" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
+              </tr>
+              <tr>
+                <td colspan="2"  style="color:rgba(201, 70, 70, 0.856)">{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
+                <td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <td colspan="2" >{{ item.jobType || 'empty'}} | {{ item.educationalBackground || 'empty'}}</td>
+                <td colspan="3" >{{ item.industry || 'empty'}} {{ item.startUpYear|| 'empty' }}</td>
+              </tr>
+            </table>
+          </el-card>
+          <br>
+        </div>
+        
     </div>
 </template>
 
 <style scoped>
-b{
-  font-size: 18px;
-}
-img{
-    height: 25%;
-    width: 30%;
-    margin: 4%;
-}
-
-hr{
-  border: 1px solid black;
-}
-
-.cardseeker{
-  width:65%;
-  margin-left:17%;
-  margin-bottom: 2%;
-  border-radius: 15px !important;
-  background-color: rgb(240, 245, 250)!important;
+  .div{
+    background-color: rgb(219, 217, 217);
+    font-size: 15px;
+  }
+  img{
+      width: 30%;
+      margin: 3%;
+  }
+  .importantInfo{
+    font-size: 25px;
+    color:#42b983;
+  }
+  .avatar{
+    width: 80px;
+    height: 80px;
+  }
+  .cardseeker{
+    width:65%;
+    margin-left:17%;
+    margin-bottom: 2%;
+    border-radius: 15px !important;
+    background-color: rgb(255, 255, 255)!important;
+    text-align: left;
+  }
+  .cardseeker:hover{
+       box-shadow: 5px 10px 5px #888888;
+  }
+.cardseeker table{
+  margin-left:5%;
+  width: 90%;
 }
 .cardseeker td{
   text-align: left;
-  width: 44.5%;
-  padding-left: 8%;
+  width: 78px;
+  /* border: 1px solid black; */
 }
 .cardpost{
-  width:65%;
-  margin-left:17%;
+  width:60%;
+  margin-left:20%;
   margin-bottom: 2%;
   border-radius: 15px !important;
-  background-color: rgb(240, 245, 250)!important;
+  background-color: rgb(255, 255, 255)!important;
+}
+.cardpost:hover{
+  box-shadow: 5px 10px 5px #888888;
+}
+.cardpost table{
+  margin-left:5%;
+  width: 90%;
 }
 .cardpost td{
   text-align: left;
-  width: 20%;
-  padding: 1.5%;
+  width: 78px;
+  /* border: 1px solid black; */
+
 }
-.submit{
-  background-color: #54c685 !important;
+.avatar{
+    width: 80px;
+    height: 80px;
 }
-.submit:hover{
-  background-color: #3ea56a !important;
-}
-.submit:focus{
-  background-color: #54c685 !important;
-}
-@media only screen and (max-width: 500px) {
+  .submit{
+    background-color: #54c685 !important;
+  }
+  .submit:hover{
+    background-color: #3ea56a !important;
+  }
+  .submit:focus{
+    background-color: #54c685 !important;
+  }
+  /*css only for small size screen like mobile phone*/
+@media only screen and (max-width: 1150px) {
+  .div{
+    font-size: 10px;
+  }
   img{
-    width: 92%;
-    display: block;
+      width: 75%;
+      margin: 3%;
+  }
+  .importantInfo{
+    font-size: 15px !important;
+    color:#42b983;
+  }
+  .avatar{
+    width: 30px;
+    height: 30px;
+    background: #3ea56a;
   }
   .cardseeker{
-    width:80%;
-    margin-left:10%;
+    width:100%;
+    margin-left:0%;
+    border-radius: 0 !important;
+  }
+  .cardseeker table{
+    margin-left:0%;
+    width: 100%;
+  }
+  .cardseeker td{
+    width: 20%;
+    padding: 0%;
+  }
+  .cardpost{
+    width:100%;
+    margin-left:0%;
+    border-radius: 0 !important;
+  }
+  .cardpost table{
+    margin-left:0%;
+    width: 100%;
+  }
+  .cardpost td{
+    width: 70%;
+    padding: 0%;
+  }
+  .submit{
+    background-color: #54c685 !important;
+
   }
 }
 </style>
@@ -158,12 +207,13 @@ hr{
     data() {
       return {
         recommendPosts:null,
-        // recommendSeekers:null,
         array: null,
         personal:false,
         company:false,
         defaultt:true,
         login:false,
+        dataNum: 0,
+        currentPage: 1,
       }
     },
     
@@ -172,8 +222,9 @@ hr{
       this.loginOrnot();
       if(this.login){
         if(this.personal==true){
+          console.log("personal")
           this.getRecommendPost();
-        }else if(this.company==true){
+        }else{
            this.getAllSeekers();
         }
       }else{
@@ -181,28 +232,35 @@ hr{
       }
     },
     methods: {
-      handleEdit(index, row) {
-        console.log(index, row);
+      //handle card click for company
+      seekerCardClick(seekerId){
+        this.$router.push({name: 'Resume', params: { seekerId: seekerId }})
       },
-      handleDelete(index, row) {
-        console.log(index, row);
+      //handle card click for personal account
+      postCardClick(postId){
+        this.$router.push({name: 'PostDetail', params: { postId: postId }})
       },
+      //get Recommend Post for jobseeker
       getRecommendPost(){
         this.$axios.get('/api/seeker/recommend/all').then(res => {
-          console.log(res.data.data)
           this.recommendPosts = res.data.data
+          this.dataNum = res.data.data.length
         });
       },
       getAllPost(){
         this.$axios.get('/api/post/all').then(res => {
           this.array = res.data.data
+          this.dataNum = res.data.data.length
         });
       },
+       //get All Seekers for company
       getAllSeekers(){
         this.$axios.get('/api/seeker/all').then(res => {
           this.array = res.data.data
+          this.dataNum = res.data.data.length
         });
       },
+      //check the role of current login account
       personalOrCompany(){
         if(localStorage.getItem('roleId')==1){
           this.personal = true
@@ -213,6 +271,7 @@ hr{
           this.personal = false
         }
       },
+      //check login or not
       loginOrnot(){
         if(localStorage.getItem('token')==null){
           this.login = false
@@ -223,6 +282,20 @@ hr{
           this.defaultt = false
         }
       },
+      // handle the pagenation function
+      handleCurrentChange: function(val) {
+            this.currentPage = val;
+            this.$http.get("/api/assignment/qa/" + this.currentPage).then(
+              response => {
+                this.questionsList = response.data.assignments;
+                this.questionsNum = response.data.asgCount;
+                console.log(response.data);
+              },
+              response => console.log(response)
+            );
+            console.log(`当前页: ${val}`);
+      }
+        
     }
   }
 </script>

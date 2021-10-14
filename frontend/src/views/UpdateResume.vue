@@ -1,17 +1,18 @@
 <template>
-      <div>
-        <br>
+<!-- html -->
+  <div>
+    <br>
         <div class="form">
           <h1>Update your profile</h1>
-          <el-form :model="informationForm" :rules="rules" ref="informationForm">
+          <el-form :inline="true" :model="informationForm" :rules="rules" ref="informationForm" label-width="165px" :label-position="left">
             <el-form-item label="First Name" prop="firstName">
-                <el-input v-model="informationForm.firstName"></el-input>
+                <el-input v-model="informationForm.firstName" class="shortInput"></el-input>
             </el-form-item>
             <el-form-item label="Last Name" prop="lastName" >
-                <el-input v-model="informationForm.lastName"></el-input>
+                <el-input v-model="informationForm.lastName" class="shortInput"></el-input>
             </el-form-item>
             <el-form-item  label="Gender" prop="gender">
-              <el-select v-model="informationForm.gender" style="width: 100%;">
+              <el-select v-model="informationForm.gender" class="shortInput">
                 <el-option
                   v-for="item in genderOptions"
                   :key="item.value"
@@ -21,24 +22,10 @@
               </el-select>
             </el-form-item>
             <el-form-item label="Phone" prop="phone" type="number">
-                <el-input v-model="informationForm.phone" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
-            </el-form-item>
-            <el-form-item label="Date of Birth" prop="dateOfBirth" >
-                <el-date-picker
-                    style="width: 100%;"
-                    v-model="informationForm.dateOfBirth"
-                    type="date"
-                    placeholder="select a date">
-                </el-date-picker>
-            </el-form-item>
-            <el-form-item label="School Name" prop="schoolName" >
-                <el-input v-model="informationForm.schoolName"></el-input>
-            </el-form-item>
-            <el-form-item label="Major" prop="major" >
-                <el-input v-model="informationForm.major"></el-input>
+                <el-input v-model="informationForm.phone" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" class="shortInput"></el-input>
             </el-form-item>
             <el-form-item label="Educational Background" prop="educationalBackground" >
-                <el-select v-model="informationForm.educationalBackground" style="width: 100%;" placeholder="Please select">
+                <el-select v-model="informationForm.educationalBackground" style="width: 100%;" class="shortInput" placeholder="Please select">
                     <el-option
                         v-for="item in bsckgroundOptions"
                         :key="item.value"
@@ -47,21 +34,34 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="Date of Birth" prop="dateOfBirth" >
+                <el-date-picker
+                    class="shortInput"
+                    v-model="informationForm.dateOfBirth"
+                    type="date"
+                    placeholder="select a date">
+                </el-date-picker>
+            </el-form-item>
+            <el-form-item label="School Name" prop="schoolName" >
+                <el-input v-model="informationForm.schoolName" class="longInput"></el-input>
+            </el-form-item>
+            <el-form-item label="Major" prop="major" >
+                <el-input v-model="informationForm.major" class="longInput"></el-input>
+            </el-form-item>
             <el-form-item label="Skill" prop="skill" >
-                <el-input v-model="informationForm.skill"></el-input>
+                <el-input v-model="informationForm.skill" class="longInput"></el-input>
             </el-form-item>
             <el-form-item label="Location" prop="location" >
-                <el-input v-model="informationForm.location"></el-input>
+                <el-input v-model="informationForm.location" class="longInput"></el-input>
             </el-form-item>
-            <el-form-item label="Statement" prop="statement" >
-                <el-input v-model="informationForm.statement"></el-input>
+            
+            <el-form-item label="Expected Salary" prop="expectedSalary" >
+                <el-input v-model="informationForm.expectedSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')" class="shortInput"></el-input>
             </el-form-item>
-            <el-form-item label="Wanted Industry" prop="wantedIndustry" >
-                <el-input v-model="informationForm.wantedIndustry"></el-input>
-            </el-form-item>
+            
             <el-form-item label="JobType" prop="jobType" >
-                <el-select v-model="informationForm.jobType" style="width: 100%;" placeholder="Please select">
-                    <el-option
+                <el-select v-model="informationForm.jobType" placeholder="Please select">
+                    <el-option class="shortInput"
                         v-for="item in jobTypeOptions"
                         :key="item.value"
                         :label="item.label"
@@ -69,11 +69,12 @@
                     </el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="Expected Salary" prop="expectedSalary" >
-                <el-input v-model="informationForm.expectedSalary" onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"></el-input>
+            <el-form-item label="Wanted Industry" prop="wantedIndustry" >
+                <el-input v-model="informationForm.wantedIndustry" class="longInput"></el-input>
             </el-form-item>
-
-            
+            <el-form-item label="Statement" prop="statement" >
+                <textarea v-model="informationForm.statement" class="longInput" rows="10" cols="50"></textarea>
+            </el-form-item>
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('informationForm')">submit</el-button>
               <el-button @click="resetForm('informationForm')">replace</el-button>
@@ -86,9 +87,6 @@
 
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
-import qs from 'qs'
 export default {
   data() {
         return {
@@ -122,12 +120,6 @@ export default {
                 jobType: [
                     { required: true, message: 'Please select your job type!', trigger: 'blur' },
                 ],
-                // phone:[
-                //     { type:'number', message: 'Only accept number!' },
-                // ],
-                // expectedSalary:[
-                //     { type: 'number', message: 'Only accept number!' },
-                // ],
             },
 
             genderOptions: [{
@@ -184,9 +176,11 @@ export default {
       
     },
      created() {
+       //get the old info for easy to update
        this.informationForm = this.$route.query.informationForm
      },
-    methods: {
+    methods: { 
+      // contact to backend to update the info
       submitForm(formName) {
         
         this.$refs[formName].validate((valid) => {
@@ -216,18 +210,16 @@ export default {
 
 <style scoped>
 .form{
-  width: 30%;
-  margin-left:30.5%;
+  width: 810px;
+  margin-left:20.5%;
   margin-top: 5%;
   margin-bottom:5%;
-  border: 1px solid black;
-  background-color: rgb(240, 245, 250);
+  box-shadow: 5px 10px 5px #888888;
+  background-color: rgb(255, 255, 255);
   border-radius: 15px;
-  padding: 5%;
-  padding-top: 3%;
-  padding-bottom: 3%;
+  text-align: center;
+  padding: 20px;
 }
-
 .submit{
   background-color: #54c685;
 }
@@ -237,6 +229,14 @@ export default {
 .submit:hover{
   background-color: #3ea56a;
 }
+.shortInput{
+  width: 220px;
+}
+.longInput{
+  width: 605px;
+  resize: none;
+}
+/*css only for small size screen like mobile phone*/
 @media only screen and (max-width: 900px) {
   .form{
     width: 80%;

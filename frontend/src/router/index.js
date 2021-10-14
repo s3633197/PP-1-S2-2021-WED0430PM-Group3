@@ -1,3 +1,4 @@
+//import all file
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
@@ -18,17 +19,19 @@ import UpdateCompanyInfo from '../views/UpdateCompanyInfo.vue'
 import UpdatePost from '../views/UpdatePost.vue'
 Vue.use(VueRouter)
 
-
+//routers
 const routes = [
   {
     path: '/',
     name: 'Home',
+    redirect: 'Index',
     component: Home,
     children:[
       {
         path: 'Index',
         name: 'Index',
-        component: Index
+        component: Index,
+
       },
       {
         path: '/SignIn',
@@ -80,11 +83,7 @@ const routes = [
         name: 'PostDetailCompany',
         component: PostDetailCompany
       },
-      {
-        path: '/get-All-Company-Post',
-        name: 'getAllCompanyPost',
-        component: getAllCompanyPost
-      },
+      
       {
         path: '/create-company',
         name: 'createCompany',
@@ -93,12 +92,20 @@ const routes = [
       {
         path: '/company-info',
         name: 'companyInfo',
-        component: companyInfo
-      },
-      {
-        path: '/updateCompanyInfo',
-        name: 'UpdateCompanyInfo',
-        component: UpdateCompanyInfo
+        redirect: '/get-All-Company-Post',
+        component: companyInfo,
+        children:[
+          {
+            path: '/updateCompanyInfo',
+            name: 'UpdateCompanyInfo',
+            component: UpdateCompanyInfo
+          },
+          {
+            path: '/get-All-Company-Post',
+            name: 'getAllCompanyPost',
+            component: getAllCompanyPost
+          },
+        ]
       },
   ]
   },

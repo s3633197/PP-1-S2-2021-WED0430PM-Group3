@@ -1,5 +1,7 @@
 <template>
+<!-- html -->
   <div>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
     <br>
         <div class="form">
           <h1>Sign Up</h1>
@@ -67,6 +69,7 @@
 .submit:focus{
   background-color: #54c685;
 }
+/*css only for small size screen like mobile phone*/
 @media only screen and (max-width : 900px) {
   .form{
     width: 80%;
@@ -86,13 +89,8 @@
 import Element from "element-ui";
 export default {
   name: 'SignUp',
-  // components: {
-  //   HelloWorld
-  // }
   data() {
       return {
-        
-        
         active: 0,
         signupForm: {
           email: '',
@@ -101,6 +99,7 @@ export default {
           roleId: null,
           verifyCode:''
         },
+        // rules for sign up input
         rules: {
           email: [
             { required: true, message: 'Please enter email number!', trigger: 'blur' },
@@ -131,7 +130,7 @@ export default {
             { required: true, message: 'Please enter verify code!', trigger: 'blur' },
           ]
         },
-
+        //selections
         options: [{
           value: 1,
           label: 'personal'
@@ -143,6 +142,7 @@ export default {
       };
     },
     methods: {
+      //post the info email, password and role to backend
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -158,6 +158,7 @@ export default {
           }
         });
       },
+      //send the verify code to the email 
       sendVerifyCode(){
           if (this.signupForm.email!='') {
             this.$axios.post('/api/account/verify/email',this.signupForm.email).then(res => {
@@ -169,18 +170,13 @@ export default {
           }
 
       },
+      //clear the info in the input
       resetForm(formName) {
         this.$refs[formName].resetFields();
-      },
-      next() {
-        if (this.active++ > 2) this.active = 0;
       },
     }
     
 }
-
-
-
 
 </script>
 

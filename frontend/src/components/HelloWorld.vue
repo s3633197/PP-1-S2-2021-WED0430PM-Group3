@@ -32,33 +32,8 @@
 </template>
 
 <script>
-import axios from "axios"
 export default {
   name: 'HelloWorld',
-  // props: {
-  //   msg: String
-  // }
-  // created(){
-  //   axios.get('/static/data/xxxxx.json')
-  //     .then(res => {
-  //       console.log(res)
-  //     }).catch(err => {
-  //     console.log(err)
-  //   })
-  // }
-  // created() {
-  //     this.getaccountexist();
-  //   },
-  // methods: {
-  //   getaccountexist(){
-  //       this.$axios.get('/api/user/register').then(res => {
-  //         this.signupForm.token = res.data.data.token
-  //         this.accountexist = res.data.data.accountexist
-  //         console.log(this.accountexist)
-  //         console.log(this.signupForm.token)
-  //       });
-  //     }
-  // }
 }
 
 ;
