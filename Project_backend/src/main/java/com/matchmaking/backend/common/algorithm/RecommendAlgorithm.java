@@ -104,8 +104,8 @@ public class RecommendAlgorithm {
                         // calculate object 2 location match distance
                         int locationNextO2[] = kmpAlgorithm.kmpNext(o2.getLocation());
                         int locationDistanceO2 = kmpAlgorithm.kmpSearch(location,o2.getLocation(),locationNextO2);
-                        int distance1 = knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o1));
-                        int distance2= knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o2));
+                        int distance1 = knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o1)) + industryDistanceO1*5 + locationDistanceO1*4;
+                        int distance2= knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o2))  + industryDistanceO2*5 + locationDistanceO2*4;
                         if(distance1 < distance2){
                             return 0;
                         }else {
