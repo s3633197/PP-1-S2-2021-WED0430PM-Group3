@@ -21,7 +21,6 @@ request.interceptors.request.use(
 // response interceptors for backend
 request.interceptors.response.use(
     response =>{
-        console.log(response)
         let res = response.data
         if(res.statusCode === 201 || res.statusCode === 200){
             if(res.message !== null){

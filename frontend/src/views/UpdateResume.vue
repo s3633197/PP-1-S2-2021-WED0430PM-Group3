@@ -4,7 +4,7 @@
     <br>
         <div class="form">
           <h1>Update your profile</h1>
-          <el-form :inline="true" :model="informationForm" :rules="rules" ref="informationForm" label-width="165px" :label-position="left">
+          <el-form :inline="true" :model="informationForm" :rules="rules" ref="informationForm" label-width="165px" >
             <el-form-item label="First Name" prop="firstName">
                 <el-input v-model="informationForm.firstName" class="shortInput"></el-input>
             </el-form-item>
@@ -233,7 +233,7 @@ export default {
   width: 220px;
 }
 .longInput{
-  width: 605px;
+  width: 620px;
   resize: none;
 }
 /*css only for small size screen like mobile phone*/
@@ -243,6 +243,10 @@ export default {
     margin-bottom:5%;
     margin-top: 10%;
     margin-left:6%;
+  }
+  .longInput{
+    width: 219px;
+    resize: none;
   }
 }
 </style>

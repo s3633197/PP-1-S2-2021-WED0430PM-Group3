@@ -17,6 +17,7 @@ import PostDetailCompany from '../views/PostDetailCompany.vue'
 import UpdateResume from '../views/UpdateResume.vue'
 import UpdateCompanyInfo from '../views/UpdateCompanyInfo.vue'
 import UpdatePost from '../views/UpdatePost.vue'
+import ResumeCompany from '../views/ResumeCompany.vue'
 Vue.use(VueRouter)
 
 //routers
@@ -52,6 +53,11 @@ const routes = [
         path: '/Resume',
         name: 'Resume',
         component: Resume
+      },
+      {
+        path: '/ResumeCompany',
+        name: 'ResumeCompany',
+        component: ResumeCompany
       },
       {
         path: '/updateResume',

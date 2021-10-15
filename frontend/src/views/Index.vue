@@ -25,13 +25,13 @@
                 </tr>
               </table>
             </el-card>
-            <el-pagination
+            <!-- <el-pagination
                 @current-change="handleCurrentChange"
                 :current-page="currentPage"
                 :page-size="20" 
                 layout="total, prev, pager, next, jumper"
                 :total="questionsNum"
-            ></el-pagination>
+            ></el-pagination> -->
              <br>
         </div>
         <div v-if="personal">
@@ -234,7 +234,7 @@
     methods: {
       //handle card click for company
       seekerCardClick(seekerId){
-        this.$router.push({name: 'Resume', params: { seekerId: seekerId }})
+        this.$router.push({name: 'ResumeCompany', params: { seekerId: seekerId }})
       },
       //handle card click for personal account
       postCardClick(postId){
@@ -283,18 +283,18 @@
         }
       },
       // handle the pagenation function
-      handleCurrentChange: function(val) {
-            this.currentPage = val;
-            this.$http.get("/api/assignment/qa/" + this.currentPage).then(
-              response => {
-                this.questionsList = response.data.assignments;
-                this.questionsNum = response.data.asgCount;
-                console.log(response.data);
-              },
-              response => console.log(response)
-            );
-            console.log(`当前页: ${val}`);
-      }
+      // handleCurrentChange: function(val) {
+      //       this.currentPage = val;
+      //       this.$http.get("/api/assignment/qa/" + this.currentPage).then(
+      //         response => {
+      //           this.questionsList = response.data.assignments;
+      //           this.questionsNum = response.data.asgCount;
+      //           console.log(response.data);
+      //         },
+      //         response => console.log(response)
+      //       );
+      //       console.log(`current page: ${val}`);
+      // }
         
     }
   }
