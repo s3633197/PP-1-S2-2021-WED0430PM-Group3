@@ -25,7 +25,6 @@ public class AccountController {
 
     @PostMapping("/register")
     public Result signUp(@RequestBody Account account){
-        System.out.println(account);
         return accountService.createAccount(account);
     }
 

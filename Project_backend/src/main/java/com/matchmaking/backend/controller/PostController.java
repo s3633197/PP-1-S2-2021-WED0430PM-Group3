@@ -64,6 +64,13 @@ public class PostController {
         return postService.deletePost(postId);
     }
 
+    /**
+     * Get post by post id
+     * @param postId
+     * @return Post
+     */
+
+
     @GetMapping("/select/{postId}")
     public Result selectPost(@PathVariable int postId){
         return postService.selectPost(postId);

@@ -42,7 +42,6 @@ public class PostService {
 
 
     public Result createPost(Post post){
-        // 需要检查相同的post
         Company company = companyService.currentCompany();
         if(company == null){
             return Result.failed("Please upload your company information first");
@@ -131,7 +130,6 @@ public class PostService {
     public List<Resume> getRecommendResumes(int postId){
         Company company = companyService.currentCompany();
         Post post =postMapper.getPost(postId);
-        // 应该抛出找不到异常
 
         if(post == null){
             return null;
@@ -141,6 +139,6 @@ public class PostService {
         }
         Target target = recommendAlgorithm.postCovertToTarget(post);
         List<Resume> resumeList = resumeMapper.getAllResume();
-        return recommendAlgorithm.matchResume(target.getJobType().getValue(),target.getDegree().getValue(),resumeList);
+        return recommendAlgorithm.matchResume(target.getJobType().getValue(),target.getDegree().getValue(),post.getIndustry(),post.getAddress(),resumeList);
     }
 }

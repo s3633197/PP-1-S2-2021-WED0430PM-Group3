@@ -36,7 +36,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         }
     }
 
-
+    // get user authorities
     public List<GrantedAuthority> getAuthorities(int roleId){
         List<GrantedAuthority> authorities = new ArrayList<>();
         String role = roleService.getAccountAuthority(roleId);

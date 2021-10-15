@@ -71,7 +71,7 @@ public class RecommendAlgorithm {
     return postList;
     }
 
-    public List<Resume> matchResume(int jobType,int educationalBackground, List<Resume> targetList){
+    public List<Resume> matchResume(int jobType,int educationalBackground, String location,String industry,List<Resume> targetList){
 
 
         List<Resume> resumeList =  new ArrayList<>();
@@ -92,6 +92,18 @@ public class RecommendAlgorithm {
                 new Comparator<Resume>() {
                     @Override
                     public int compare(Resume o1, Resume o2) {
+                        int industryNextO1[] = kmpAlgorithm.kmpNext(o1.getWantedIndustry());
+                        int industryDistanceO1 = kmpAlgorithm.kmpSearch(industry,o1.getWantedIndustry(),industryNextO1);
+                        // calculate object 2 industry match distance
+                        int industryNextO2[] = kmpAlgorithm.kmpNext(o2.getWantedIndustry());
+                        int industryDistanceO2 = kmpAlgorithm.kmpSearch(industry,o2.getWantedIndustry(),industryNextO2);
+
+                        // calculate object 1 location match distance
+                        int locationNextO1[] = kmpAlgorithm.kmpNext(o1.getLocation());
+                        int locationDistanceO1 = kmpAlgorithm.kmpSearch(location,o1.getLocation(),locationNextO1);
+                        // calculate object 2 location match distance
+                        int locationNextO2[] = kmpAlgorithm.kmpNext(o2.getLocation());
+                        int locationDistanceO2 = kmpAlgorithm.kmpSearch(location,o2.getLocation(),locationNextO2);
                         int distance1 = knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o1));
                         int distance2= knnAlgorithm.getTotalDistance(jobType,educationalBackground,resumeCovertToTarget(o2));
                         if(distance1 < distance2){
