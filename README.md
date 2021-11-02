@@ -4,6 +4,20 @@
 
 The project is to develop job matching making system, user can register as job seeker and company user. The jobseeker need to provide their basic personal information,educational background  and expected job information. For company user, they need to provide the company information before they post a job requirement post.  Then the system will match the job seeker's CV and job requirement base on the educational background and expect job information to generates the recommendation of post to job seeker and CV to the company users
 
+
+
+### **v1.6.1** 
+
+------
+
+##### Bug Fixes：
+
+- Can not send email in the deploy environment 
+
+------
+
+
+
 ### **v1.6.0** 
 
 ------

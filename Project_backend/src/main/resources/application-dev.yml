@@ -14,34 +14,36 @@ mybatis:
 
 spring:
 # Local database configuration
-#  datasource:
-#    username: root
-#    password: 12345
-#    url: jdbc:mysql://localhost:3306/project1
-# AWS database configuration
   datasource:
-    username: admin
-    password: 123456789
-    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
+    username: root
+    password: 12345
+    url: jdbc:mysql://localhost:3306/project1
+# AWS database configuration
+#  datasource:
+#    username: admin
+#    password: 123456789
+#    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
 
 
   # Redis configuration
-#  redis:
-#    host: localhost
-#    port: 6379
-#    database: 0
-##    password: project12345
-
   redis:
-    host: 18.205.41.24
+    host: localhost
     port: 6379
     database: 0
-    password: project12345
+#    password: project12345
+
   # email configuration
   mail:
     host: smtp.126.com
     username: kenlbd61@126.com
-    password: TNFIAMJHYCBIZMCV
+    password: CRIQTBGDMQSPMFLF
+    protocol: smtps
+    port: 465
+    properties:
+      socketFactory:
+        port: 465
+        class: javax.net.ssl.SSLSocketFactory
+        fallback: false
 
 token:
   jwt:
