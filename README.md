@@ -6,38 +6,57 @@ The project is to develop job matching making system, user can register as job s
 
 
 
-### **v1.6.1** 
+> ### v1.6.2 
+>
+> ------
+>
+> ##### Bug Fixes：
+>
+> - Error in getting verification code when register
+> - Incorrect information when getting all post of company
+> - Missing information in post details page
+>
+> ------
 
-------
-
-##### Bug Fixes：
-
-- Can not send email in the deploy environment 
-
-------
 
 
+> ### v1.6.1 
+>
+> ------
+>
+> ##### Bug Fixes：
+>
+> - Can not send email in the deploy environment 
+> - Invalid recommendation of post, incorrect match
+>
+> ------
+>
 
-### **v1.6.0** 
 
-------
 
-#### Framework Enhancements:
-
-- update matching algorithm
-- Email  register verification 
-
-##### Bug Fixes：
-
-- Not matching CV for company user 
-
-------
+> ### **v1.6.0** 
+>
+> ------
+>
+> #### Framework Enhancements:
+>
+> - update matching algorithm
+> - Email  register verification 
+>
+> ##### Bug Fixes：
+>
+> - Not matching CV for company user 
+> - Incorrect information of recommend posts
+> - Invalid validation for email format
+>
+> ------
+>
 
 
 
 #### <u>**Require Java version : Java 8**</u>
 
-**Deploy URL:** https://ec2-18-205-41-24.compute-1.amazonaws.com/
+**Deploy URL:** http://ec2-18-205-41-24.compute-1.amazonaws.com/   OR http://18.205.41.24/
 
 **GitHub URL:**https://github.com/s3633197/PP-1-S2-2021-WED0430PM-Group3
 
@@ -57,10 +76,11 @@ The project is to develop job matching making system, user can register as job s
 - VUE
 - element-ui
 - axios
+- nodejs
 
 ## How to run the project
 
-## backend Project setup
+### Backend Project setup
 
 **Prerequisites**
 
@@ -77,7 +97,9 @@ The project is to develop job matching making system, user can register as job s
 
 3. After configuration and installing, the project is ready to start 
 
-## frontend Project setup
+   
+
+### Frontend project setup
 
 ```
 yarn install
