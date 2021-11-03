@@ -7,6 +7,7 @@ import com.matchmaking.backend.entity.Company;
 import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.entity.Target;
+import com.matchmaking.backend.entity.vo.CompanyVO;
 import com.matchmaking.backend.entity.vo.PostListVO;
 import com.matchmaking.backend.entity.vo.PostPageVO;
 import com.matchmaking.backend.mapper.CompanyMapper;
@@ -107,10 +108,29 @@ public class PostService {
         return Result.success("Successfully update");
     }
 
+    // Get all post of select company
     public Result getPostsOfCompany(){
-        List<Post> postList =postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
+        Company company = companyMapper.selectCompany(companyService.currentCompany().getCompanyId());
+        List<Post> postList = postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
+        // convert to Company VO
+        CompanyVO companyVO = dozerBeanMapper.map(company, CompanyVO.class);
+        List<PostListVO> postVOList = postList.stream()
+                .map(e -> new PostListVO(
+                        e.getPostId(),
+                        e.getTitle(),
+                        e.getMinSalary(),
+                        e.getMaxSalary(),
+                        e.getEducationalBackground(),
+                        e.getAddress(),
+                        e.getIndustry(),
+                        e.getEmploymentType(),
+                        companyMapper.selectCompany(e.getCompanyId()).getStartUpDate(),
+                        companyMapper.selectCompany(e.getCompanyId()).getCompanyName(),
+                        e.getCompanyId()
+                )).collect(Collectors.toList());
+        companyVO.setPosts(postVOList);
         if(postList.isEmpty()) return Result.failed("No post available now");
-        return Result.success(postList);
+        return Result.success(companyVO);
     }
 
     public Result deletePost(int postId){

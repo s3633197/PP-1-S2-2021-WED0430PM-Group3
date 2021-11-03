@@ -43,7 +43,7 @@ public class AccountController {
         return accountService.checkAuthSeeker();
     }
 
-    @GetMapping("/verify/email")
+    @PostMapping("/verify/email")
     public Result getEmailCaptcha(@RequestBody String email){
         return accountService.sendEmail(email);
     }
