@@ -4,6 +4,7 @@ package com.matchmaking.backend.controller;
 import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
+import com.matchmaking.backend.entity.vo.PostListVO;
 import com.matchmaking.backend.service.ResumeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -59,7 +60,7 @@ public class ResumeController {
     @PreAuthorize("hasAnyRole('Personal')")
     @GetMapping("/recommend/all")
     public Result getRecommendPosts(){
-        List<Post> postList = resumeService.getAllRecommendPost();
+        List<PostListVO> postList = resumeService.getAllRecommendPost();
         if (postList != null){
             return Result.success(postList);
         }

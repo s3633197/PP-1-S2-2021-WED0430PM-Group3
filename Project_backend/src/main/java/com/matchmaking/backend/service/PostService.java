@@ -110,7 +110,6 @@ public class PostService {
 
     // Get all post of select company
     public Result getPostsOfCompany(){
-        Company company = companyMapper.selectCompany(companyService.currentCompany().getCompanyId());
         List<Post> postList = postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
         // convert to Company VO
         List<PostListVO> postVOList = postList.stream()

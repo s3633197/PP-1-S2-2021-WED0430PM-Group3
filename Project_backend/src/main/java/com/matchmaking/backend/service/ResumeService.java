@@ -5,7 +5,9 @@ import com.matchmaking.backend.common.lang.Result;
 import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.entity.Target;
+import com.matchmaking.backend.entity.vo.PostListVO;
 import com.matchmaking.backend.entity.vo.ResumeVO;
+import com.matchmaking.backend.mapper.CompanyMapper;
 import com.matchmaking.backend.mapper.PostMapper;
 import com.matchmaking.backend.mapper.ResumeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class ResumeService {
 
     @Autowired
     RecommendAlgorithm recommendAlgorithm;
+
+    @Autowired
+    CompanyMapper companyMapper;
 
 
     // create resume if user haven't created
@@ -102,7 +107,7 @@ public class ResumeService {
     }
 
     // get recommendPost base on job seeker's experience
-    public List<Post> getAllRecommendPost(){
+    public List<PostListVO> getAllRecommendPost(){
         Resume resume = getCurrentResume();
         if(resume == null){
             return null;
@@ -110,11 +115,27 @@ public class ResumeService {
         Target target = recommendAlgorithm.resumeCovertToTarget(getCurrentResume());
         // get all post as target for match
         List<Post> postList = postMapper.getAllPosts();
-        System.out.println(target);
-        // represent job type, educational background to number
-        return recommendAlgorithm.matchPost(target.getJobType().getValue(),target.getDegree().getValue(),
+
+        List<Post> recommendPosts = recommendAlgorithm.matchPost(target.getJobType().getValue(),target.getDegree().getValue(),
                 resume.getLocation(),resume.getWantedIndustry(),
                 postList);
+
+        List<PostListVO> postVOList = recommendPosts.stream()
+                .map(e -> new PostListVO(
+                        e.getPostId(),
+                        e.getTitle(),
+                        e.getMinSalary(),
+                        e.getMaxSalary(),
+                        e.getEducationalBackground(),
+                        e.getAddress(),
+                        e.getIndustry(),
+                        e.getEmploymentType(),
+                        companyMapper.selectCompany(e.getCompanyId()).getStartUpDate(),
+                        companyMapper.selectCompany(e.getCompanyId()).getCompanyName(),
+                        e.getCompanyId()
+                )).collect(Collectors.toList());
+        // represent job type, educational background to number
+        return postVOList;
     }
 
     // check user have resume or not

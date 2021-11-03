@@ -94,7 +94,7 @@ public class AccountService {
         if(!correct){
             return Result.failed("Incorrect password");
         }
-        // 密码更新后需要删掉对应的token缓存
+        // delete token when password updated
 
         accountMapper.updatePassword(email,oldPassword,newPassword);
         return Result.success("Password changed");
@@ -120,7 +120,7 @@ public class AccountService {
         return Result.success("","Authorised");
     }
 
-
+    // Send email verification code
     public Result sendEmail(String email){
         Account user = accountMapper.findAccountByEmail(email);
         if(user!= null){
@@ -131,7 +131,6 @@ public class AccountService {
         try {
             // send email
             emailUtil.sendVerifyEmail(email,code);
-            System.out.println(code);
             // store code in redis for validation
             redistUtils.hset(Const.VERIFYEMAIL,email,code,900);
             return Result.success("","Verification sent,please check your email ");
