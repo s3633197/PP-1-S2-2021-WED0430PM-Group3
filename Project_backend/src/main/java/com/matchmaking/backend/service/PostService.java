@@ -113,7 +113,6 @@ public class PostService {
         Company company = companyMapper.selectCompany(companyService.currentCompany().getCompanyId());
         List<Post> postList = postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
         // convert to Company VO
-        CompanyVO companyVO = dozerBeanMapper.map(company, CompanyVO.class);
         List<PostListVO> postVOList = postList.stream()
                 .map(e -> new PostListVO(
                         e.getPostId(),
@@ -128,9 +127,8 @@ public class PostService {
                         companyMapper.selectCompany(e.getCompanyId()).getCompanyName(),
                         e.getCompanyId()
                 )).collect(Collectors.toList());
-        companyVO.setPosts(postVOList);
         if(postList.isEmpty()) return Result.failed("No post available now");
-        return Result.success(companyVO);
+        return Result.success(postVOList);
     }
 
     public Result deletePost(int postId){

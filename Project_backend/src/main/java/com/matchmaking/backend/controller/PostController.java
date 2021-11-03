@@ -69,8 +69,6 @@ public class PostController {
      * @param postId
      * @return Post
      */
-
-
     @GetMapping("/select/{postId}")
     public Result selectPost(@PathVariable int postId){
         return postService.selectPost(postId);

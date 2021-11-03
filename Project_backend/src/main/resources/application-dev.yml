@@ -14,15 +14,15 @@ mybatis:
 
 spring:
 # Local database configuration
-  datasource:
-    username: root
-    password: 12345
-    url: jdbc:mysql://localhost:3306/project1
-# AWS database configuration
 #  datasource:
-#    username: admin
-#    password: 123456789
-#    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
+#    username: root
+#    password: 12345
+#    url: jdbc:mysql://localhost:3306/project1
+# AWS database configuration
+  datasource:
+    username: admin
+    password: 123456789
+    url: jdbc:mysql://database-1.co8c9v24smnd.us-east-1.rds.amazonaws.com:3306/project1
 
 
   # Redis configuration

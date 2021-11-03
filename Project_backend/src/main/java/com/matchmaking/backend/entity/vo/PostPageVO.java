@@ -11,6 +11,8 @@ public class PostPageVO {
 
     private String position;
 
+    private String title;
+
     @Mapping("address")
     private String location;
 

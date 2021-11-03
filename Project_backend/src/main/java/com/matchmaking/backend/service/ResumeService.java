@@ -110,6 +110,7 @@ public class ResumeService {
         Target target = recommendAlgorithm.resumeCovertToTarget(getCurrentResume());
         // get all post as target for match
         List<Post> postList = postMapper.getAllPosts();
+        System.out.println(target);
         // represent job type, educational background to number
         return recommendAlgorithm.matchPost(target.getJobType().getValue(),target.getDegree().getValue(),
                 resume.getLocation(),resume.getWantedIndustry(),

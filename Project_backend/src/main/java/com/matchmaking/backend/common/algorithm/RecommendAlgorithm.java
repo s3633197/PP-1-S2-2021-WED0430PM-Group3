@@ -123,7 +123,12 @@ public class RecommendAlgorithm {
     // convert to target get represented integer
     public  Target postCovertToTarget(Post post){
         Target target = new Target();
+
+        // initial job type number
+        target.setJobType(JobType.UNKNOWN);
         target.setDegree(Degree.UNKNOWN);
+
+        // ignore case-sensitive
         for(Degree degree: Degree.values()){
             if(degree.getKey().toLowerCase(Locale.ROOT).equals(post.getEducationalBackground().toLowerCase(Locale.ROOT))){
                 target.setDegree(degree);
@@ -143,14 +148,24 @@ public class RecommendAlgorithm {
         Target target = new Target();
         // initial job type number
         target.setJobType(JobType.UNKNOWN);
+        target.setDegree(Degree.UNKNOWN);
+
+        // ignore case-sensitive
+        String actualDegree = resume.getEducationalBackground().toLowerCase(Locale.ROOT);
+        String actualJobType = resume.getJobType().toLowerCase(Locale.ROOT);
+
+        // match degree replace integer
         for(Degree degree: Degree.values()){
-            if(degree.getKey().equals(resume.getEducationalBackground())){
+            String targetDegree = degree.getKey().toLowerCase(Locale.ROOT);
+            if(targetDegree.equals(actualDegree)){
                 target.setDegree(degree);
             }
         }
         // match job type replace integer
         for(JobType jobType: JobType.values()){
-            if(jobType.getKey().equals(resume.getJobType())){
+            String targetType = jobType.getKey().toLowerCase(Locale.ROOT);
+
+            if(targetType.equals(actualJobType)){
                 target.setJobType(jobType);
             }
 

@@ -5,8 +5,7 @@ public enum JobType {
     FULLTIME("Full-time",1),
     PARTIME("Part-time",2),
     CONTRACT("Contract",3),
-    UNKNOWN("Unknown",4)
-            ;
+    UNKNOWN("Unknown",4);
 
 
     private String key;
