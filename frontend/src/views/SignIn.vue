@@ -13,7 +13,6 @@
             </el-form-item>
             <el-form-item>
               <el-button class="submit" type="primary" @click="submitForm('signinForm')">submit</el-button>
-              <el-button>forgot password</el-button>
             </el-form-item>
           </el-form>
         </div>
