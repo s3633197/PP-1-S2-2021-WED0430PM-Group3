@@ -7,6 +7,7 @@ import com.matchmaking.backend.entity.Company;
 import com.matchmaking.backend.entity.Post;
 import com.matchmaking.backend.entity.Resume;
 import com.matchmaking.backend.entity.Target;
+import com.matchmaking.backend.entity.vo.CompanyVO;
 import com.matchmaking.backend.entity.vo.PostListVO;
 import com.matchmaking.backend.entity.vo.PostPageVO;
 import com.matchmaking.backend.mapper.CompanyMapper;
@@ -42,7 +43,6 @@ public class PostService {
 
 
     public Result createPost(Post post){
-        // 需要检查相同的post
         Company company = companyService.currentCompany();
         if(company == null){
             return Result.failed("Please upload your company information first");
@@ -108,10 +108,26 @@ public class PostService {
         return Result.success("Successfully update");
     }
 
+    // Get all post of select company
     public Result getPostsOfCompany(){
-        List<Post> postList =postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
+        List<Post> postList = postMapper.getPostsByCompanyId(companyService.currentCompany().getCompanyId());
+        // convert to Company VO
+        List<PostListVO> postVOList = postList.stream()
+                .map(e -> new PostListVO(
+                        e.getPostId(),
+                        e.getTitle(),
+                        e.getMinSalary(),
+                        e.getMaxSalary(),
+                        e.getEducationalBackground(),
+                        e.getAddress(),
+                        e.getIndustry(),
+                        e.getEmploymentType(),
+                        companyMapper.selectCompany(e.getCompanyId()).getStartUpDate(),
+                        companyMapper.selectCompany(e.getCompanyId()).getCompanyName(),
+                        e.getCompanyId()
+                )).collect(Collectors.toList());
         if(postList.isEmpty()) return Result.failed("No post available now");
-        return Result.success(postList);
+        return Result.success(postVOList);
     }
 
     public Result deletePost(int postId){
@@ -131,7 +147,6 @@ public class PostService {
     public List<Resume> getRecommendResumes(int postId){
         Company company = companyService.currentCompany();
         Post post =postMapper.getPost(postId);
-        // 应该抛出找不到异常
 
         if(post == null){
             return null;
@@ -141,6 +156,6 @@ public class PostService {
         }
         Target target = recommendAlgorithm.postCovertToTarget(post);
         List<Resume> resumeList = resumeMapper.getAllResume();
-        return recommendAlgorithm.matchResume(target.getExpectedSalary(),target.getJobType().getValue(),target.getDegree().getValue(),resumeList);
+        return recommendAlgorithm.matchResume(target.getJobType().getValue(),target.getDegree().getValue(),post.getIndustry(),post.getAddress(),resumeList);
     }
 }

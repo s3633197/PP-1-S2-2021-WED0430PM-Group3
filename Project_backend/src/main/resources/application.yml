@@ -1,9 +1,13 @@
 
 # 配置运行环境
+# 本地数据库相关配置
 spring:
 
   profiles:
     active: dev
+# 设置启动端口
+server:
+  port: 9000
   # email configuration
   mail:
     host: smtp.126.com

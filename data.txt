@@ -1,0 +1,16 @@
+Database Type: MySQL 
+Version: 8.0
+
+The application is atuomatically connected AWS RDS database
+if some error happen, please change the url and credential of database under the path 
+
+Project_backend/src/main/resources/application-dev.yml
+
+to this format
+# spring:
+#  datasource:
+#    username: root
+#    password: 12345
+#    url: jdbc:mysql://localhost:3306/project1
+
+The DDL is provided 

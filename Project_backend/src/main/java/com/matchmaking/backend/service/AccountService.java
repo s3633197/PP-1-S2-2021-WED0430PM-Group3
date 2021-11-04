@@ -74,7 +74,6 @@ public class AccountService {
     }
 
     public Account findAccountByEmail(String email){
-        // 需要抛出找不到用户的异常
       return accountMapper.findAccountByEmail(email);
     }
 
@@ -95,7 +94,7 @@ public class AccountService {
         if(!correct){
             return Result.failed("Incorrect password");
         }
-        // 密码更新后需要删掉对应的token缓存
+        // delete token when password updated
 
         accountMapper.updatePassword(email,oldPassword,newPassword);
         return Result.success("Password changed");
@@ -108,7 +107,6 @@ public class AccountService {
     }
 
     public Result checkAuthCompany(){
-        System.out.println(currentAccount().getRoleId());
         if(currentAccount().getRoleId() != 2){
             return Result.notAuthorised("Not authorised");
         }
@@ -122,7 +120,7 @@ public class AccountService {
         return Result.success("","Authorised");
     }
 
-
+    // Send email verification code
     public Result sendEmail(String email){
         Account user = accountMapper.findAccountByEmail(email);
         if(user!= null){
@@ -135,12 +133,6 @@ public class AccountService {
             emailUtil.sendVerifyEmail(email,code);
             // store code in redis for validation
             redistUtils.hset(Const.VERIFYEMAIL,email,code,900);
-
-            // mock data for testing
-            String testCode = "12345";
-            String testEmail = "unitCompany@test.com";
-            redistUtils.hset(Const.VERIFYEMAIL,testEmail,testCode,900);
-
             return Result.success("","Verification sent,please check your email ");
         } catch (MessagingException | UnsupportedEncodingException e) {
             e.printStackTrace();

@@ -11,6 +11,8 @@ public class PostPageVO {
 
     private String position;
 
+    private String title;
+
     @Mapping("address")
     private String location;
 
@@ -23,6 +25,10 @@ public class PostPageVO {
     private String companyName;
 
     private String owner;
+
+    private String employmentType;
+
+    private String industry;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private Date startUpDate;

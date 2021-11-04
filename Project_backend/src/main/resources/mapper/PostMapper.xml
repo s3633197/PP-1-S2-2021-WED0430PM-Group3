@@ -9,7 +9,7 @@
     </insert>
 
     <select id="getAllPosts" resultType="com.matchmaking.backend.entity.Post">
-        select * from Post
+        select * from post
     </select>
 
     <update id="updatePost" parameterType="com.matchmaking.backend.entity.Post">

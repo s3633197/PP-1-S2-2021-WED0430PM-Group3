@@ -33,6 +33,7 @@ public class CompanyService {
 
     public Result createCompany(Company company){
         Account account = accountService.currentAccount();
+        // check if company information already exists
         if(companyMapper.getCompany(account.getAccountId()) != null) {
             return Result.failed("You have already upload your Company information");
         }
@@ -50,6 +51,15 @@ public class CompanyService {
             return Result.success(company);
     }
 
+    // check if company information created or not, for determine the UI flow
+    public Result checkInformation(){
+        Company company = currentCompany();
+        if(company==null){
+            return  Result.failed(false);
+        }
+        return Result.success(true);
+    }
+
     // return all company info in the database
     public Result getAllCompany(){
         List<Company> companies = companyMapper.getAllCompany();
@@ -61,6 +71,7 @@ public class CompanyService {
 
     public Result updateCompany(Company company){
         Company current = this.currentCompany();
+        // check if company information exist
         if( current == null){
             return Result.failed("Please upload your company information first");
         }

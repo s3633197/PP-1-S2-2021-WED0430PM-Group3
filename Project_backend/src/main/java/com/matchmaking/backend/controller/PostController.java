@@ -19,13 +19,21 @@ public class PostController {
     @Autowired
     PostService postService;
 
+    /**
+     * All allow company role to create post
+     * @param post
+     * @return successful created message or error message
+     */
     @PreAuthorize("hasAnyRole('Company')")
     @PostMapping("/create")
     public Result createPost(@RequestBody Post post){
         return postService.createPost(post);
     }
 
-
+    /**
+     * Get all posts from database
+     * @return post list
+     */
     @GetMapping("/all")
     public Result getAllPosts(){
         return postService.getAllPosts();
@@ -39,6 +47,10 @@ public class PostController {
     }
 
 
+    /**
+     * Get all post of a company
+     * @return post list
+     */
     @PreAuthorize("hasAnyRole('Company')")
     @GetMapping("/getAll")
     public Result getAllPostsOfCompany(){
@@ -52,6 +64,11 @@ public class PostController {
         return postService.deletePost(postId);
     }
 
+    /**
+     * Get post by post id
+     * @param postId
+     * @return Post
+     */
     @GetMapping("/select/{postId}")
     public Result selectPost(@PathVariable int postId){
         return postService.selectPost(postId);
