@@ -93,8 +93,8 @@ The project is to develop job matching making system, user can register as job s
    maven install
    ```
 
-3.Update the redis and mysql database confitguration in the /src/main/application-dev.yml to localhost machine for connection
-4.Use the provided DDL and insertData.sql  to create table in local machine and insert data
+3. Update the redis and mysql database confitguration in the /src/main/application-dev.yml to localhost machine for connection
+4. Use the provided DDL and insertData.sql  to create table in local machine and insert data
 5. After configuration and installing, the project is ready to start 
 
    
