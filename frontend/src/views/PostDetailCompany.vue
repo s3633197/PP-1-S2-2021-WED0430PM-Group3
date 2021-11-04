@@ -19,11 +19,11 @@
           <p><b>Owner: </b>{{this.owner}}</p>
           <p><b>Start Up Date: </b>{{this.startUpDate}}</p>
         </el-card>
-        <div style="display:inline-block;">
-          <h3>industry </h3>{{this.industry}} 
+        <div style="display:inline-block;margin:10px;">
+          <h3>Industry </h3>{{this.industry}} 
         </div>
         <div style="display:inline-block;">
-          <h3>employmentType </h3>{{this.employmentType}}
+          <h3>Employment Type </h3>{{this.employmentType}}
         </div>
       </div>
       <br>
