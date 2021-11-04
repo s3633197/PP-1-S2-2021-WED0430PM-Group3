@@ -141,10 +141,12 @@ export default {
     },
     created() {
        this.postInformation = this.$route.query.item
+       this.postInformation.position = this.$route.query.item.location
+       this.postInformation.employmentType = this.$route.query.item.jobType
+       this.postInformation.address = this.$route.query.item.location
      },
     methods: {
       submitForm(formName) {
-        console.log(qs.stringify(this.postInformation))
         this.$refs[formName].validate((valid) => {
           if (valid) {
              this.$axios.put('/api/post/update/'+this.postInformation.postId,this.postInformation).then(res => {

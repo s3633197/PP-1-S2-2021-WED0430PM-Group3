@@ -6,16 +6,16 @@
        <el-card class="cardpost" v-for="item in array" :key="item.postid">
          <table>
               <tr>
-                <td class="importantInfo" colspan="3">{{ item.title }} [{{ item.location || 'empty' }}]</td>
-                <td class="importantInfo" colspan="2">{{ item.companyName || 'empty'}}</td>
+                <td class="importantInfo" colspan="3">{{ item.title }} [{{ item.location || 'location' }}]</td>
+                <td class="importantInfo" colspan="2">{{ item.companyName || 'companyName'}}</td>
                 <td rowspan="3" colspan="1" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
               </tr>
               <tr>
                 <td colspan="3"  style="color:rgba(201, 70, 70, 0.856)">{{ item.minSalary }}-{{ item.maxSalary }}/hour</td>
-                <td colspan="2" >{{ item.industry || 'empty'}} {{ item.startUpYear || 'empty'}}</td>
+                <td colspan="2" >{{ item.industry || 'industry'}} {{ item.startUpYear || 'startUpYear'}}</td>
               </tr>
               <tr>
-                <td colspan="2" >{{ item.jobType || 'empty'}} | {{ item.educationalBackground || 'empty'}}</td>
+                <td colspan="2" >{{ item.jobType || 'jobType'}} | {{ item.educationalBackground || 'educationalBackground'}}</td>
                 
               </tr>
               <tr>

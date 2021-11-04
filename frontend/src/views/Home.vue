@@ -196,7 +196,6 @@ export default {
     //if CV exits display the CV otherwise link to create CV page
     UploadCV(){
       this.$axios.get('/api/seeker/resume').then(res => {
-        console.log("statusCode"+res.data.statusCode)
           if(res.data.statusCode!=200){
             this.$router.push("/Profile")
           }else{

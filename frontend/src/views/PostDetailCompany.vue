@@ -5,8 +5,8 @@
       <br>
       <h1>Post Detail</h1><br>
       <el-card class="top">
-        <b class="title">{{this.title}}</b><br><br><br>
-        <b>{{this.location || 'empty'}}  |  {{this.educationalBackground}}</b><br><br>
+        <b class="title">{{this.title || 'title'}}</b><br><br><br>
+        <b>{{this.location || 'location'}}  |  {{this.educationalBackground}}</b><br><br>
         <b class="salary">${{this.maxSalary}} / hour</b><br><br>
       </el-card>
       
@@ -105,7 +105,6 @@ export default {
       getRecommendJobSeeker(postId){
         this.$axios.get('/api/post/recommend/all/'+postId).then(res => {
           this.recommendSeekers = res.data.data
-          console.log("getRecommendJobSeeker: "+res.data.data)
         });
       },
     }
@@ -178,6 +177,7 @@ p{
   }
   .cardseeker:hover{
        box-shadow: 5px 10px 5px #888888;
+       cursor:pointer
   }
 .cardseeker table{
   margin-left:5%;

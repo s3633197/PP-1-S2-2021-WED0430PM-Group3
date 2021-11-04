@@ -162,8 +162,7 @@ export default {
       sendVerifyCode(){
           if (this.signupForm.email!='') {
             this.$axios.post('/api/account/verify/email',this.signupForm.email).then(res => {
-                  console.log(res.data.message)
-                  console.log(res.data.statusCode)
+
                 });
           }else {
              Element.Message.error('Please enter email first!')

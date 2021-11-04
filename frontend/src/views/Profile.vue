@@ -120,6 +120,12 @@ export default {
                 jobType: [
                     { required: true, message: 'Please select your job type!', trigger: 'blur' },
                 ],
+                location: [
+                    { required: true, message: 'Please enter the location that where you want work at!', trigger: 'blur' },
+                ],
+                wantedIndustry: [
+                    { required: true, message: 'Please enter the industry you wanted!', trigger: 'blur' },
+                ],
             },
 
             genderOptions: [{

@@ -76,6 +76,7 @@
   }
   .cardpost:hover{
       box-shadow: 5px 10px 5px #888888;
+      cursor:pointer
   }
   table{
     margin-left:5%;

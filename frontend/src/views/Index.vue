@@ -25,13 +25,6 @@
                 </tr>
               </table>
             </el-card>
-            <!-- <el-pagination
-                @current-change="handleCurrentChange"
-                :current-page="currentPage"
-                :page-size="20" 
-                layout="total, prev, pager, next, jumper"
-                :total="questionsNum"
-            ></el-pagination> -->
              <br>
         </div>
         <div v-if="personal">
@@ -39,8 +32,8 @@
                 <el-card v-for="item in recommendPosts" :key="item.postId" class="cardpost" @click.native="postCardClick(item.postId)">
                   <table>
                     <tr>
-                      <td class="importantInfo" colspan="2">{{ item.title }}{{ item.address || 'empty' }}</td>
-                      <td class="importantInfo" colspan="3">{{ item.companyName || 'empty' }}</td>
+                      <td class="importantInfo" colspan="2">{{ item.title || 'title'}}{{ item.address || 'address' }}</td>
+                      <td class="importantInfo" colspan="3">{{ item.companyName || 'companyName' }}</td>
                       <td rowspan="3" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
                     </tr>
                     <tr>
@@ -48,8 +41,8 @@
                       <td></td><td></td><td></td>
                     </tr>
                     <tr>
-                      <td colspan="2">{{ item.position }} | {{ item.educationalBackground }}</td>
-                      <td colspan="3">{{ item.industry }} / {{ item.startUpDate }}</td>
+                      <td colspan="2">{{ item.position || 'position'}} | {{ item.educationalBackground || 'educationalBackground'}}</td>
+                      <td colspan="3">{{ item.industry || 'industry'}} / {{ item.startUpDate || 'startUpDate'}}</td>
                     </tr>
                   </table>
                 </el-card>
@@ -108,6 +101,7 @@
   }
   .cardseeker:hover{
        box-shadow: 5px 10px 5px #888888;
+       cursor:pointer
   }
 .cardseeker table{
   margin-left:5%;
@@ -127,6 +121,7 @@
 }
 .cardpost:hover{
   box-shadow: 5px 10px 5px #888888;
+  cursor:pointer
 }
 .cardpost table{
   margin-left:5%;
@@ -222,7 +217,6 @@
       this.loginOrnot();
       if(this.login){
         if(this.personal==true){
-          console.log("personal")
           this.getRecommendPost();
         }else{
            this.getAllSeekers();
@@ -282,20 +276,6 @@
           this.defaultt = false
         }
       },
-      // handle the pagenation function
-      // handleCurrentChange: function(val) {
-      //       this.currentPage = val;
-      //       this.$http.get("/api/assignment/qa/" + this.currentPage).then(
-      //         response => {
-      //           this.questionsList = response.data.assignments;
-      //           this.questionsNum = response.data.asgCount;
-      //           console.log(response.data);
-      //         },
-      //         response => console.log(response)
-      //       );
-      //       console.log(`current page: ${val}`);
-      // }
-        
     }
   }
 </script>

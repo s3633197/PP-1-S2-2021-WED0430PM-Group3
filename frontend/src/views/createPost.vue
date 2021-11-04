@@ -4,7 +4,7 @@
     <br>
         <div class="form">
           <h1 class="h1">Create Post</h1>
-          <el-form :inline="true" :model="postInformation" :rules="rules" ref="postInformation" :label-position="left">
+          <el-form :inline="true" :model="postInformation" :rules="rules" ref="postInformation" label-width="130px" :label-position="left">
             <el-row>
               <el-col>
                 <el-form-item label="Title" prop="title">
@@ -104,6 +104,12 @@ export default {
                 employmentType: [
                     { required: true, message: 'Please select your employment type!', trigger: 'blur' },
                 ],
+                address: [
+                    { required: true, message: 'Please enter the address!', trigger: 'blur' },
+                ],
+                industry: [
+                    { required: true, message: 'Please enter the industry!', trigger: 'blur' },
+                ],
             },
             //selections for user to select
             employmentTypeOptions: [{
@@ -148,7 +154,6 @@ export default {
     methods: {
      //post the info from input to backend and rediret to all company post page
       submitForm(formName) {
-        console.log(qs.stringify(this.postInformation))
         this.$refs[formName].validate((valid) => {
           if (valid) {
              this.$axios.post('/api/post/create',this.postInformation).then(res => {

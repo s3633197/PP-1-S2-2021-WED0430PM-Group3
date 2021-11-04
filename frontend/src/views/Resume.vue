@@ -15,9 +15,7 @@
                 <td colspan="2">DOB: {{ informationForm.dateOfBirth }}</td>
                 <td colspan="1">Phone: {{ informationForm.phone }}</td>
               </tr>
-              <tr>
-                <td colspan="4">Location: {{ informationForm.location }}</td>
-              </tr>
+              
               <tr><th colspan="4">EducationalBackground</th></tr>
               <tr>
                 <td colspan="2">SchoolName: {{ informationForm.schoolName }}</td>
@@ -34,6 +32,9 @@
               <tr>
                 <td colspan="2">Job Type: {{ informationForm.jobType }}</td>
                 <td colspan="2">Expected Salary: {{ informationForm.expectedSalary }}</td>
+              </tr>
+              <tr>
+                <td colspan="4">Location: {{ informationForm.location }}</td>
               </tr>
               <tr>
                 <td colspan="3">Statement:{{ informationForm.statement }}</td>

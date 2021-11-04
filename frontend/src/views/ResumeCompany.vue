@@ -73,7 +73,6 @@ export default {
     },
       created() {
         this.informationForm.seekerId = this.$route.params.seekerId
-        console.log("this.seekerId:"+this.informationForm.seekerId)
         this.getResume();
       },
     methods: {
