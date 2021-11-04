@@ -6,7 +6,7 @@
       <el-card class="cardpost" v-for="item in array" :key="item.postid" @click.native="postCardClick(item.postId)">
         <table >
           <tr>
-            <td class="importantInfo" colspan="2">{{ item.title }} [{{ item.location || 'empty' }}]</td>
+            <td class="importantInfo" colspan="2">{{ item.title }} <b style="color:black;font-size:20px;">[{{ item.location || 'location' }}]</b></td>
             <td class="importantInfo" colspan="3">{{ item.companyName }}</td>
             <td rowspan="3" colspan="1" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
           </tr>

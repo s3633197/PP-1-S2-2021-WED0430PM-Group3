@@ -22,6 +22,7 @@ request.interceptors.request.use(
 request.interceptors.response.use(
     response =>{
         let res = response.data
+        console.log(response.data.data)
         if(res.statusCode === 201 || res.statusCode === 200){
             if(res.message !== null){
                 Element.Message.success(res.message)

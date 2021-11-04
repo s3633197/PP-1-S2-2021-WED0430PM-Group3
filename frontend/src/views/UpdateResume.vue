@@ -142,18 +142,6 @@ export default {
             }],
 
             bsckgroundOptions: [{
-            value: 'Elementary School',
-            label: 'Elementary School'
-            }, {
-            value: 'Secondary Education',
-            label: 'Secondary Education'
-            }, {
-            value: 'Post Secondary Education',
-            label: 'Post-Secondary Education'
-            }, {
-            value: 'High school',
-            label: 'High school'
-            }, {
             value: 'Diploma',
             label: 'Diploma'
             }, {
@@ -163,8 +151,8 @@ export default {
             value: 'Master',
             label: 'Master'
             }, {
-            value: 'Phd',
-            label: 'Phd'
+            value: 'Doctor',
+            label: 'Doctor'
             }],
 
             pickerOptions: {

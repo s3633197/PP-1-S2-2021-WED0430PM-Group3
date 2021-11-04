@@ -32,7 +32,7 @@
                 <el-card v-for="item in recommendPosts" :key="item.postId" class="cardpost" @click.native="postCardClick(item.postId)">
                   <table>
                     <tr>
-                      <td class="importantInfo" colspan="2">{{ item.title || 'title'}}{{ item.address || 'address' }}</td>
+                      <td class="importantInfo" colspan="2">{{ item.title || 'title'}}<b style="color:black;font-size:20px;">[{{ item.location || 'location' }}]</b></td>
                       <td class="importantInfo" colspan="3">{{ item.companyName || 'companyName' }}</td>
                       <td rowspan="3" style="text-align:center;"><el-avatar shape="square" :src="require('../assets/a.png')" class="avatar"></el-avatar></td>
                     </tr>
@@ -41,8 +41,8 @@
                       <td></td><td></td><td></td>
                     </tr>
                     <tr>
-                      <td colspan="2">{{ item.position || 'position'}} | {{ item.educationalBackground || 'educationalBackground'}}</td>
-                      <td colspan="3">{{ item.industry || 'industry'}} / {{ item.startUpDate || 'startUpDate'}}</td>
+                      <td colspan="2">{{ item.jobType || 'jobType'}} | {{ item.educationalBackground || 'educationalBackground'}}</td>
+                      <td colspan="3">{{ item.industry || 'industry'}} / {{ item.startUpYear || 'startUpDate'}}</td>
                     </tr>
                   </table>
                 </el-card>
