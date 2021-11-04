@@ -16,7 +16,7 @@ The project is to develop job matching making system, user can register as job s
 > - Incorrect information when getting all post of company
 > - Missing information in post details page
 >
-> ------
+
 
 
 
@@ -29,8 +29,7 @@ The project is to develop job matching making system, user can register as job s
 > - Can not send email in the deploy environment 
 > - Invalid recommendation of post, incorrect match
 >
-> ------
->
+
 
 
 
@@ -49,8 +48,7 @@ The project is to develop job matching making system, user can register as job s
 > - Incorrect information of recommend posts
 > - Invalid validation for email format
 >
-> ------
->
+
 
 
 
@@ -95,7 +93,9 @@ The project is to develop job matching making system, user can register as job s
    maven install
    ```
 
-3. After configuration and installing, the project is ready to start 
+3.Update the redis and mysql database confitguration in the /src/main/application-dev.yml to localhost machine for connection
+4.Use the provided DDL and insertData.sql  to create table in local machine and insert data
+5. After configuration and installing, the project is ready to start 
 
    
 
